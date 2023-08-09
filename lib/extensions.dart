@@ -273,9 +273,9 @@ extension SharedRequestHelper on SharedRequest {
 }
 
 extension CubitStateHelper on CubitStatuses {
-  bool get loading => this == CubitStatuses.loading;
+  bool get isLoading => this == CubitStatuses.loading;
 
-  bool get done => this == CubitStatuses.done;
+  bool get isDone => this == CubitStatuses.done;
 }
 
 extension TripPointHelper on TripPoint {
