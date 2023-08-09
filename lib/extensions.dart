@@ -9,7 +9,10 @@ import 'package:qareeb_models/points/data/model/trip_point.dart';
 import 'package:qareeb_models/shared_trip/data/response/shared_trip.dart';
 import 'package:qareeb_models/trip_path/data/models/trip_path.dart';
 import 'package:qareeb_models/trip_process/data/response/trip_response.dart';
+import 'package:qareeb_models/trip_process/data/shared/location_model.dart';
 
+import 'booking/trip_mediator.dart';
+import 'favorite_place/data/response/add_favorite_place_response.dart';
 import 'global.dart';
 
 extension PolylineExt on List<List<num>> {
@@ -74,6 +77,11 @@ extension MaxInt on num {
   int get maxInt => 2147483647;
 
   String get formatPrice => '${oCcy.format(this)} ل.س';
+
+  int get myRound {
+    if (toInt() < this) return toInt() + 1;
+    return toInt();
+  }
 }
 
 extension RealName on Enum {
@@ -250,12 +258,44 @@ extension PathMap on TripPath {
   }
 
   LatLng? get startPoint => edges.firstOrNull?.startPoint.getLatLng;
+
+  List<SpinnerItem> get getPointsSpinner {
+    final list = <SpinnerItem>[];
+
+    edges.forEachIndexed((i, e) {
+      if (i == 0) {
+        list.add(SpinnerItem(
+          id: e.startPoint.id,
+          name: e.startPoint.arName,
+          item: e,
+        ));
+      }
+      list.add(SpinnerItem(
+        id: e.endPoint.id,
+        name: e.endPoint.arName,
+        item: e,
+      ));
+    });
+
+    return list;
+  }
 }
 
 extension NormalTripMap on TripResult {
-  LatLng get startPoint => LatLng(currentLocation.lat, currentLocation.lng);
 
-  LatLng get endPoint => LatLng(destination.lat, destination.lng);
+  LatLng get startPoint => currentLocation.latLng;
+
+  LatLng get endPoint => destination.latLng;
+
+  String get dateTrip {
+    if (startDate != null) {
+      return startDate!.formatFullDate;
+    } else if (endDate != null) {
+      return endDate!.formatFullDate;
+    }
+    return 'لم تبدأ';
+  }
+
 }
 
 extension SharedRequestMap on SharedTrip {
@@ -265,6 +305,28 @@ extension SharedRequestMap on SharedTrip {
       if (e.pickupPoint.getLatLng.hashCode == point.hashCode) return e.seatNumber;
     }
     return 0;
+  }
+
+  bool get isStart => startDate != null;
+
+  bool get isEnd => endDate != null;
+
+  String get dateTrip {
+    if (isStart) {
+      return startDate!.formatFullDate;
+    } else if (isEnd) {
+      return 'منتهية:  ${endDate!.formatFullDate}';
+    }
+    return schedulingDate?.formatFullDate ?? '';
+  }
+
+  List<SpinnerItem> availableRequest() {
+    var s = <SpinnerItem>[];
+    var a = seatsNumber - sharedRequests.length;
+    for (var i = 1; i <= a; i++) {
+      s.add(SpinnerItem(id: i, name: i.toString()));
+    }
+    return s;
   }
 }
 
@@ -355,3 +417,10 @@ extension ScrollMax on ScrollController {
 
   bool get isMin => offset == 0;
 }
+
+
+
+extension FavoritePlaceResultHelper on FavoritePlaceResult {
+  LatLng get latLng => LatLng(lat, lng);
+}
+

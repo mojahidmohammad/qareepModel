@@ -1,5 +1,4 @@
-
-
+import '../../../global.dart';
 import '../../../points/data/model/trip_point.dart';
 import '../../../trip_path/data/models/trip_path.dart';
 
@@ -51,7 +50,7 @@ class SharedTrip {
   final DateTime? schedulingDate;
   final DateTime? startDate;
   final DateTime? endDate;
-  final dynamic tripStatus;
+  final SharedTripStatus tripStatus;
   final num seatsNumber;
   final num seatCost;
   final num totalCost;
@@ -59,17 +58,6 @@ class SharedTrip {
   final Driver driver;
   final num availableSeats;
   final num reservedSeats;
-
-  int status() {
-    if (tripStatus == null) return 0;
-
-    if (tripStatus is num) {
-      return tripStatus;
-    } else if (tripStatus is String) {
-      return int.parse(tripStatus);
-    }
-    return 0;
-  }
 
   factory SharedTrip.fromJson(Map<String, dynamic> json) {
     return SharedTrip(
@@ -85,7 +73,7 @@ class SharedTrip {
       schedulingDate: DateTime.tryParse(json["schedulingDate"] ?? ""),
       startDate: DateTime.tryParse(json["startDate"] ?? ""),
       endDate: DateTime.tryParse(json["endDate"] ?? ""),
-      tripStatus: json["tripStatus"],
+      tripStatus: SharedTripStatus.values[int.tryParse(json["tripStatus"]) ?? 0],
       seatsNumber: json["seatsNumber"] ?? 0,
       seatCost: json["seatCost"] ?? 0,
       totalCost: json["totalCost"] ?? 0,
