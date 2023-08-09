@@ -1,4 +1,6 @@
 
+import 'package:latlong2/latlong.dart';
+
 class LocationModel {
   LocationModel({
     required this.lng,
@@ -18,4 +20,11 @@ class LocationModel {
   Map<String, dynamic> toJson() => {"longitud": lng, "latitud": lat};
 
 
+  factory LocationModel.fromLatLng(LatLng latLng) =>
+      LocationModel(lng: latLng.longitude, lat: latLng.latitude);
+
+  factory LocationModel.latLng(LatLng latLng) =>
+      LocationModel(lng: latLng.longitude, lat: latLng.latitude);
+
+  LatLng get latLng => LatLng(lat, lng);
 }
