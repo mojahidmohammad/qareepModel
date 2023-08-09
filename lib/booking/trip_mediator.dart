@@ -1,4 +1,3 @@
-
 import 'package:latlong2/latlong.dart';
 
 class TripMediator {
@@ -22,7 +21,7 @@ class TripMediator {
 
   bool get startIsSet => startLocation.hashCode != 0;
 
-  bool get endIsSet => endLocation.hashCode != 0 ;
+  bool get endIsSet => endLocation.hashCode != 0;
 
   bool get startEnable => startLocation.hashCode == 0;
 
@@ -32,11 +31,10 @@ class TripMediator {
 
   bool get canConfirm => startLocation.hashCode > 0 && endLocation.hashCode > 0;
 
-
   factory TripMediator.initial() {
     return TripMediator(
-      startLocation: const LatLng(0, 0),
-      endLocation: const LatLng(0, 0),
+      startLocation: LatLng(0, 0),
+      endLocation: LatLng(0, 0),
       distance: 0,
       duration: 0,
       carTypeId: 0,

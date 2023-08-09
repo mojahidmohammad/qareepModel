@@ -73,7 +73,8 @@ class SharedTrip {
       schedulingDate: DateTime.tryParse(json["schedulingDate"] ?? ""),
       startDate: DateTime.tryParse(json["startDate"] ?? ""),
       endDate: DateTime.tryParse(json["endDate"] ?? ""),
-      tripStatus: SharedTripStatus.values[int.tryParse(json["tripStatus"]) ?? 0],
+      tripStatus: SharedTripStatus
+          .values[int.tryParse(json["tripStatus"]?.toString() ?? '0') ?? 0],
       seatsNumber: json["seatsNumber"] ?? 0,
       seatCost: json["seatCost"] ?? 0,
       totalCost: json["totalCost"] ?? 0,
