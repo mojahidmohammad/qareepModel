@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class FixUrl {
   static String fixAvatarImage(String? image) {
     if (image == null || image.isEmpty) return '';
@@ -5,6 +7,64 @@ class FixUrl {
     final String link = "https://live.qareeb-maas.com/Images/$image";
     return link;
   }
+}
+
+class SpinnerItem {
+  SpinnerItem({
+    this.name,
+    this.id = -2,
+    this.isSelected = false,
+    this.item,
+    this.icon,
+    this.enable = true,
+  });
+
+  String? name;
+  int id;
+  bool isSelected;
+  bool enable;
+  dynamic item;
+  Widget? icon;
+
+//<editor-fold desc="Data Methods">
+
+  SpinnerItem copyWith({
+    String? name,
+    int? id,
+    bool? isSelected,
+    bool? enable,
+    dynamic item,
+  }) {
+    return SpinnerItem(
+      name: name ?? this.name,
+      id: id ?? this.id,
+      isSelected: isSelected ?? this.isSelected,
+      enable: enable ?? this.enable,
+      item: item ?? this.item,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'id': id,
+      'isSelected': isSelected,
+      'enable': enable,
+      'item': item,
+    };
+  }
+
+  factory SpinnerItem.fromMap(Map<String, dynamic> map) {
+    return SpinnerItem(
+      name: map['name'] as String,
+      id: map['id'] as int,
+      isSelected: map['isSelected'] as bool,
+      enable: map['enable'] as bool,
+      item: map['item'] as dynamic,
+    );
+  }
+
+//</editor-fold>
 }
 
 enum CubitStatuses { init, done, loading, error }
