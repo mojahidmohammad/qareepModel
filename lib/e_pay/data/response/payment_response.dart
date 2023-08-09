@@ -54,7 +54,7 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       url: json["url"] ?? "",
-      processId: json["proccessId"] ?? "",
+      processId: json["processId"] ?? "",
     );
   }
 
