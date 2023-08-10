@@ -178,6 +178,7 @@ extension NavTripHelper on NavTrip {
         return 0.24;
 
       case NavTrip.end:
+      case NavTrip.have:
 
         break;
     }
@@ -196,6 +197,7 @@ extension NavTripHelper on NavTrip {
         return 0.1;
 
       case NavTrip.end:
+      case NavTrip.have:
 
         break;
     }
@@ -211,6 +213,7 @@ extension NavTripHelper on NavTrip {
       case NavTrip.start:
         return 0.1;
       case NavTrip.end:
+      case NavTrip.have:
         break;
     }
     return 0.3;

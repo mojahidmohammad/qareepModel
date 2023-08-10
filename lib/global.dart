@@ -75,7 +75,7 @@ enum BookingPages { selectLocation, trip, booking }
 
 enum StateScreen { non, confirmCode, policy, main, passwordCode }
 
-enum NavTrip { waiting, acceptor, start, end }
+enum NavTrip { waiting, acceptor, start, end, have }
 
 
 enum MapType { normal, word, mix }
