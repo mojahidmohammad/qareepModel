@@ -77,6 +77,7 @@ enum StateScreen { non, confirmCode, policy, main, passwordCode }
 
 enum NavTrip { waiting, acceptor, start, end }
 
+
 enum MapType { normal, word, mix }
 
 enum MtnState { init, pay, otp }
