@@ -402,6 +402,7 @@ extension DateUtcHelper on DateTime {
     return DateFormat('EEEE', 'ar_SA').format(this);
   }
 
+
   DateTime addFromNow({int? year, int? month, int? day}) {
     return DateTime(
         this.year + (year ?? 0), this.month + (month ?? 0), this.day + (day ?? 0));
