@@ -410,6 +410,8 @@ extension DateUtcHelper on DateTime {
   DateTime initialFromDateTime({required DateTime date, required TimeOfDay time}) {
     return DateTime(date.year, date.month, date.day, time.hour, time.minute);
   }
+
+  String get formatDateAther => DateFormat('yyyy/MM/dd HH:MM').format(this);
 }
 
 extension ScrollMax on ScrollController {
