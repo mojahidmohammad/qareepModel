@@ -69,6 +69,8 @@ class SpinnerItem {
 
 enum CubitStatuses { init, done, loading, error }
 
+enum TripStatus { non, reject, accept, start, end }
+
 enum BookingPages { selectLocation, trip, booking }
 
 enum StateScreen { non, confirmCode, policy, main, passwordCode }
