@@ -110,6 +110,7 @@ class SharedRequest {
     required this.id,
     required this.sharedTripId,
     required this.clientId,
+    required this.client,
     required this.status,
     required this.seatNumber,
     required this.dropPointId,
@@ -122,6 +123,7 @@ class SharedRequest {
   final int id;
   final num sharedTripId;
   final num clientId;
+  final Client client;
   final int status;
   final int seatNumber;
   final num dropPointId;
@@ -135,13 +137,14 @@ class SharedRequest {
       id: json["id"] ?? 0,
       sharedTripId: json["sharedTripId"] ?? 0,
       clientId: json["clientId"] ?? 0,
+      client: Client.fromJson(json["client"] ?? {}),
       status: json["status"] ?? 0,
       seatNumber: json["seatNumber"] ?? 0,
       dropPointId: json["dropPointId"] ?? 0,
-      amount: json["amount"] ?? 0,
       dropPoint: TripPoint.fromJson(json["dropPoint"] ?? {}),
       pickupPointId: json["pickupPointId"] ?? 0,
       pickupPoint: TripPoint.fromJson(json["pickupPoint"] ?? {}),
+      amount: json["amount"] ?? 0,
     );
   }
 
@@ -149,13 +152,52 @@ class SharedRequest {
         "id": id,
         "sharedTripId": sharedTripId,
         "clientId": clientId,
+        "client": client.toJson(),
         "status": status,
         "seatNumber": seatNumber,
         "dropPointId": dropPointId,
         "dropPoint": dropPoint.toJson(),
         "pickupPointId": pickupPointId,
-        "amount": amount,
         "pickupPoint": pickupPoint.toJson(),
+        "amount": amount,
+      };
+}
+
+class Client {
+  Client({
+    required this.userName,
+    required this.fullName,
+    required this.name,
+    required this.surname,
+    required this.phoneNumber,
+    required this.avatar,
+  });
+
+  final String userName;
+  final String fullName;
+  final String name;
+  final String surname;
+  final String phoneNumber;
+  final String avatar;
+
+  factory Client.fromJson(Map<String, dynamic> json) {
+    return Client(
+      userName: json["userName"] ?? "",
+      fullName: json["fullName"] ?? "",
+      name: json["name"] ?? "",
+      surname: json["surname"] ?? "",
+      phoneNumber: json["phoneNumber"] ?? "",
+      avatar: json["avatar"] ?? "",
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "userName": userName,
+        "fullName": fullName,
+        "name": name,
+        "surname": surname,
+        "phoneNumber": phoneNumber,
+        "avatar": avatar,
       };
 }
 
