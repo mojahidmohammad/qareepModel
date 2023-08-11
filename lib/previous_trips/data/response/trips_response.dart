@@ -25,7 +25,7 @@ class TripsResult {
   });
 
   final List<TripResult> items;
-  final num totalCount;
+  final int totalCount;
 
   factory TripsResult.fromJson(Map<String, dynamic> json) {
     return TripsResult(
