@@ -1,4 +1,3 @@
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
@@ -177,7 +176,6 @@ extension NavTripHelper on NavTrip {
 
       case NavTrip.end:
       case NavTrip.have:
-
         break;
     }
     return 0.5;
@@ -196,7 +194,6 @@ extension NavTripHelper on NavTrip {
 
       case NavTrip.end:
       case NavTrip.have:
-
         break;
     }
     return 0.2;
@@ -283,7 +280,6 @@ extension PathMap on TripPath {
 }
 
 extension NormalTripMap on TripResult {
-
   LatLng get startPoint => currentLocation.latLng;
 
   LatLng get endPoint => destination.latLng;
@@ -297,6 +293,39 @@ extension NormalTripMap on TripResult {
     return 'لم تبدأ';
   }
 
+  String get tripStateName {
+    //غير موجودة أو منتهية
+    if (isCanceled) return 'ملغية';
+
+    //final
+    if (isDelved) return 'مكتملة';
+    //بدأت
+    if (isStarted || isConfirmed) return 'جارية';
+
+    //تم تأكيدها
+    if (isConfirmed) return 'بحث عن سائق';
+
+    return 'حالة غير معروفة';
+  }
+
+  NavTrip? get tripStateEnum {
+    //غير موجودة أو منتهية
+    if (isCanceled) return null;
+
+    //final
+    if (isDelved) return NavTrip.end;
+    //بدأت
+    if (isStarted || isConfirmed) return NavTrip.start;
+
+    //تم تأكيدها
+    if (isConfirmed) return NavTrip.waiting;
+
+    return NavTrip.have;
+  }
+
+  String get getDuration {
+    return ' ${duration.numberOnly ~/ 60} دقيقة';
+  }
 }
 
 extension SharedRequestMap on SharedTrip {
@@ -403,7 +432,6 @@ extension DateUtcHelper on DateTime {
     return DateFormat('EEEE', 'ar_SA').format(this);
   }
 
-
   DateTime addFromNow({int? year, int? month, int? day}) {
     return DateTime(
         this.year + (year ?? 0), this.month + (month ?? 0), this.day + (day ?? 0));
@@ -422,9 +450,6 @@ extension ScrollMax on ScrollController {
   bool get isMin => offset == 0;
 }
 
-
-
 extension FavoritePlaceResultHelper on FavoritePlaceResult {
   LatLng get latLng => LatLng(lat, lng);
 }
-
