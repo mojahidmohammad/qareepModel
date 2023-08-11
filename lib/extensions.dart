@@ -9,9 +9,7 @@ import 'package:qareeb_models/points/data/model/trip_point.dart';
 import 'package:qareeb_models/shared_trip/data/response/shared_trip.dart';
 import 'package:qareeb_models/trip_path/data/models/trip_path.dart';
 import 'package:qareeb_models/trip_process/data/response/trip_response.dart';
-import 'package:qareeb_models/trip_process/data/shared/location_model.dart';
 
-import 'booking/trip_mediator.dart';
 import 'favorite_place/data/response/add_favorite_place_response.dart';
 import 'global.dart';
 

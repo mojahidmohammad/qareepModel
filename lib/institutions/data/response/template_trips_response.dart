@@ -170,7 +170,7 @@ class BusModel {
   final String busNumber;
   final num seatsNumber;
   final num institutionId;
-  final InstitutionModel? institution;
+  final InstitutionModel institution;
   final List<Supervisor> supervisors;
 
   factory BusModel.fromJson(Map<String, dynamic> json) {
@@ -184,9 +184,7 @@ class BusModel {
       busNumber: json["busNumber"] ?? "",
       seatsNumber: json["seatsNumber"] ?? 0,
       institutionId: json["institutionId"] ?? 0,
-      institution: json["institution"] == null
-          ? null
-          : InstitutionModel.fromJson(json["institution"]),
+      institution:  InstitutionModel.fromJson(json["institution"]??{}),
       supervisors: json["supervisors"] == null
           ? []
           : List<Supervisor>.from(
@@ -204,7 +202,7 @@ class BusModel {
         "busNumber": busNumber,
         "seatsNumber": seatsNumber,
         "institutionId": institutionId,
-        "institution": institution?.toJson(),
+        "institution": institution.toJson(),
         "supervisors": supervisors.map((x) => x.toJson()).toList(),
       };
 }

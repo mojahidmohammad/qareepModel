@@ -67,17 +67,17 @@ class Member {
   final num institutionId;
   final List<Subscription> subscriptions;
 
-  MemberSubscriptionState get memberState {
-    if (subscriptions.isEmpty || !subscriptions.last.isActive) {
-      return MemberSubscriptionState.notSubscribe;
-    }
-
-    if (true) {
-      return MemberSubscriptionState.active;
-    } else {
-      return MemberSubscriptionState.expired;
-    }
-  }
+  // MemberSubscriptionState get memberState {
+  //   if (subscriptions.isEmpty || !subscriptions.last.isActive) {
+  //     return MemberSubscriptionState.notSubscribe;
+  //   }
+  //
+  //   if (true) {
+  //     return MemberSubscriptionState.active;
+  //   } else {
+  //     return MemberSubscriptionState.expired;
+  //   }
+  // }
 
   factory Member.fromJson(Map<String, dynamic> json) {
     return Member(

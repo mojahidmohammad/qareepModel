@@ -113,12 +113,8 @@ class TripResult {
       destinationName: json['distnation_name'] ?? '',
       duration: json['duration'] ?? '',
       isStarted: json['isStarted'] ?? false,
-      currentLocation: json['currentLocation'] == null
-          ? LocationModel.fromJson({})
-          : LocationModel.fromJson(json['currentLocation']),
-      destination: json['distnation'] == null
-          ? LocationModel.fromJson({})
-          : LocationModel.fromJson(json['distnation']),
+      currentLocation:  LocationModel.fromJson(json['currentLocation']??{}),
+      destination:LocationModel.fromJson(json['distnation']??{}),
       isAccepted: json['isAccepted'] ?? false,
       note: json['note'] ?? '',
       distance: json['distance'] ?? 0,
@@ -143,9 +139,7 @@ class TripResult {
       isClientRated: json['isClientRated'] ?? false,
       isDriverRated: json['isDriverRated'] ?? false,
       carCategoryId: json['carCategoryId'] ?? 0,
-      carType: json['carType'] == null
-          ? CarType.fromJson({})
-          : CarType.fromJson(json['carType']),
+      carType:  CarType.fromJson(json['carType']??{}),
       coupons: json['coupons'] == null
           ? Coupons.fromJson({})
           : Coupons.fromJson(json['coupons']),

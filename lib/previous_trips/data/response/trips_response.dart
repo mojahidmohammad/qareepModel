@@ -5,16 +5,16 @@ class TripsResponse {
     required this.result,
   });
 
-  final TripsResult? result;
+  final TripsResult result;
 
   factory TripsResponse.fromJson(Map<String, dynamic> json) {
     return TripsResponse(
-      result: json["result"] == null ? null : TripsResult.fromJson(json["result"]),
+      result: TripsResult.fromJson(json["result"]??{}),
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "result": result?.toJson(),
+        "result": result.toJson(),
       };
 }
 

@@ -211,6 +211,7 @@ class Driver {
     required this.phoneNumber,
     required this.imei,
     required this.avatar,
+    required this.rating,
     required this.carType,
   });
 
@@ -222,6 +223,7 @@ class Driver {
   final String phoneNumber;
   final String imei;
   final String avatar;
+  final num rating;
   final CarType carType;
 
   factory Driver.fromJson(Map<String, dynamic> json) {
@@ -234,6 +236,7 @@ class Driver {
       phoneNumber: json["phoneNumber"] ?? "",
       imei: json["imei"] ?? "",
       avatar: json["avatar"] ?? "",
+      rating: json["rating"] ?? 0,
       carType: CarType.fromJson(json["carType"] ?? {}),
     );
   }
@@ -247,6 +250,7 @@ class Driver {
         "phoneNumber": phoneNumber,
         "imei": imei,
         "avatar": avatar,
+        "rating": rating,
         "carType": carType.toJson(),
       };
 }
@@ -258,6 +262,7 @@ class CarType {
     required this.carModel,
     required this.carColor,
     required this.carNumber,
+    required this.seatsNumber,
   });
 
   final num userId;
@@ -265,6 +270,7 @@ class CarType {
   final String carModel;
   final String carColor;
   final String carNumber;
+  final num seatsNumber;
 
   factory CarType.fromJson(Map<String, dynamic> json) {
     return CarType(
@@ -273,6 +279,7 @@ class CarType {
       carModel: json["carModel"] ?? "",
       carColor: json["carColor"] ?? "",
       carNumber: json["carNumber"] ?? "",
+      seatsNumber: json["seatsNumber"] ?? 0,
     );
   }
 
@@ -282,5 +289,6 @@ class CarType {
         "carModel": carModel,
         "carColor": carColor,
         "carNumber": carNumber,
+        "seatsNumber": seatsNumber,
       };
 }
