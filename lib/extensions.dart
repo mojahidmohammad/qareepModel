@@ -361,7 +361,7 @@ extension SharedRequestMap on SharedTrip {
 }
 
 extension SharedRequestHelper on SharedRequest {
-  String get cost => '$amount spy}';
+  String get cost => '$amount spy';
 }
 
 extension CubitStateHelper on CubitStatuses {

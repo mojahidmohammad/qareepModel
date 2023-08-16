@@ -124,7 +124,7 @@ class SharedRequest {
   final num sharedTripId;
   final num clientId;
   final Client client;
-  final int status;
+  final SharedRequestStatus status;
   final int seatNumber;
   final num dropPointId;
   final TripPoint dropPoint;
@@ -138,7 +138,7 @@ class SharedRequest {
       sharedTripId: json["sharedTripId"] ?? 0,
       clientId: json["clientId"] ?? 0,
       client: Client.fromJson(json["client"] ?? {}),
-      status: json["status"] ?? 0,
+      status:SharedRequestStatus.values[ json["status"] ?? 0],
       seatNumber: json["seatNumber"] ?? 0,
       dropPointId: json["dropPointId"] ?? 0,
       dropPoint: TripPoint.fromJson(json["dropPoint"] ?? {}),
@@ -153,7 +153,7 @@ class SharedRequest {
         "sharedTripId": sharedTripId,
         "clientId": clientId,
         "client": client.toJson(),
-        "status": status,
+        "status": status.index,
         "seatNumber": seatNumber,
         "dropPointId": dropPointId,
         "dropPoint": dropPoint.toJson(),
