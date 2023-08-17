@@ -84,7 +84,7 @@ class InstitutionModel {
     return InstitutionModel(
       id: json["id"] ?? 0,
       name: json["name"] ?? "",
-      government: json["government"] ?? "",
+      government: json["government"] ?? 0,
       type: InstitutionType.values[json["type"] ?? 0],
       imageUrl: FixUrl.fixAvatarImage(json["imageUrl"]),
       atharKey: json["atharKey"] ?? "",

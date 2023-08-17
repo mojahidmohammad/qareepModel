@@ -120,7 +120,7 @@ class Attendance {
   final num busMemberId;
   final Member busMember;
   final DateTime? date;
-  final String attendanceType;
+  final int attendanceType;
   final bool isParticipated;
 
   factory Attendance.fromJson(Map<String, dynamic> json) {
@@ -130,7 +130,7 @@ class Attendance {
       busMemberId: json["busMemberId"] ?? 0,
       busMember: Member.fromJson(json["busMember"] ?? {}),
       date: DateTime.tryParse(json["date"] ?? ""),
-      attendanceType: json["attendanceType"] ?? "",
+      attendanceType: json["attendanceType"] ?? 0,
       isParticipated: json["isParticipated"] ?? false,
     );
   }
