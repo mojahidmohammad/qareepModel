@@ -47,7 +47,7 @@ class ProfileInfoResult {
     required this.phoneNumber,
     required this.coupons,
     required this.imei,
-    required this.password,
+    required this.emergencyPhone,
   });
 
   final num id;
@@ -76,7 +76,7 @@ class ProfileInfoResult {
   final String coupons;
   final String ageRange;
   final String imei;
-  final String password;
+  final String emergencyPhone;
 
   factory ProfileInfoResult.fromJson(Map<String, dynamic> json) {
     return ProfileInfoResult(
@@ -109,7 +109,7 @@ class ProfileInfoResult {
       phoneNumber: json["phoneNumber"] ?? "",
       coupons: json["coupons"] ?? "",
       imei: json["imei"] ?? "",
-      password: json["password"] ?? "",
+      emergencyPhone: json["emergencyPhone"] ?? "",
     );
   }
 
@@ -140,7 +140,7 @@ class ProfileInfoResult {
         "phoneNumber": phoneNumber,
         "coupons": coupons,
         "imei": imei,
-        "password": password,
+        "emergencyPhone": emergencyPhone,
       };
 
 }
