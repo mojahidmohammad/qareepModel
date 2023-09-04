@@ -40,7 +40,7 @@ extension SplitByLength on String {
     return split(' ').last.length > 2;
   }
 
-  String get formatPrice => '${oCcy.format(this)} ل.س';
+  String get formatPrice => '${oCcy.format(this)}';
 
   String get removeSpace => replaceAll(' ', '');
 
@@ -73,7 +73,7 @@ final oCcy = NumberFormat("#,##0.00", "en_US");
 extension MaxInt on num {
   int get maxInt => 2147483647;
 
-  String get formatPrice => '${oCcy.format(this)} ل.س';
+  String get formatPrice => '${oCcy.format(this)}';
 
   int get myRound {
     if (toInt() < this) return toInt() + 1;
