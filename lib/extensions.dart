@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:qareeb_models/points/data/model/trip_point.dart';
 import 'package:qareeb_models/shared_trip/data/response/shared_trip.dart';
 import 'package:qareeb_models/trip_path/data/models/trip_path.dart';

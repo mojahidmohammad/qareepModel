@@ -1,5 +1,4 @@
-
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class LocationModel {
   LocationModel({
@@ -18,7 +17,6 @@ class LocationModel {
   }
 
   Map<String, dynamic> toJson() => {"longitud": lng, "latitud": lat};
-
 
   factory LocationModel.fromLatLng(LatLng latLng) =>
       LocationModel(lng: latLng.longitude, lat: latLng.latitude);

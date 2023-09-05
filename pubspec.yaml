@@ -1,6 +1,6 @@
 name: qareeb_models
 description: A new Flutter project.
-version: 0.1.4
+version: 0.1.5
 
 
 environment:
@@ -11,7 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  latlong2: any
+  google_maps_flutter:
+  intl: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
