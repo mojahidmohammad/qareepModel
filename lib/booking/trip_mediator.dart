@@ -19,17 +19,17 @@ class TripMediator {
     required this.carTypeId,
   });
 
-  bool get startIsSet => startLocation.hashCode != 0;
+  bool get startIsSet => startLocation.latitude != 0;
 
-  bool get endIsSet => endLocation.hashCode != 0;
+  bool get endIsSet => endLocation.latitude != 0;
 
-  bool get startEnable => startLocation.hashCode == 0;
+  bool get startEnable => startLocation.latitude == 0;
 
-  bool get endEnable => endLocation.hashCode == 0 && !startEnable;
+  bool get endEnable => endLocation.latitude == 0 && !startEnable;
 
-  bool get endInitial => endLocation.hashCode == 0;
+  bool get endInitial => endLocation.latitude == 0;
 
-  bool get canConfirm => startLocation.hashCode > 0 && endLocation.hashCode > 0;
+  bool get canConfirm => startLocation.latitude > 0 && endLocation.latitude > 0;
 
   factory TripMediator.initial() {
     return TripMediator(
