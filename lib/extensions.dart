@@ -5,12 +5,49 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:qareeb_models/points/data/model/trip_point.dart';
+import 'package:qareeb_models/redeems/data/response/redeems_response.dart';
 import 'package:qareeb_models/shared_trip/data/response/shared_trip.dart';
 import 'package:qareeb_models/trip_path/data/models/trip_path.dart';
 import 'package:qareeb_models/trip_process/data/response/trip_response.dart';
 
 import 'favorite_place/data/response/add_favorite_place_response.dart';
 import 'global.dart';
+
+
+extension Redeems on RedeemsResult {
+  /// كم مرة يحق للسائق التبديل
+  double get _oilCount =>
+      ((km / systemParameters.oil) - (totals.oil / systemParameters.oil));
+
+  /// كم مرة يحق للسائق التبديل
+  double get _goldCount =>
+      ((km / systemParameters.gold) - (totals.gold / systemParameters.gold));
+
+  /// كم مرة يحق للسائق التبديل
+  double get _tiresCount =>
+      ((km / systemParameters.tire) - (totals.tire / systemParameters.tire));
+
+  // كم مرة يحق لكن عدد صحيح
+  int get oilCount => (_oilCount).floor();
+
+  int get goldCount => (_goldCount).floor();
+
+  int get tiresCount => (_tiresCount).floor();
+
+  // كم مرة قام بالتبديل
+  int get oilOldCount => (totals.oil / systemParameters.oil).floor();
+
+  int get goldOldCount => (totals.gold / systemParameters.gold).floor();
+
+  int get tiresOldCount => (totals.tire / systemParameters.tire).floor();
+
+  double get oilPCount => double.parse((_oilCount * 100).toStringAsFixed(2));
+
+  double get goldPCount => double.parse((_goldCount * 100).toStringAsFixed(2));
+
+  double get tiresPCount => double.parse((_tiresCount * 100).toStringAsFixed(2));
+}
+
 
 extension PolylineExt on List<List<num>> {
   List<LatLng> unpackPolyline() =>
@@ -66,7 +103,15 @@ extension SplitByLength on String {
     String output = uniqueList.join(' ');
     return output;
   }
+
 }
+
+extension StringHelper on String? {
+  bool get isBlank {
+    return this?.trim().isEmpty ?? true;
+  }
+}
+
 
 final oCcy = NumberFormat("#,##0.00", "en_US");
 
@@ -81,66 +126,13 @@ extension MaxInt on num {
   }
 }
 
-extension RealName on Enum {
-  String get upperFirst => name.replaceRange(0, 1, name.substring(0, 1).toUpperCase());
-
-  String get arabicName {
-    if (this is WeekDays) {
-      switch (this) {
-        case WeekDays.sunday:
-          return 'أحد';
-        case WeekDays.monday:
-          return 'إثنين';
-        case WeekDays.tuesday:
-          return 'ثلاثاء';
-        case WeekDays.wednesday:
-          return 'أربعاء';
-        case WeekDays.thursday:
-          return 'خميس';
-        case WeekDays.friday:
-          return 'جمعة';
-        case WeekDays.saturday:
-          return 'سبت';
-      }
-    }
-
-    if (this is NavTrip) {
-      switch (this) {
-        case NavTrip.waiting:
-          return 'جاري البحث عن سائق';
-        case NavTrip.acceptor:
-          return 'جارية';
-        case NavTrip.start:
-          return 'بدأت بالفعل';
-        case NavTrip.end:
-          return 'منتهية';
-      }
-    }
-    if (this is MemberSubscriptionState) {
-      switch (this) {
-        case MemberSubscriptionState.notSubscribe:
-          return 'غير مشترك';
-        case MemberSubscriptionState.active:
-          return 'الاشتراك فعال';
-        case MemberSubscriptionState.expired:
-          return 'اشتراك منتهي الصلاحية';
-      }
-    }
-    return '';
-  }
-
-  bool get isTripActive {
-    switch (this) {
-      case NavTrip.waiting:
-        return true;
-      case NavTrip.acceptor:
-        return true;
-      case NavTrip.start:
-        return true;
-      case NavTrip.end:
-        return false;
-    }
-    return false;
+extension EnumSpinner on List<Enum> {
+  List<SpinnerItem> spinnerItems({Enum? selected}) {
+    return map((e) => SpinnerItem(
+        name: e.arabicName,
+        id: e.index,
+        item: e,
+        isSelected: e == selected)).toList();
   }
 }
 
@@ -331,7 +323,7 @@ extension NormalTripMap on TripResult {
 extension SharedRequestMap on SharedTrip {
   int nou(LatLng point) {
     for (var e in sharedRequests) {
-      if (e.status == SharedRequestStatus.pending.index) return 0;
+      if (e.status == SharedRequestStatus.pending) return 0;
       if (e.pickupPoint.getLatLng.hashCode == point.hashCode) return e.seatNumber;
     }
     return 0;
@@ -452,4 +444,197 @@ extension ScrollMax on ScrollController {
 
 extension FavoritePlaceResultHelper on FavoritePlaceResult {
   LatLng get latLng => LatLng(lat, lng);
+}
+
+extension RealName on Enum {
+  String get upperFirst => name.replaceRange(0, 1, name.substring(0, 1).toUpperCase());
+
+  String get arabicName {
+    if (this is WeekDays) {
+      switch (this) {
+        case WeekDays.sunday:
+          return 'أحد';
+        case WeekDays.monday:
+          return 'إثنين';
+        case WeekDays.tuesday:
+          return 'ثلاثاء';
+        case WeekDays.wednesday:
+          return 'أربعاء';
+        case WeekDays.thursday:
+          return 'خميس';
+        case WeekDays.friday:
+          return 'جمعة';
+        case WeekDays.saturday:
+          return 'سبت';
+      }
+    }
+
+    if (this is NavTrip) {
+      switch (this) {
+        case NavTrip.waiting:
+          return 'جاري البحث عن سائق';
+        case NavTrip.acceptor:
+          return 'جارية';
+        case NavTrip.start:
+          return 'بدأت بالفعل';
+        case NavTrip.end:
+          return 'منتهية';
+      }
+    }
+
+    if (this is MemberSubscriptionState) {
+      switch (this) {
+        case MemberSubscriptionState.notSubscribe:
+          return 'غير مشترك';
+        case MemberSubscriptionState.active:
+          return 'الاشتراك فعال';
+        case MemberSubscriptionState.expired:
+          return 'اشتراك منتهي الصلاحية';
+      }
+    }
+
+    if (this is Gender) {
+      switch (this) {
+        case Gender.mail:
+          return 'ذكر';
+        case Gender.female:
+          return 'انثي';
+      }
+    }
+
+    if (this is RedeemType) {
+      switch (this) {
+        case RedeemType.gold:
+          return 'المليون';
+        case RedeemType.oil:
+          return 'زيت';
+        case RedeemType.tire:
+          return 'إطارات';
+      }
+    }
+
+    if (this is TransferType) {
+      switch (this) {
+        case TransferType.sharedPay:
+          return 'تحويل لرحلة تشاركية';
+        case TransferType.tripPay:
+          return 'تحويل لرحلة عادية';
+        case TransferType.payoff:
+          return 'دفعة من السائق للشركة';
+        case TransferType.debit:
+          return 'دفعة من الشركة للسائق';
+        case TransferType.award:
+          return 'مكافئة';
+      }
+    }
+
+    if (this is SummaryPayToEnum) {
+      switch (this) {
+        case SummaryPayToEnum.requiredFromDriver:
+          return 'السائق يجب أن يدفع للشركة';
+        case SummaryPayToEnum.requiredFromCompany:
+          return 'الشركة يجب انت تدفع للسائق';
+        case SummaryPayToEnum.equal:
+          return 'الرصيد متكافئ';
+      }
+    }
+
+    if (this is UserType) {
+      switch (this) {
+        case UserType.client:
+          return 'زبون';
+        case UserType.driver:
+          return 'سائق';
+        case UserType.admin:
+          return 'مدير نظام';
+        case UserType.institutionAdmin:
+          return 'مدير مؤسسة';
+      }
+    }
+
+    if (this is InstitutionType) {
+      switch (this) {
+        case InstitutionType.school:
+          return 'مدرسة';
+        case InstitutionType.college:
+          return 'جامعة';
+        case InstitutionType.transportation:
+          return 'نقل';
+      }
+    }
+
+    if (this is BusTripType) {
+      switch (this) {
+        case BusTripType.go:
+          return 'ذهاب';
+        case BusTripType.back:
+          return 'إياب';
+      }
+    }
+
+    if (this is TransferPayType) {
+      switch (this) {
+        case TransferPayType.driverToCompany:
+          return 'من السائق للشركة';
+        case TransferPayType.companyToDriver:
+          return 'من الشركة للسائق';
+      }
+    }
+
+    if (this is SharedRequestStatus) {
+      switch (this) {
+        case SharedRequestStatus.pending:
+          return 'لم تبدأ';
+        case SharedRequestStatus.accepted:
+          return 'تم قبولها';
+        case SharedRequestStatus.payed:
+          return 'تم الدفع';
+        case SharedRequestStatus.pickedup:
+          return 'تم الركوب';
+        case SharedRequestStatus.dropped:
+          return 'تم النزول';
+        case SharedRequestStatus.closed:
+          return 'مكتملة';
+      }
+    }
+
+    if (this is SharedTripStatus) {
+      switch (this) {
+        case SharedTripStatus.pending:
+          return 'في الانتظار';
+        case SharedTripStatus.started:
+          return 'جارية';
+        case SharedTripStatus.closed:
+          return 'منتهية';
+        case SharedTripStatus.canceled:
+          return 'ملغية';
+      }
+    }
+    if (this is InstitutionType) {
+      switch (this) {
+        case InstitutionType.school:
+          return '';
+        case InstitutionType.college:
+          return '';
+        case InstitutionType.transportation:
+          return '';
+      }
+    }
+
+    return name;
+  }
+
+  bool get isTripActive {
+    switch (this) {
+      case NavTrip.waiting:
+        return true;
+      case NavTrip.acceptor:
+        return true;
+      case NavTrip.start:
+        return true;
+      case NavTrip.end:
+        return false;
+    }
+    return false;
+  }
 }

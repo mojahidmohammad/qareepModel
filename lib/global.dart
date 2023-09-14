@@ -77,7 +77,6 @@ enum StateScreen { non, confirmCode, policy, main, passwordCode }
 
 enum NavTrip { waiting, acceptor, start, end, have }
 
-
 enum MyMapType { normal, word, mix }
 
 enum MtnState { init, pay, otp }
@@ -105,3 +104,33 @@ enum WeekDays { sunday, monday, tuesday, wednesday, thursday, friday, saturday }
 enum InstitutionType { school, college, transportation }
 
 enum MemberSubscriptionState { notSubscribe, active, expired }
+
+enum Gender { mail, female }
+//
+enum RedeemType { gold, oil, tire }
+
+enum TransferType {
+
+  sharedPay,
+
+  tripPay,
+
+  ///السائق دافع للشركة
+  payoff,
+
+  ///الشركة دافعة للسائق
+  debit,
+
+  award,
+}
+
+enum SummaryPayToEnum {
+  ///السائق يجب أن يدفع للشركة
+  requiredFromDriver,
+
+  ///الشركة يجب انت تدفع للسائق
+  requiredFromCompany,
+
+  ///الرصيد متكافئ
+  equal,
+}
