@@ -7,11 +7,16 @@ class TripPath {
     required this.name,
     required this.arName,
     required this.edges,
+    required this.distance,
+    required this.duration,
   });
 
   final int id;
   final String name;
   final String arName;
+  final num distance;
+  final num duration;
+
   final List<Edge> edges;
 
   factory TripPath.fromJson(Map<String, dynamic> json) {
@@ -19,6 +24,8 @@ class TripPath {
       id: json["id"] ?? 0,
       name: json["name"] ?? "",
       arName: json["arName"] ?? "",
+      distance: json["distance"] ?? 0,
+      duration: json["duration"] ?? 0,
       edges: json["edges"] == null
           ? []
           : List<Edge>.from(json["edges"]!.map((x) => Edge.fromJson(x))),
@@ -29,6 +36,8 @@ class TripPath {
         "id": id,
         "name": name,
         "arName": arName,
+        "distance": distance,
+        "duration": duration,
         "edges": edges.map((x) => x.toJson()).toList(),
       };
 }
@@ -49,9 +58,9 @@ class Edge {
 
   final int id;
   final TripPoint startPoint;
-  final num startPointId;
+  final int startPointId;
   final TripPoint endPoint;
-  final num endPointId;
+  final int endPointId;
   final num distance;
   final num price;
   final String steps;
