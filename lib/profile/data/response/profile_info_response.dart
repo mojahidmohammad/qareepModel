@@ -1,4 +1,6 @@
 
+import 'package:qareeb_models/areas/data/response/area_response.dart';
+
 import '../../../global.dart';
 
 class ProfileInfoResponse {
@@ -48,6 +50,7 @@ class ProfileInfoResult {
     required this.coupons,
     required this.imei,
     required this.emergencyPhone,
+    required this.areas,
   });
 
   final num id;
@@ -77,6 +80,7 @@ class ProfileInfoResult {
   final String ageRange;
   final String imei;
   final String emergencyPhone;
+  final List<AreaModel> areas;
 
   factory ProfileInfoResult.fromJson(Map<String, dynamic> json) {
     return ProfileInfoResult(
@@ -110,6 +114,9 @@ class ProfileInfoResult {
       coupons: json["coupons"] ?? "",
       imei: json["imei"] ?? "",
       emergencyPhone: json["emergencyPhone"] ?? "",
+      areas: json["areas"] == null
+          ? []
+          : List<AreaModel>.from(json["areas"]!.map((x) => AreaModel.fromJson(x))),
     );
   }
 
