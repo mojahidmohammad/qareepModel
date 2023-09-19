@@ -148,6 +148,7 @@ class ProfileInfoResult {
         "coupons": coupons,
         "imei": imei,
         "emergencyPhone": emergencyPhone,
+        "areas": areas.map((x) => x.toJson()).toList(),
       };
 
 }
