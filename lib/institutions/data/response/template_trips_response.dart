@@ -34,6 +34,7 @@ class TemplateTripsResult {
     required this.pathId,
     required this.path,
     required this.description,
+    required this.category,
     required this.distance,
     required this.buses,
     required this.creationDate,
@@ -51,6 +52,7 @@ class TemplateTripsResult {
   final num pathId;
   final TripPath path;
   final String description;
+  final BusTripCategory category;
   final num distance;
   final List<BusModel> buses;
   final DateTime? creationDate;
@@ -69,6 +71,7 @@ class TemplateTripsResult {
       pathId: json["pathId"] ?? 0,
       path: TripPath.fromJson(json["path"] ?? {}),
       description: json["description"] ?? "",
+      category: BusTripCategory.values[json["category"] ?? 0],
       distance: json["distance"] ?? 0,
       buses: json["buses"] == null
           ? []

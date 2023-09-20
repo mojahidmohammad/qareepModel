@@ -109,6 +109,8 @@ enum Gender { mail, female }
 //
 enum RedeemType { gold, oil, tire }
 
+enum BusTripCategory { qareebPoints, customPoints }
+
 enum TransferType {
 
   sharedPay,
