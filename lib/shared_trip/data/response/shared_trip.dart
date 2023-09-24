@@ -32,7 +32,7 @@ class SharedTrip {
     required this.startDate,
     required this.endDate,
     required this.tripStatus,
-    required this.seatsNumber,
+    required this.seatNumber,
     required this.seatCost,
     required this.totalCost,
     required this.note,
@@ -51,7 +51,7 @@ class SharedTrip {
   final DateTime? startDate;
   final DateTime? endDate;
   final SharedTripStatus tripStatus;
-  final num seatsNumber;
+  final num seatNumber;
   final num seatCost;
   final num totalCost;
   final String note;
@@ -75,7 +75,7 @@ class SharedTrip {
       endDate: DateTime.tryParse(json["endDate"] ?? ""),
       tripStatus: SharedTripStatus
           .values[int.tryParse(json["tripStatus"]?.toString() ?? '0') ?? 0],
-      seatsNumber: json["seatsNumber"] ?? 0,
+      seatNumber: json["seatNumber"] ?? 0,
       seatCost: json["seatCost"] ?? 0,
       totalCost: json["totalCost"] ?? 0,
       availableSeats: json["availableSeats"] ?? 0,
@@ -96,7 +96,7 @@ class SharedTrip {
         "startDate": startDate?.toIso8601String(),
         "endDate": endDate?.toIso8601String(),
         "tripStatus": tripStatus,
-        "seatsNumber": seatsNumber,
+        "seatNumber": seatNumber,
         "seatCost": seatCost,
         "totalCost": totalCost,
         "availableSeats": availableSeats,
