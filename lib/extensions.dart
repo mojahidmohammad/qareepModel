@@ -344,7 +344,7 @@ extension SharedRequestMap on SharedTrip {
 
   List<SpinnerItem> availableRequest() {
     var s = <SpinnerItem>[];
-    var a = seatsNumber - sharedRequests.length;
+    var a = seatNumber - sharedRequests.length;
     for (var i = 1; i <= a; i++) {
       s.add(SpinnerItem(id: i, name: i.toString()));
     }
