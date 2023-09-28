@@ -35,6 +35,7 @@ class TripResult {
     required this.isAccepted,
     required this.note,
     required this.distance,
+    required this.realDistance,
     required this.tripTimeDate,
     required this.tripTime,
     required this.tripFare,
@@ -45,7 +46,7 @@ class TripResult {
     required this.cancelReason,
     required this.driverName,
     required this.clientName,
-    required this.PreAcceptPath,
+    required this.preAcceptPath,
     required this.creationTime,
     required this.isConfirmed,
     required this.isActive,
@@ -77,6 +78,7 @@ class TripResult {
   bool isAccepted;
   final String note;
   final double distance;
+  final double realDistance;
   final DateTime? tripTimeDate;
   final String tripTime;
   final double tripFare;
@@ -87,7 +89,7 @@ class TripResult {
   final String cancelReason;
   String driverName;
   final String clientName;
-  final String PreAcceptPath;
+  final String preAcceptPath;
   final DateTime? creationTime;
   bool isConfirmed;
   bool isActive;
@@ -121,6 +123,7 @@ class TripResult {
       isAccepted: json['isAccepted'] ?? false,
       note: json['note'] ?? '',
       distance: json['distance'] ?? 0,
+      realDistance: json['realDistance'] ?? 0,
       tripTimeDate:
           json['tripTimeDate'] == null ? null : DateTime.parse(json['tripTimeDate']),
       tripTime: json['tripTime'] ?? '',
@@ -132,7 +135,7 @@ class TripResult {
       cancelReason: json['cancelReasone'] ?? '',
       driverName: json['driverName'] ?? '',
       clientName: json['clietName'] ?? '',
-      PreAcceptPath: json['PreAcceptPath'] ?? '',
+      preAcceptPath: json['PreAcceptPath'] ?? '',
       creationTime:
           json['creationTime'] == null ? null : DateTime.parse(json['creationTime']),
       isConfirmed: json['isConfirmed'] ?? false,
@@ -169,6 +172,7 @@ class TripResult {
         'isAccepted': isAccepted,
         'note': note,
         'distance': distance,
+        'realDistance': realDistance,
         'tripTimeDate': tripTimeDate?.toIso8601String(),
         'tripTime': tripTime,
         'tripFare': tripFare,
@@ -179,7 +183,7 @@ class TripResult {
         'cancelReasone': cancelReason,
         'driverName': driverName,
         'clietName': clientName,
-        'PreAcceptPath': PreAcceptPath,
+        'PreAcceptPath': preAcceptPath,
         'creationTime': creationTime?.toIso8601String(),
         'isConfirmed': isConfirmed,
         'isActive': isActive,
