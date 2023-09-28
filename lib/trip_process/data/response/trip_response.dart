@@ -1,4 +1,3 @@
-
 import '../../../shared_trip/data/response/shared_trip.dart';
 
 import '../shared/location_model.dart';
@@ -46,6 +45,7 @@ class TripResult {
     required this.cancelReason,
     required this.driverName,
     required this.clientName,
+    required this.PreAcceptPath,
     required this.creationTime,
     required this.isConfirmed,
     required this.isActive,
@@ -58,6 +58,7 @@ class TripResult {
     required this.carType,
     required this.coupons,
     required this.couponsId,
+    required this.preAcceptDistance,
     required this.driver,
   });
 
@@ -86,6 +87,7 @@ class TripResult {
   final String cancelReason;
   String driverName;
   final String clientName;
+  final String PreAcceptPath;
   final DateTime? creationTime;
   bool isConfirmed;
   bool isActive;
@@ -99,6 +101,7 @@ class TripResult {
   final CarType carType;
   final Coupons coupons;
   final int couponsId;
+  final int preAcceptDistance;
   final Driver driver;
 
   factory TripResult.fromJson(Map<String, dynamic> json) {
@@ -113,8 +116,8 @@ class TripResult {
       destinationName: json['distnation_name'] ?? '',
       duration: json['duration'] ?? '',
       isStarted: json['isStarted'] ?? false,
-      currentLocation:  LocationModel.fromJson(json['currentLocation']??{}),
-      destination:LocationModel.fromJson(json['distnation']??{}),
+      currentLocation: LocationModel.fromJson(json['currentLocation'] ?? {}),
+      destination: LocationModel.fromJson(json['distnation'] ?? {}),
       isAccepted: json['isAccepted'] ?? false,
       note: json['note'] ?? '',
       distance: json['distance'] ?? 0,
@@ -129,6 +132,7 @@ class TripResult {
       cancelReason: json['cancelReasone'] ?? '',
       driverName: json['driverName'] ?? '',
       clientName: json['clietName'] ?? '',
+      PreAcceptPath: json['PreAcceptPath'] ?? '',
       creationTime:
           json['creationTime'] == null ? null : DateTime.parse(json['creationTime']),
       isConfirmed: json['isConfirmed'] ?? false,
@@ -139,11 +143,12 @@ class TripResult {
       isClientRated: json['isClientRated'] ?? false,
       isDriverRated: json['isDriverRated'] ?? false,
       carCategoryId: json['carCategoryId'] ?? 0,
-      carType:  CarType.fromJson(json['carType']??{}),
+      carType: CarType.fromJson(json['carType'] ?? {}),
       coupons: json['coupons'] == null
           ? Coupons.fromJson({})
           : Coupons.fromJson(json['coupons']),
       couponsId: json['couponsId'] ?? 0,
+      preAcceptDistance: json['preAcceptDistance'] ?? 0,
       driver: Driver.fromJson(json["driver"] ?? {}),
     );
   }
@@ -174,6 +179,7 @@ class TripResult {
         'cancelReasone': cancelReason,
         'driverName': driverName,
         'clietName': clientName,
+        'PreAcceptPath': PreAcceptPath,
         'creationTime': creationTime?.toIso8601String(),
         'isConfirmed': isConfirmed,
         'isActive': isActive,
@@ -186,9 +192,9 @@ class TripResult {
         'carType': carType.toJson(),
         'coupons': coupons.toJson(),
         'couponsId': couponsId,
+        'preAcceptDistance': preAcceptDistance,
         "driver": driver.toJson(),
       };
-
 }
 
 class Coupons {
