@@ -69,13 +69,12 @@ class SpinnerItem {
 
 enum CubitStatuses { init, done, loading, error }
 
-enum TripStatus { non, reject, accept, start, end }
 
 enum BookingPages { selectLocation, trip, booking }
 
 enum StateScreen { non, confirmCode, policy, main, passwordCode }
 
-enum NavTrip { waiting, acceptor, start, end, have }
+enum NavTrip { waiting, acceptor, start, end }
 
 enum MyMapType { normal, word, mix }
 
@@ -135,4 +134,14 @@ enum SummaryPayToEnum {
 
   ///الرصيد متكافئ
   equal,
+}
+
+ enum TripType
+{
+  scheduled, normal
+}
+
+ enum TripStatus
+{
+  pending, accepted, started, completed, canceled, canceledByAdmin
 }

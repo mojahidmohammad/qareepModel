@@ -13,7 +13,6 @@ import 'package:qareeb_models/trip_process/data/response/trip_response.dart';
 import 'favorite_place/data/response/add_favorite_place_response.dart';
 import 'global.dart';
 
-
 extension Redeems on RedeemsResult {
   /// كم مرة يحق للسائق التبديل
   double get _oilCount =>
@@ -48,7 +47,6 @@ extension Redeems on RedeemsResult {
   double get tiresPCount => double.parse((_tiresCount * 100).toStringAsFixed(2));
 }
 
-
 extension PolylineExt on List<List<num>> {
   List<LatLng> unpackPolyline() =>
       map((p) => LatLng(p[0].toDouble(), p[1].toDouble())).toList();
@@ -77,7 +75,7 @@ extension SplitByLength on String {
     return split(' ').last.length > 2;
   }
 
-  String get formatPrice => '${oCcy.format(this)}';
+  String get formatPrice => oCcy.format(this);
 
   String get removeSpace => replaceAll(' ', '');
 
@@ -103,7 +101,6 @@ extension SplitByLength on String {
     String output = uniqueList.join(' ');
     return output;
   }
-
 }
 
 extension StringHelper on String? {
@@ -112,13 +109,12 @@ extension StringHelper on String? {
   }
 }
 
-
 final oCcy = NumberFormat("#,##0.00", "en_US");
 
 extension MaxInt on num {
   int get maxInt => 2147483647;
 
-  String get formatPrice => '${oCcy.format(this)}';
+  String get formatPrice => oCcy.format(this);
 
   int get myRound {
     if (toInt() < this) return toInt() + 1;
@@ -129,10 +125,7 @@ extension MaxInt on num {
 extension EnumSpinner on List<Enum> {
   List<SpinnerItem> spinnerItems({Enum? selected}) {
     return map((e) => SpinnerItem(
-        name: e.arabicName,
-        id: e.index,
-        item: e,
-        isSelected: e == selected)).toList();
+        name: e.arabicName, id: e.index, item: e, isSelected: e == selected)).toList();
   }
 }
 
@@ -167,7 +160,6 @@ extension NavTripHelper on NavTrip {
         return 0.24;
 
       case NavTrip.end:
-      case NavTrip.have:
         break;
     }
     return 0.5;
@@ -185,7 +177,6 @@ extension NavTripHelper on NavTrip {
         return 0.1;
 
       case NavTrip.end:
-      case NavTrip.have:
         break;
     }
     return 0.2;
@@ -200,7 +191,6 @@ extension NavTripHelper on NavTrip {
       case NavTrip.start:
         return 0.1;
       case NavTrip.end:
-      case NavTrip.have:
         break;
     }
     return 0.3;
@@ -271,53 +261,36 @@ extension PathMap on TripPath {
   }
 }
 
-extension NormalTripMap on TripResult {
-  LatLng get startPoint => currentLocation.latLng;
+extension NormalTripMap on Trip {
+  LatLng get startPoint => LatLng(source.latitude, source.longitude);
 
-  LatLng get endPoint => destination.latLng;
-
-  String get dateTrip {
-    if (startDate != null) {
-      return startDate!.formatFullDate;
-    } else if (endDate != null) {
-      return endDate!.formatFullDate;
-    }
-    return 'لم تبدأ';
-  }
-
-  String get tripStateName {
-    //غير موجودة أو منتهية
-    if (isCanceled) return 'ملغية';
-
-    //final
-    if (isDelved) return 'مكتملة';
-    //بدأت
-    if (isStarted || isConfirmed) return 'جارية';
-
-    //تم تأكيدها
-    if (isConfirmed) return 'بحث عن سائق';
-
-    return 'حالة غير معروفة';
-  }
+  LatLng get endPoint => LatLng(destination.latitude, destination.longitude);
 
   NavTrip? get tripStateEnum {
-    //غير موجودة أو منتهية
-    if (isCanceled) return null;
-
-    //final
-    if (isDelved) return NavTrip.end;
-    //بدأت
-    if (isStarted || isConfirmed) return NavTrip.start;
-
-    //تم تأكيدها
-    if (isConfirmed) return NavTrip.waiting;
-
-    return NavTrip.have;
+    switch (tripStatus) {
+      case TripStatus.pending:
+        return NavTrip.waiting;
+      case TripStatus.accepted:
+        return NavTrip.acceptor;
+      case TripStatus.started:
+        return NavTrip.start;
+      case TripStatus.completed:
+        return NavTrip.end;
+      case TripStatus.canceled:
+        return null;
+      case TripStatus.canceledByAdmin:
+        return null;
+    }
   }
 
-  String get getDuration {
-    return ' ${duration.numberOnly ~/ 60} دقيقة';
-  }
+  bool get isTripActive =>
+      tripStatus == TripStatus.started || tripStatus == TripStatus.accepted;
+
+  bool get isCanceled =>
+      tripStatus == TripStatus.canceled || tripStatus == TripStatus.canceledByAdmin;
+
+  bool get isDelved => tripStatus == TripStatus.completed;
+
 }
 
 extension SharedRequestMap on SharedTrip {
@@ -610,6 +583,24 @@ extension RealName on Enum {
           return 'ملغية';
       }
     }
+
+    if (this is TripStatus) {
+      switch (this) {
+        case TripStatus.pending:
+          return 'في الانتظار';
+        case TripStatus.accepted:
+          return 'تم قبولها';
+        case TripStatus.started:
+          return 'بدأت';
+        case TripStatus.completed:
+          return 'منتهية';
+        case TripStatus.canceled:
+          return 'ملغية';
+        case TripStatus.canceledByAdmin:
+          return 'ملغية بواسطة المدير';
+      }
+    }
+
     if (this is InstitutionType) {
       switch (this) {
         case InstitutionType.school:

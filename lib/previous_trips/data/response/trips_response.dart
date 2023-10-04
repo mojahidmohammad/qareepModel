@@ -5,39 +5,15 @@ class TripsResponse {
     required this.result,
   });
 
-  final TripsResult result;
+  final Trip result;
 
   factory TripsResponse.fromJson(Map<String, dynamic> json) {
     return TripsResponse(
-      result: TripsResult.fromJson(json["result"]??{}),
+      result: Trip.fromJson(json["result"]??{}),
     );
   }
 
   Map<String, dynamic> toJson() => {
         "result": result.toJson(),
-      };
-}
-
-class TripsResult {
-  TripsResult({
-    required this.items,
-    required this.totalCount,
-  });
-
-  final List<TripResult> items;
-  final int totalCount;
-
-  factory TripsResult.fromJson(Map<String, dynamic> json) {
-    return TripsResult(
-      items: json["items"] == null
-          ? []
-          : List<TripResult>.from(json["items"]!.map((x) => TripResult.fromJson(x))),
-      totalCount: json["totalCount"] ?? 0,
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        "items": items.map((x) => x.toJson()).toList(),
-        "totalCount": totalCount,
       };
 }

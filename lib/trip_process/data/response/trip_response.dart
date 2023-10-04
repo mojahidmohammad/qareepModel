@@ -1,240 +1,402 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../../global.dart';
 import '../../../shared_trip/data/response/shared_trip.dart';
 
-import '../shared/location_model.dart';
-
-class TripResponse {
-  TripResponse({required this.result});
+class TripsResponse {
+  TripsResponse({
+    required this.result,
+  });
 
   final TripResult result;
 
-  factory TripResponse.fromJson(Map<String, dynamic> json) {
-    return TripResponse(
-      result: TripResult.fromJson(json['result'] ?? {}),
+  factory TripsResponse.fromJson(Map<String, dynamic> json) {
+    return TripsResponse(
+      result: TripResult.fromJson(json["result"]),
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'result': result.toJson(),
+        "result": result.toJson(),
+      };
+}
+
+class TripResponse {
+  TripResponse({
+    required this.result,
+  });
+
+  final Trip result;
+
+  factory TripResponse.fromJson(Map<String, dynamic> json) {
+    return TripResponse(
+      result: Trip.fromJson(json["result"]),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "result": result.toJson(),
       };
 }
 
 class TripResult {
   TripResult({
-    required this.id,
-    required this.clientId,
-    required this.driverId,
-    required this.startDate,
-    required this.endDate,
-    required this.tripType,
-    required this.currentLocationName,
-    required this.destinationName,
-    required this.duration,
-    required this.isStarted,
-    required this.currentLocation,
-    required this.destination,
-    required this.isAccepted,
-    required this.note,
-    required this.distance,
-    required this.realDistance,
-    required this.tripTimeDate,
-    required this.tripTime,
-    required this.tripFare,
-    required this.paidAmount,
-    required this.clientPhoneNumber,
-    required this.isDelved,
-    required this.isCanceled,
-    required this.cancelReason,
-    required this.driverName,
-    required this.clientName,
-    required this.preAcceptPath,
-    required this.creationTime,
-    required this.isConfirmed,
-    required this.isActive,
-    required this.isPaid,
-    required this.clientRate,
-    required this.driverRate,
-    required this.isClientRated,
-    required this.isDriverRated,
-    required this.carCategoryId,
-    required this.carType,
-    required this.coupons,
-    required this.couponsId,
-    required this.preAcceptDistance,
-    required this.driver,
+    required this.items,
+    required this.totalCount,
   });
 
-  final int id;
-  final int clientId;
-  int driverId;
-  final DateTime? startDate;
-  final DateTime? endDate;
-  final int tripType;
-  final String currentLocationName;
-  final String destinationName;
-  final String duration;
-  bool isStarted;
-  final LocationModel currentLocation;
-  final LocationModel destination;
-  bool isAccepted;
-  final String note;
-  final double distance;
-  final double realDistance;
-  final DateTime? tripTimeDate;
-  final String tripTime;
-  final double tripFare;
-  final double paidAmount;
-  final String clientPhoneNumber;
-  bool isDelved;
-  bool isCanceled;
-  final String cancelReason;
-  String driverName;
-  final String clientName;
-  final String preAcceptPath;
-  final DateTime? creationTime;
-  bool isConfirmed;
-  bool isActive;
-  bool isPaid;
-  final double clientRate;
-  double driverRate;
-  bool isClientRated;
-  bool isDriverRated;
-  final int carCategoryId;
-
-  final CarType carType;
-  final Coupons coupons;
-  final int couponsId;
-  final int preAcceptDistance;
-  final Driver driver;
+  final List<Trip> items;
+  final int totalCount;
 
   factory TripResult.fromJson(Map<String, dynamic> json) {
     return TripResult(
-      id: json['id'] ?? 0,
-      clientId: json['clientId'] ?? 0,
-      driverId: json['driverId'] ?? 0,
-      startDate: json['startDate'] == null ? null : DateTime.parse(json['startDate']),
-      endDate: json['endDate'] == null ? null : DateTime.parse(json['endDate']),
-      tripType: json['tripType'] ?? 0,
-      currentLocationName: json['currentLocation_name'] ?? '',
-      destinationName: json['distnation_name'] ?? '',
-      duration: json['duration'] ?? '',
-      isStarted: json['isStarted'] ?? false,
-      currentLocation: LocationModel.fromJson(json['currentLocation'] ?? {}),
-      destination: LocationModel.fromJson(json['distnation'] ?? {}),
-      isAccepted: json['isAccepted'] ?? false,
-      note: json['note'] ?? '',
-      distance: json['distance'] ?? 0,
-      realDistance: json['realDistance'] ?? 0,
-      tripTimeDate:
-          json['tripTimeDate'] == null ? null : DateTime.parse(json['tripTimeDate']),
-      tripTime: json['tripTime'] ?? '',
-      tripFare: json['tripFare'] ?? 0,
-      paidAmount: json['paidAmount'] ?? 0,
-      clientPhoneNumber: json['client_PhoneNumber'] ?? '',
-      isDelved: json['isDilverd'] ?? false,
-      isCanceled: json['isCanceled'] ?? false,
-      cancelReason: json['cancelReasone'] ?? '',
-      driverName: json['driverName'] ?? '',
-      clientName: json['clietName'] ?? '',
-      preAcceptPath: json['PreAcceptPath'] ?? '',
-      creationTime:
-          json['creationTime'] == null ? null : DateTime.parse(json['creationTime']),
-      isConfirmed: json['isConfirmed'] ?? false,
-      isActive: json['isActive'] ?? false,
-      isPaid: json['isPaid'] ?? false,
-      clientRate: json['clientRate'] ?? 0,
-      driverRate: json['driverRate'] ?? 0,
-      isClientRated: json['isClientRated'] ?? false,
-      isDriverRated: json['isDriverRated'] ?? false,
-      carCategoryId: json['carCategoryId'] ?? 0,
-      carType: CarType.fromJson(json['carType'] ?? {}),
-      coupons: json['coupons'] == null
-          ? Coupons.fromJson({})
-          : Coupons.fromJson(json['coupons']),
-      couponsId: json['couponsId'] ?? 0,
-      preAcceptDistance: json['preAcceptDistance'] ?? 0,
-      driver: Driver.fromJson(json["driver"] ?? {}),
+      items: json["items"] == null
+          ? []
+          : List<Trip>.from(json["items"]!.map((x) => Trip.fromJson(x))),
+      totalCount: json["totalCount"] ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'clientId': clientId,
-        'driverId': driverId,
-        'startDate': startDate?.toIso8601String(),
-        'endDate': endDate?.toIso8601String(),
-        'tripType': tripType,
-        'currentLocation_name': currentLocationName,
-        'distnation_name': destinationName,
-        'duration': duration,
-        'isStarted': isStarted,
-        'currentLocation': currentLocation.toJson(),
-        'distnation': destination.toJson(),
-        'isAccepted': isAccepted,
-        'note': note,
-        'distance': distance,
-        'realDistance': realDistance,
-        'tripTimeDate': tripTimeDate?.toIso8601String(),
-        'tripTime': tripTime,
-        'tripFare': tripFare,
-        'paidAmount': paidAmount,
-        'client_PhoneNumber': clientPhoneNumber,
-        'isDilverd': isDelved,
-        'isCanceled': isCanceled,
-        'cancelReasone': cancelReason,
-        'driverName': driverName,
-        'clietName': clientName,
-        'PreAcceptPath': preAcceptPath,
-        'creationTime': creationTime?.toIso8601String(),
-        'isConfirmed': isConfirmed,
-        'isActive': isActive,
-        'isPaid': isPaid,
-        'clientRate': clientRate,
-        'driverRate': driverRate,
-        'isClientRated': isClientRated,
-        'isDriverRated': isDriverRated,
-        'carCategoryId': carCategoryId,
-        'carType': carType.toJson(),
-        'coupons': coupons.toJson(),
-        'couponsId': couponsId,
-        'preAcceptDistance': preAcceptDistance,
-        "driver": driver.toJson(),
+        "items": items.map((x) => x.toJson()).toList(),
+        "totalCount": totalCount,
       };
 }
 
-class Coupons {
-  Coupons({
+class Trip {
+  Trip({
+    required this.client,
+    required this.driver,
+    required this.clientId,
     required this.id,
-    required this.couponName,
-    required this.couponCode,
-    required this.discountValue,
-    required this.isActive,
-    required this.expireDate,
+    required this.driverId,
+    required this.reqestDate,
+    required this.schedulingDate,
+    required this.acceptDate,
+    required this.startDate,
+    required this.endDate,
+    required this.sourceName,
+    required this.source,
+    required this.destinationName,
+    required this.destination,
+    required this.estimatedDistance,
+    required this.estimatedDuration,
+    required this.estimatedPath,
+    required this.actualDistance,
+    required this.actualDuration,
+    required this.actualPath,
+    required this.preAcceptLat,
+    required this.preAcceptLng,
+    required this.preAcceptDistance,
+    required this.preAcceptPath,
+    required this.tripRate,
+    required this.note,
+    required this.tripType,
+    required this.tripStatus,
+    required this.estimatedCost,
+    required this.actualCost,
+    required this.isPaid,
+    required this.cancelReasone,
+    required this.carCategoryId,
+    required this.carCategory,
   });
 
-  final num id;
-  final String couponName;
-  final String couponCode;
-  final num discountValue;
-  final bool isActive;
-  final DateTime? expireDate;
+  final Client client;
+  final Client driver;
+  final int clientId;
+  final int id;
+  final int driverId;
+  final DateTime? reqestDate;
+  final DateTime? schedulingDate;
+  final DateTime? acceptDate;
+  final DateTime? startDate;
+  final DateTime? endDate;
+  final String sourceName;
+  final Destination source;
+  final String destinationName;
+  final Destination destination;
+  final num estimatedDistance;
+  final num estimatedDuration;
+  final String estimatedPath;
+  final num actualDistance;
+  final num actualDuration;
+  final String actualPath;
+  final double preAcceptLat;
+  final double preAcceptLng;
+  final num preAcceptDistance;
+  final String preAcceptPath;
+  final double tripRate;
+  final String note;
+  final TripType tripType;
+  final TripStatus tripStatus;
+  final num estimatedCost;
+  final num actualCost;
+  final bool isPaid;
+  final String cancelReasone;
+  final num carCategoryId;
+  final CarCategory carCategory;
 
-  factory Coupons.fromJson(Map<String, dynamic> json) {
-    return Coupons(
-      id: json['id'] ?? 0,
-      couponName: json['couponName'] ?? '',
-      couponCode: json['couponCode'] ?? '',
-      discountValue: json['discountValue'] ?? 0,
-      isActive: json['isActive'] ?? false,
-      expireDate: json['expireDate'] == null ? null : DateTime.parse(json['expireDate']),
+  factory Trip.fromJson(Map<String, dynamic> json) {
+    return Trip(
+      client: Client.fromJson(json["client"] ?? {}),
+      driver: Client.fromJson(json["driver"] ?? {}),
+      clientId: json["clientId"] ?? 0,
+      id: json["id"] ?? 0,
+      driverId: json["driverId"] ?? 0,
+      reqestDate: DateTime.tryParse(json["reqestDate"] ?? ""),
+      schedulingDate: DateTime.tryParse(json["schedulingDate"] ?? ""),
+      acceptDate: DateTime.tryParse(json["acceptDate"] ?? ""),
+      startDate: DateTime.tryParse(json["startDate"] ?? ""),
+      endDate: DateTime.tryParse(json["endDate"] ?? ""),
+      sourceName: json["sourceName"] ?? "",
+      source: Destination.fromJson(json["source"] ?? {}),
+      destinationName: json["destinationName"] ?? "",
+      destination: Destination.fromJson(json["destination"] ?? {}),
+      estimatedDistance: json["estimatedDistance"] ?? 0,
+      estimatedDuration: json["estimatedDuration"] ?? 0,
+      estimatedPath: json["estimatedPath"] ?? "",
+      actualDistance: json["actualDistance"] ?? 0,
+      actualDuration: json["actualDuration"] ?? 0,
+      actualPath: json["actualPath"] ?? "",
+      preAcceptLat: json["preAcceptLatitud"] ?? 0,
+      preAcceptLng: json["preAcceptLongitud"] ?? 0,
+      preAcceptDistance: json["preAcceptDistance"] ?? 0,
+      preAcceptPath: json["preAcceptPath"] ?? "",
+      tripRate: json["tripRate"] ?? 0,
+      note: json["note"] ?? "",
+      tripType: TripType.values[json["tripType"] ?? 0],
+      tripStatus: TripStatus.values[json["tripStatus"] ?? 0],
+      estimatedCost: json["estimatedCost"] ?? 0,
+      actualCost: json["actualCost"] ?? 0,
+      isPaid: json["isPaid"] ?? false,
+      cancelReasone: json["cancelReasone"] ?? "",
+      carCategoryId: json["carCategoryId"] ?? 0,
+      carCategory: CarCategory.fromJson(json["carCategory"] ?? {}),
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'couponName': couponName,
-        'couponCode': couponCode,
-        'discountValue': discountValue,
-        'isActive': isActive,
-        'expireDate': expireDate?.toIso8601String(),
+        "client": client.toJson(),
+        "driver": driver.toJson(),
+        "clientId": clientId,
+        "id": id,
+        "driverId": driverId,
+        "reqestDate": reqestDate?.toIso8601String(),
+        "schedulingDate": schedulingDate?.toIso8601String(),
+        "acceptDate": acceptDate?.toIso8601String(),
+        "startDate": startDate?.toIso8601String(),
+        "endDate": endDate?.toIso8601String(),
+        "sourceName": sourceName,
+        "source": source.toJson(),
+        "destinationName": destinationName,
+        "destination": destination.toJson(),
+        "estimatedDistance": estimatedDistance,
+        "estimatedDuration": estimatedDuration,
+        "estimatedPath": estimatedPath,
+        "actualDistance": actualDistance,
+        "actualDuration": actualDuration,
+        "actualPath": actualPath,
+        "preAcceptLatitud": preAcceptLat,
+        "preAcceptLongitud": preAcceptLng,
+        "preAcceptDistance": preAcceptDistance,
+        "preAcceptPath": preAcceptPath,
+        "tripRate": tripRate,
+        "note": note,
+        "tripType": tripType,
+        "tripStatus": tripStatus,
+        "estimatedCost": estimatedCost,
+        "actualCost": actualCost,
+        "isPaid": isPaid,
+        "cancelReasone": cancelReasone,
+        "carCategoryId": carCategoryId,
+        "carCategory": carCategory.toJson(),
       };
+}
+
+class CarCategory {
+  CarCategory({
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+    required this.price,
+    required this.driverRatio,
+    required this.nightKmOverCost,
+    required this.dayKmOverCost,
+    required this.sharedKmOverCost,
+    required this.nightSharedKmOverCost,
+    required this.sharedDriverRatio,
+    required this.minimumDayPrice,
+    required this.minimumNightPrice,
+    required this.companyLoyaltyRatio,
+    required this.sharedMinimumDistanceInMeters,
+    required this.normalOilRatio,
+    required this.normalGoldRatio,
+    required this.normalTiresRatio,
+    required this.sharedOilRatio,
+    required this.sharedGoldRatio,
+    required this.sharedTiresRatio,
+    required this.priceVariant,
+    required this.seatNumber,
+  });
+
+  final int id;
+  final String name;
+  final String imageUrl;
+  final num price;
+  final num driverRatio;
+  final num nightKmOverCost;
+  final num dayKmOverCost;
+  final num sharedKmOverCost;
+  final num nightSharedKmOverCost;
+  final num sharedDriverRatio;
+  final num minimumDayPrice;
+  final num minimumNightPrice;
+  final num companyLoyaltyRatio;
+  final num sharedMinimumDistanceInMeters;
+  final num normalOilRatio;
+  final num normalGoldRatio;
+  final num normalTiresRatio;
+  final num sharedOilRatio;
+  final num sharedGoldRatio;
+  final num sharedTiresRatio;
+  final num priceVariant;
+  final num seatNumber;
+
+  factory CarCategory.fromJson(Map<String, dynamic> json) {
+    return CarCategory(
+      id: json["id"] ?? 0,
+      name: json["name"] ?? "",
+      imageUrl: json["imageUrl"] ?? "",
+      price: json["price"] ?? 0,
+      driverRatio: json["driverRatio"] ?? 0,
+      nightKmOverCost: json["nightKMOverCost"] ?? 0,
+      dayKmOverCost: json["dayKMOverCost"] ?? 0,
+      sharedKmOverCost: json["sharedKMOverCost"] ?? 0,
+      nightSharedKmOverCost: json["nightSharedKMOverCost"] ?? 0,
+      sharedDriverRatio: json["sharedDriverRatio"] ?? 0,
+      minimumDayPrice: json["minimumDayPrice"] ?? 0,
+      minimumNightPrice: json["minimumNightPrice"] ?? 0,
+      companyLoyaltyRatio: json["companyLoyaltyRatio"] ?? 0,
+      sharedMinimumDistanceInMeters: json["sharedMinimumDistanceInMeters"] ?? 0,
+      normalOilRatio: json["normalOilRatio"] ?? 0,
+      normalGoldRatio: json["normalGoldRatio"] ?? 0,
+      normalTiresRatio: json["normalTiresRatio"] ?? 0,
+      sharedOilRatio: json["sharedOilRatio"] ?? 0,
+      sharedGoldRatio: json["sharedGoldRatio"] ?? 0,
+      sharedTiresRatio: json["sharedTiresRatio"] ?? 0,
+      priceVariant: json["priceVariant"] ?? 0,
+      seatNumber: json["seatNumber"] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "imageUrl": imageUrl,
+        "price": price,
+        "driverRatio": driverRatio,
+        "nightKMOverCost": nightKmOverCost,
+        "dayKMOverCost": dayKmOverCost,
+        "sharedKMOverCost": sharedKmOverCost,
+        "nightSharedKMOverCost": nightSharedKmOverCost,
+        "sharedDriverRatio": sharedDriverRatio,
+        "minimumDayPrice": minimumDayPrice,
+        "minimumNightPrice": minimumNightPrice,
+        "companyLoyaltyRatio": companyLoyaltyRatio,
+        "sharedMinimumDistanceInMeters": sharedMinimumDistanceInMeters,
+        "normalOilRatio": normalOilRatio,
+        "normalGoldRatio": normalGoldRatio,
+        "normalTiresRatio": normalTiresRatio,
+        "sharedOilRatio": sharedOilRatio,
+        "sharedGoldRatio": sharedGoldRatio,
+        "sharedTiresRatio": sharedTiresRatio,
+        "priceVariant": priceVariant,
+        "seatNumber": seatNumber,
+      };
+}
+
+class Client {
+  Client({
+    required this.userName,
+    required this.fullName,
+    required this.name,
+    required this.surname,
+    required this.phoneNumber,
+    required this.avatar,
+    required this.emergencyPhone,
+    required this.imei,
+    required this.userType,
+    required this.carType,
+  });
+
+  final String userName;
+  final String fullName;
+  final String name;
+  final String surname;
+  final String phoneNumber;
+  final String avatar;
+  final String emergencyPhone;
+  final String imei;
+  final String userType;
+  final CarType carType;
+
+  factory Client.fromJson(Map<String, dynamic> json) {
+    return Client(
+      userName: json["userName"] ?? "",
+      fullName: json["fullName"] ?? "",
+      name: json["name"] ?? "",
+      surname: json["surname"] ?? "",
+      phoneNumber: json["phoneNumber"] ?? "",
+      avatar: json["avatar"] ?? "",
+      emergencyPhone: json["emergencyPhone"] ?? "",
+      imei: json["imei"] ?? "",
+      userType: json["userType"] ?? "",
+      carType: CarType.fromJson(json["carType"] ?? {}),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "userName": userName,
+        "fullName": fullName,
+        "name": name,
+        "surname": surname,
+        "phoneNumber": phoneNumber,
+        "avatar": avatar,
+        "emergencyPhone": emergencyPhone,
+        "imei": imei,
+        "userType": userType,
+        "carType": carType,
+      };
+}
+
+class Destination {
+  Destination({
+    required this.latitude,
+    required this.longitude,
+  });
+
+  final double latitude;
+  final double longitude;
+
+  factory Destination.fromJson(Map<String, dynamic> json) {
+    return Destination(
+      latitude: json["latitude"] ?? 0,
+      longitude: json["longitude"] ?? 0,
+    );
+  }
+
+  factory Destination.fromLatLng(LatLng? latLng) {
+    if (latLng == null) return Destination.fromJson({});
+    return Destination(
+      latitude: latLng.latitude,
+      longitude: latLng.longitude,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "latitude": latitude,
+        "longitude": longitude,
+      };
+
+  LatLng toLatLng() => LatLng(latitude, longitude);
 }

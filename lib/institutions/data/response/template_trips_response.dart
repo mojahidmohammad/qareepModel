@@ -9,14 +9,14 @@ class TemplateTripsResponse {
     required this.result,
   });
 
-  final List<TemplateTripsResult> result;
+  final List<TemplateTrip> result;
 
   factory TemplateTripsResponse.fromJson(Map<String, dynamic> json) {
     return TemplateTripsResponse(
       result: json["result"] == null
           ? []
-          : List<TemplateTripsResult>.from(
-              json["result"]!.map((x) => TemplateTripsResult.fromJson(x))),
+          : List<TemplateTrip>.from(
+              json["result"]!.map((x) => TemplateTrip.fromJson(x))),
     );
   }
 
@@ -25,8 +25,8 @@ class TemplateTripsResponse {
       };
 }
 
-class TemplateTripsResult {
-  TemplateTripsResult({
+class TemplateTrip {
+  TemplateTrip({
     required this.id,
     required this.name,
     required this.tripTemplateId,
@@ -62,8 +62,8 @@ class TemplateTripsResult {
   final List<int> days;
   final List<Attendance> attendances;
 
-  factory TemplateTripsResult.fromJson(Map<String, dynamic> json) {
-    return TemplateTripsResult(
+  factory TemplateTrip.fromJson(Map<String, dynamic> json) {
+    return TemplateTrip(
       id: json["id"] ?? 0,
       name: json["name"] ?? "",
       tripTemplateId: json["tripTemplateId"] ?? 0,
