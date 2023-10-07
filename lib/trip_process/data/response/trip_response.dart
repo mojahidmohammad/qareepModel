@@ -65,10 +65,10 @@ class TripResult {
 
 class Trip {
   Trip({
+    required this.id,
     required this.client,
     required this.driver,
     required this.clientId,
-    required this.id,
     required this.driverId,
     required this.reqestDate,
     required this.schedulingDate,
@@ -90,6 +90,7 @@ class Trip {
     required this.preAcceptDistance,
     required this.preAcceptPath,
     required this.tripRate,
+    required this.reviewNote,
     required this.note,
     required this.tripType,
     required this.tripStatus,
@@ -101,10 +102,10 @@ class Trip {
     required this.carCategory,
   });
 
-  final Client client;
-  final Client driver;
-  final int clientId;
   final int id;
+  final Client client;
+  final Driver driver;
+  final int clientId;
   final int driverId;
   final DateTime? reqestDate;
   final DateTime? schedulingDate;
@@ -126,6 +127,7 @@ class Trip {
   final num preAcceptDistance;
   final String preAcceptPath;
   final double tripRate;
+  final String reviewNote;
   final String note;
   final TripType tripType;
   final TripStatus tripStatus;
@@ -139,7 +141,7 @@ class Trip {
   factory Trip.fromJson(Map<String, dynamic> json) {
     return Trip(
       client: Client.fromJson(json["client"] ?? {}),
-      driver: Client.fromJson(json["driver"] ?? {}),
+      driver: Driver.fromJson(json["driver"] ?? {}),
       clientId: json["clientId"] ?? 0,
       id: json["id"] ?? 0,
       driverId: json["driverId"] ?? 0,
@@ -163,6 +165,7 @@ class Trip {
       preAcceptDistance: json["preAcceptDistance"] ?? 0,
       preAcceptPath: json["preAcceptPath"] ?? "",
       tripRate: json["tripRate"] ?? 0,
+      reviewNote: json["reviewNote"] ?? "",
       note: json["note"] ?? "",
       tripType: TripType.values[json["tripType"] ?? 0],
       tripStatus: TripStatus.values[json["tripStatus"] ?? 0],
@@ -176,10 +179,10 @@ class Trip {
   }
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "client": client.toJson(),
         "driver": driver.toJson(),
         "clientId": clientId,
-        "id": id,
         "driverId": driverId,
         "reqestDate": reqestDate?.toIso8601String(),
         "schedulingDate": schedulingDate?.toIso8601String(),
@@ -201,9 +204,10 @@ class Trip {
         "preAcceptDistance": preAcceptDistance,
         "preAcceptPath": preAcceptPath,
         "tripRate": tripRate,
+        "reviewNote": reviewNote,
         "note": note,
-        "tripType": tripType,
-        "tripStatus": tripStatus,
+        "tripType": tripType.index,
+        "tripStatus": tripStatus.index,
         "estimatedCost": estimatedCost,
         "actualCost": actualCost,
         "isPaid": isPaid,
@@ -324,9 +328,7 @@ class Client {
     required this.phoneNumber,
     required this.avatar,
     required this.emergencyPhone,
-    required this.imei,
     required this.userType,
-    required this.carType,
   });
 
   final String userName;
@@ -336,9 +338,7 @@ class Client {
   final String phoneNumber;
   final String avatar;
   final String emergencyPhone;
-  final String imei;
   final String userType;
-  final CarType carType;
 
   factory Client.fromJson(Map<String, dynamic> json) {
     return Client(
@@ -349,9 +349,7 @@ class Client {
       phoneNumber: json["phoneNumber"] ?? "",
       avatar: json["avatar"] ?? "",
       emergencyPhone: json["emergencyPhone"] ?? "",
-      imei: json["imei"] ?? "",
       userType: json["userType"] ?? "",
-      carType: CarType.fromJson(json["carType"] ?? {}),
     );
   }
 
@@ -363,9 +361,7 @@ class Client {
         "phoneNumber": phoneNumber,
         "avatar": avatar,
         "emergencyPhone": emergencyPhone,
-        "imei": imei,
         "userType": userType,
-        "carType": carType,
       };
 }
 
@@ -399,4 +395,106 @@ class Destination {
       };
 
   LatLng toLatLng() => LatLng(latitude, longitude);
+
+}
+
+
+class Driver {
+  Driver({
+    required this.id,
+    required this.fullName,
+    required this.name,
+    required this.surname,
+    required this.phoneNumber,
+    required this.imei,
+    required this.avatar,
+    required this.rating,
+    required this.carType,
+  });
+
+  final int id;
+  final String fullName;
+  final String name;
+  final String surname;
+  final String phoneNumber;
+  final String imei;
+  final String avatar;
+  final num rating;
+  final CarType carType;
+
+  factory Driver.fromJson(Map<String, dynamic> json) {
+    return Driver(
+      id: json["id"] ?? 0,
+      fullName: json["fullName"] ?? "",
+      name: json["name"] ?? "",
+      surname: json["surname"] ?? "",
+      phoneNumber: json["phoneNumber"] ?? "",
+      imei: json["imei"] ?? "",
+      avatar: json["avatar"] ?? "",
+      rating: json["rating"] ?? 0,
+      carType: CarType.fromJson(json["carType"]??{}),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "fullName": fullName,
+        "name": name,
+        "surname": surname,
+        "phoneNumber": phoneNumber,
+        "imei": imei,
+        "avatar": avatar,
+        "rating": rating,
+        "carType": carType.toJson(),
+      };
+}
+
+class CarType {
+  CarType({
+    required this.userId,
+    required this.carBrand,
+    required this.carModel,
+    required this.carColor,
+    required this.carNumber,
+    required this.seatsNumber,
+    required this.carGovernorate,
+    required this.manufacturingYear,
+    required this.type,
+  });
+
+  final num userId;
+  final String carBrand;
+  final String carModel;
+  final String carColor;
+  final String carNumber;
+  final num seatsNumber;
+  final String carGovernorate;
+  final String manufacturingYear;
+  final String type;
+
+  factory CarType.fromJson(Map<String, dynamic> json) {
+    return CarType(
+      userId: json["userId"] ?? 0,
+      carBrand: json["carBrand"] ?? "",
+      carModel: json["carModel"] ?? "",
+      carColor: json["carColor"] ?? "",
+      carNumber: json["carNumber"] ?? "",
+      seatsNumber: json["seatsNumber"] ?? 0,
+      carGovernorate: json["carGovernorate"] ?? "",
+      manufacturingYear: json["manufacturingYear"] ?? "",
+      type: json["type"] ?? "",
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "userId": userId,
+        "carBrand": carBrand,
+        "carModel": carModel,
+        "carColor": carColor,
+        "carNumber": carNumber,
+        "seatsNumber": seatsNumber,
+        "carGovernorate": carGovernorate,
+        "manufacturingYear": manufacturingYear,
+        "type": type,
+      };
 }

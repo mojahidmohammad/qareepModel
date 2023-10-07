@@ -266,6 +266,9 @@ extension NormalTripMap on Trip {
 
   LatLng get endPoint => LatLng(destination.latitude, destination.longitude);
 
+  LatLng? get preAcceptPoint =>
+      (preAcceptLat == 0) ? null : LatLng(preAcceptLat, preAcceptLng);
+
   NavTrip? get tripStateEnum {
     switch (tripStatus) {
       case TripStatus.pending:
@@ -290,7 +293,6 @@ extension NormalTripMap on Trip {
       tripStatus == TripStatus.canceled || tripStatus == TripStatus.canceledByAdmin;
 
   bool get isDelved => tripStatus == TripStatus.completed;
-
 }
 
 extension SharedRequestMap on SharedTrip {
@@ -407,6 +409,42 @@ extension DateUtcHelper on DateTime {
   }
 
   String get formatDateAther => DateFormat('yyyy/MM/dd HH:MM').format(this);
+
+  String formatDuration(DateTime serverDate) {
+    final difference = serverDate.difference(this);
+
+    final months = difference.inDays ~/ 30;
+    final days = difference.inDays % 30;
+    final hours = difference.inHours % 24;
+    final minutes = difference.inMinutes % 60;
+    final seconds = difference.inSeconds % 60;
+
+    final formattedDuration = StringBuffer();
+    formattedDuration.write('منذ: ');
+    var c = 0;
+    if (months > 0) {
+      c++;
+      formattedDuration.write('$months شهر و ');
+    }
+    if (days > 0 && c < 2) {
+      c++;
+      formattedDuration.write('$days يوم و ');
+    }
+    if (hours > 0 && c < 2) {
+      c++;
+      formattedDuration.write('$hours ساعة و ');
+    }
+    if (minutes > 0 && c < 2) {
+      c++;
+      formattedDuration.write('$minutes دقيقة و ');
+    }
+    if (seconds > 0 && c < 2) {
+      c++;
+      formattedDuration.write('$seconds ثانية ');
+    }
+
+    return formattedDuration.toString().trim();
+  }
 }
 
 extension ScrollMax on ScrollController {
