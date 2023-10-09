@@ -329,6 +329,7 @@ class Client {
     required this.avatar,
     required this.emergencyPhone,
     required this.userType,
+    required this.accountBalance,
   });
 
   final String userName;
@@ -339,6 +340,7 @@ class Client {
   final String avatar;
   final String emergencyPhone;
   final String userType;
+  final num accountBalance;
 
   factory Client.fromJson(Map<String, dynamic> json) {
     return Client(
@@ -350,6 +352,7 @@ class Client {
       avatar: json["avatar"] ?? "",
       emergencyPhone: json["emergencyPhone"] ?? "",
       userType: json["userType"] ?? "",
+      accountBalance: json["accountBalance"] ?? 0,
     );
   }
 
@@ -362,6 +365,7 @@ class Client {
         "avatar": avatar,
         "emergencyPhone": emergencyPhone,
         "userType": userType,
+        "accountBalance": accountBalance,
       };
 }
 
@@ -395,9 +399,7 @@ class Destination {
       };
 
   LatLng toLatLng() => LatLng(latitude, longitude);
-
 }
-
 
 class Driver {
   Driver({
@@ -432,7 +434,7 @@ class Driver {
       imei: json["imei"] ?? "",
       avatar: json["avatar"] ?? "",
       rating: json["rating"] ?? 0,
-      carType: CarType.fromJson(json["carType"]??{}),
+      carType: CarType.fromJson(json["carType"] ?? {}),
     );
   }
 
