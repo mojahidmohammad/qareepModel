@@ -327,10 +327,6 @@ extension SharedRequestMap on SharedTrip {
   }
 }
 
-extension SharedRequestHelper on SharedRequest {
-  String get cost => '$amount ل.س';
-}
-
 extension CubitStateHelper on CubitStatuses {
   bool get isLoading => this == CubitStatuses.loading;
 
