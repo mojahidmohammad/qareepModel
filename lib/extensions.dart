@@ -430,26 +430,26 @@ extension DateUtcHelper on DateTime {
     var c = 0;
     if (months > 0) {
       c++;
-      formattedDuration.write('$months شهر و ');
+      formattedDuration.write('و $months شهر ');
     }
     if (days > 0 && c < 2) {
       c++;
-      formattedDuration.write('$days يوم و ');
+      formattedDuration.write('و $days يوم  ');
     }
     if (hours > 0 && c < 2) {
       c++;
-      formattedDuration.write('$hours ساعة و ');
+      formattedDuration.write('و $hours ساعة  ');
     }
     if (minutes > 0 && c < 2) {
       c++;
-      formattedDuration.write('$minutes دقيقة و ');
+      formattedDuration.write('و $minutes دقيقة  ');
     }
     if (seconds > 0 && c < 2) {
       c++;
-      formattedDuration.write('$seconds ثانية ');
+      formattedDuration.write('و $seconds ثانية ');
     }
 
-    return formattedDuration.toString().trim();
+    return formattedDuration.toString().trim().replaceFirst('و', '');
   }
 }
 
@@ -572,6 +572,8 @@ extension RealName on Enum {
           return 'مدير نظام';
         case UserType.institutionAdmin:
           return 'مدير مؤسسة';
+        case UserType.agencyAdmin:
+          return 'وكيل';
       }
     }
 
@@ -673,7 +675,7 @@ extension RealName on Enum {
       }
     }
 
-    if(this is Governorate){
+    if (this is Governorate) {
       switch (this) {
         case Governorate.damascus:
           return 'دمشق';

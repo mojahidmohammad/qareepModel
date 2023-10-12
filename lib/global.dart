@@ -93,7 +93,7 @@ enum TransferPayType { driverToCompany, companyToDriver }
 
 enum BusTripType { go, back }
 
-enum UserType { client, driver, admin, institutionAdmin }
+enum UserType { client, driver, admin, institutionAdmin,agencyAdmin }
 
 enum WeekDays { sunday, monday, tuesday, wednesday, thursday, friday, saturday }
 
