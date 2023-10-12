@@ -69,7 +69,6 @@ class SpinnerItem {
 
 enum CubitStatuses { init, done, loading, error }
 
-
 enum BookingPages { selectLocation, trip, booking }
 
 enum StateScreen { non, confirmCode, policy, main, passwordCode }
@@ -92,8 +91,6 @@ enum TransferStatus { pending, closed }
 
 enum TransferPayType { driverToCompany, companyToDriver }
 
-enum Government { damascus, rifDimashq }
-
 enum BusTripType { go, back }
 
 enum UserType { client, driver, admin, institutionAdmin }
@@ -105,24 +102,27 @@ enum InstitutionType { school, college, transportation }
 enum MemberSubscriptionState { notSubscribe, active, expired }
 
 enum Gender { mail, female }
+
 //
-enum RedeemType { gold, oil, tire }
+enum RedeemType { gold, oil, tire, gas }
 
 enum BusTripCategory { qareebPoints, customPoints }
 
 enum TransferType {
-
+  //دفع لرحلة تشاركية
   sharedPay,
-
+  //دفع لرحلة عادي
   tripPay,
-
-  ///السائق دافع للشركة
+  //السائق دافع للشركة
   payoff,
-
-  ///الشركة دافعة للسائق
+  //الشركة دافعة للسائق
   debit,
-
+  //جائزة
   award,
+  //خصم
+  discount,
+  //استعادة
+  refund
 }
 
 enum SummaryPayToEnum {
@@ -136,12 +136,25 @@ enum SummaryPayToEnum {
   equal,
 }
 
- enum TripType
-{
-  scheduled, normal
+enum TripType { scheduled, normal }
+
+enum TripStatus { pending, accepted, started, completed, canceled, canceledByAdmin }
+
+enum Governorate {
+  damascus,
+  ruralDamascus,
+  aleppo,
+  homs,
+  hama,
+  latakia,
+  tartus,
+  raqqa,
+  alHasakah,
+  idlib,
+  deirEzZor,
+  asSuwayda,
+  daraa,
+  quneitra,
 }
 
- enum TripStatus
-{
-  pending, accepted, started, completed, canceled, canceledByAdmin
-}
+enum DriverStatus { unAvailable, available, busy }

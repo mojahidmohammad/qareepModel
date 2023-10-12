@@ -1,4 +1,3 @@
-
 import 'package:qareeb_models/global.dart';
 
 class EpayResponse {
@@ -68,7 +67,7 @@ class EpayItem {
   final bool isWebView;
   final String creationTime;
   final String creatorUserId;
-  final bool isActive;
+  bool isActive;
 
   factory EpayItem.fromJson(Map<String, dynamic> json) {
     return EpayItem(

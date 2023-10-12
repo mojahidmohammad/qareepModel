@@ -26,12 +26,18 @@ extension Redeems on RedeemsResult {
   double get _tiresCount =>
       ((km / systemParameters.tire) - (totals.tire / systemParameters.tire));
 
+  /// كم مرة يحق للسائق التبديل
+  double get _gasCount =>
+      ((km / systemParameters.gas) - (totals.gas / systemParameters.gas));
+
   // كم مرة يحق لكن عدد صحيح
   int get oilCount => (_oilCount).floor();
 
   int get goldCount => (_goldCount).floor();
 
   int get tiresCount => (_tiresCount).floor();
+
+  int get gasCount => (_gasCount).floor();
 
   // كم مرة قام بالتبديل
   int get oilOldCount => (totals.oil / systemParameters.oil).floor();
@@ -40,11 +46,15 @@ extension Redeems on RedeemsResult {
 
   int get tiresOldCount => (totals.tire / systemParameters.tire).floor();
 
+  int get gasOldCount => (totals.gas / systemParameters.gas).floor();
+
   double get oilPCount => double.parse((_oilCount * 100).toStringAsFixed(2));
 
   double get goldPCount => double.parse((_goldCount * 100).toStringAsFixed(2));
 
   double get tiresPCount => double.parse((_tiresCount * 100).toStringAsFixed(2));
+
+  double get gasPCount => double.parse((_gasCount * 100).toStringAsFixed(2));
 }
 
 extension PolylineExt on List<List<num>> {
@@ -517,6 +527,8 @@ extension RealName on Enum {
           return 'زيت';
         case RedeemType.tire:
           return 'إطارات';
+        case RedeemType.gas:
+          return 'بنزين';
       }
     }
 
@@ -532,6 +544,10 @@ extension RealName on Enum {
           return 'دفعة من الشركة للسائق';
         case TransferType.award:
           return 'مكافئة';
+        case TransferType.discount:
+          return 'قسيمة حسم';
+        case TransferType.refund:
+          return 'استرجاع';
       }
     }
 
@@ -643,6 +659,50 @@ extension RealName on Enum {
           return '';
         case InstitutionType.transportation:
           return '';
+      }
+    }
+
+    if (this is DriverStatus) {
+      switch (this) {
+        case DriverStatus.unAvailable:
+          return 'غير متاح';
+        case DriverStatus.available:
+          return 'متاح';
+        case DriverStatus.busy:
+          return 'لديه رحلة حاليا';
+      }
+    }
+
+    if(this is Governorate){
+      switch (this) {
+        case Governorate.damascus:
+          return 'دمشق';
+        case Governorate.aleppo:
+          return ' ريف دمشق';
+        case Governorate.homs:
+          return ' حلب';
+        case Governorate.hama:
+          return ' حمص';
+        case Governorate.latakia:
+          return ' حماة';
+        case Governorate.tartus:
+          return ' اللاذقية';
+        case Governorate.raqqa:
+          return ' طرطوس';
+        case Governorate.alHasakah:
+          return ' الرقة';
+        case Governorate.idlib:
+          return ' الحسكة';
+        case Governorate.deirEzZor:
+          return ' إدلب';
+        case Governorate.asSuwayda:
+          return ' دير الزور';
+        case Governorate.daraa:
+          return ' السويداء';
+        case Governorate.quneitra:
+          return ' درعا';
+        case Governorate.ruralDamascus:
+          return ' القنيطرة';
       }
     }
 

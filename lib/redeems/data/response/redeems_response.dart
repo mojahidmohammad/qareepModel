@@ -1,3 +1,5 @@
+import 'package:qareeb_models/extensions.dart';
+
 class RedeemsResponse {
   RedeemsResponse({
     required this.result,
@@ -49,19 +51,22 @@ class SystemParameters {
     required this.gold,
     required this.oil,
     required this.tire,
+    required this.gas,
   });
 
   final int id;
   final num gold;
   final num oil;
   final num tire;
+  final num gas;
 
   factory SystemParameters.fromJson(Map<String, dynamic> json) {
     return SystemParameters(
       id: json["id"] ?? 0,
-      gold: json["gold"] ?? 0,
-      oil: json["oil"] ?? 0,
-      tire: json["tire"] ?? 0,
+      gold: json["gold"] ?? 1.maxInt,
+      oil: json["oil"] ?? 1.maxInt,
+      tire: json["tire"] ?? 1.maxInt,
+      gas: json["gas"] ?? 1.maxInt,
     );
   }
 
@@ -70,5 +75,6 @@ class SystemParameters {
         "gold": gold,
         "oil": oil,
         "tire": tire,
+        "gas": gas,
       };
 }
