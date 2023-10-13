@@ -9,6 +9,8 @@ import 'package:qareeb_models/redeems/data/response/redeems_response.dart';
 import 'package:qareeb_models/shared_trip/data/response/shared_trip.dart';
 import 'package:qareeb_models/trip_path/data/models/trip_path.dart';
 import 'package:qareeb_models/trip_process/data/response/trip_response.dart';
+import 'package:qareeb_models/wallet/data/response/driver_financial_response.dart';
+import 'package:qareeb_models/wallet/data/response/single_driver_financial.dart';
 
 import 'favorite_place/data/response/add_favorite_place_response.dart';
 import 'global.dart';
@@ -119,7 +121,7 @@ extension StringHelper on String? {
   }
 }
 
-final oCcy = NumberFormat("#,##0.00", "en_US");
+final oCcy = NumberFormat("#,##", "en_US");
 
 extension MaxInt on num {
   int get maxInt => 2147483647;
@@ -129,6 +131,107 @@ extension MaxInt on num {
   int get myRound {
     if (toInt() < this) return toInt() + 1;
     return toInt();
+  }
+}
+
+extension SummaryPayToHelper on SummaryPayToEnum {
+  ///السائق يجب أن يدفع للشركة
+  bool get d2c => this == SummaryPayToEnum.requiredFromDriver;
+
+  ///الشركة يجب انت تدفع للسائق
+  bool get c2d => this == SummaryPayToEnum.requiredFromCompany;
+
+  ///الرصيد متكافئ
+  bool get eq => this == SummaryPayToEnum.equal;
+}
+
+extension FinancialResultHelper on FinancialResult {
+  DriverFinancialResult get driverFinancial => DriverFinancialResult.fromJson(toJson());
+
+  String get getMessage {
+    switch (summaryType) {
+      //السائق يجب أن يدفع للشركة
+      case SummaryPayToEnum.requiredFromDriver:
+        return 'يستوجب على السائق تسديد مبلغ للشركة وقدره   ';
+
+      //الشركة يجب انت تدفع للسائق
+      case SummaryPayToEnum.requiredFromCompany:
+        return 'يستوجب على الشركة تسديد مبلغ للسائق وقدره  ';
+
+      //الرصيد متكافئ
+      case SummaryPayToEnum.equal:
+        return 'ان مستحقات الشركة من السائق مساوية تماما لمستحقات السائق لدى الشركة';
+    }
+  }
+
+  num get price {
+    switch (summaryType) {
+      //السائق يجب أن يدفع للشركة
+      case SummaryPayToEnum.requiredFromDriver:
+        return requiredAmountFromDriver - requiredAmountFromCompany;
+
+      //الشركة يجب انت تدفع للسائق
+      case SummaryPayToEnum.requiredFromCompany:
+        return requiredAmountFromCompany - requiredAmountFromDriver;
+
+      //الرصيد متكافئ
+      case SummaryPayToEnum.equal:
+        return 0;
+    }
+  }
+
+  SummaryPayToEnum get summaryType {
+    if (requiredAmountFromCompany > requiredAmountFromDriver) {
+      return SummaryPayToEnum.requiredFromCompany;
+    } else if (requiredAmountFromDriver > requiredAmountFromCompany) {
+      return SummaryPayToEnum.requiredFromDriver;
+    } else {
+      return SummaryPayToEnum.equal;
+    }
+  }
+}
+
+extension DriverFinancialHelper on DriverFinancialResult {
+  String get getMessage {
+    switch (summaryType) {
+      //السائق يجب أن يدفع للشركة
+      case SummaryPayToEnum.requiredFromDriver:
+        return 'يستوجب على السائق تسديد مبلغ للشركة وقدره   ';
+
+      //الشركة يجب انت تدفع للسائق
+      case SummaryPayToEnum.requiredFromCompany:
+        return 'يستوجب على الشركة تسديد مبلغ للسائق وقدره  ';
+
+      //الرصيد متكافئ
+      case SummaryPayToEnum.equal:
+        return 'ان مستحقات الشركة من السائق مساوية تماما لمستحقات السائق لدى الشركة';
+    }
+  }
+
+  num get price {
+    switch (summaryType) {
+      //السائق يجب أن يدفع للشركة
+      case SummaryPayToEnum.requiredFromDriver:
+        return requiredAmountFromDriver - requiredAmountFromCompany;
+
+      //الشركة يجب انت تدفع للسائق
+      case SummaryPayToEnum.requiredFromCompany:
+        return requiredAmountFromCompany - requiredAmountFromDriver;
+
+      //الرصيد متكافئ
+      case SummaryPayToEnum.equal:
+        return 0;
+    }
+  }
+
+  SummaryPayToEnum get summaryType {
+    if (requiredAmountFromCompany > requiredAmountFromDriver) {
+      return SummaryPayToEnum.requiredFromCompany;
+    } else if (requiredAmountFromDriver > requiredAmountFromCompany) {
+      return SummaryPayToEnum.requiredFromDriver;
+    } else {
+      return SummaryPayToEnum.equal;
+    }
   }
 }
 
