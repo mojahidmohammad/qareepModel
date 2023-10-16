@@ -121,7 +121,7 @@ extension StringHelper on String? {
   }
 }
 
-final oCcy = NumberFormat("#,##", "en_US");
+final oCcy = NumberFormat("#,###", "en_US");
 
 extension MaxInt on num {
   int get maxInt => 2147483647;
