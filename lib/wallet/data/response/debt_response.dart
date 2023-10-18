@@ -65,7 +65,7 @@ class Debt {
   final num discountAmount;
   final num sharedRequestId;
   final num tripId;
-  final num driverId;
+  final int driverId;
   final DateTime? date;
   final num oilShare;
   final num goldShare;

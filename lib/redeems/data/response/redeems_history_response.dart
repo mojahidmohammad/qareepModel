@@ -54,7 +54,7 @@ class RedeemHistory {
   });
 
   final int id;
-  final num driverId;
+  final int driverId;
   final RedeemType type;
   final num meters;
   final DateTime? redeemDate;

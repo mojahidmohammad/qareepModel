@@ -42,7 +42,7 @@ class SharedTrip {
   });
 
   final int id;
-  final num driverId;
+  final int driverId;
   final num pathId;
   final TripPath path;
   final List<SharedRequest> sharedRequests;

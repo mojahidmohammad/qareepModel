@@ -88,6 +88,7 @@ class Trip {
     required this.preAcceptLat,
     required this.preAcceptLng,
     required this.preAcceptDistance,
+    required this.driverCompensation,
     required this.preAcceptPath,
     required this.tripRate,
     required this.reviewNote,
@@ -125,6 +126,7 @@ class Trip {
   final double preAcceptLat;
   final double preAcceptLng;
   final num preAcceptDistance;
+  final num driverCompensation;
   final String preAcceptPath;
   final double tripRate;
   final String reviewNote;
@@ -163,6 +165,7 @@ class Trip {
       preAcceptLat: json["preAcceptLatitud"] ?? 0,
       preAcceptLng: json["preAcceptLongitud"] ?? 0,
       preAcceptDistance: json["preAcceptDistance"] ?? 0,
+      driverCompensation: json["driverCompensation"] ?? 0,
       preAcceptPath: json["preAcceptPath"] ?? "",
       tripRate: json["tripRate"] ?? 0,
       reviewNote: json["reviewNote"] ?? "",
@@ -202,6 +205,7 @@ class Trip {
         "preAcceptLatitud": preAcceptLat,
         "preAcceptLongitud": preAcceptLng,
         "preAcceptDistance": preAcceptDistance,
+        "driverCompensation": driverCompensation,
         "preAcceptPath": preAcceptPath,
         "tripRate": tripRate,
         "reviewNote": reviewNote,
@@ -236,9 +240,11 @@ class CarCategory {
     required this.normalOilRatio,
     required this.normalGoldRatio,
     required this.normalTiresRatio,
+    required this.normalGasRatio,
     required this.sharedOilRatio,
     required this.sharedGoldRatio,
     required this.sharedTiresRatio,
+    required this.sharedGasRatio,
     required this.priceVariant,
     required this.seatNumber,
   });
@@ -260,9 +266,11 @@ class CarCategory {
   final num normalOilRatio;
   final num normalGoldRatio;
   final num normalTiresRatio;
+  final num normalGasRatio;
   final num sharedOilRatio;
   final num sharedGoldRatio;
   final num sharedTiresRatio;
+  final num sharedGasRatio;
   final num priceVariant;
   final num seatNumber;
 
@@ -285,9 +293,11 @@ class CarCategory {
       normalOilRatio: json["normalOilRatio"] ?? 0,
       normalGoldRatio: json["normalGoldRatio"] ?? 0,
       normalTiresRatio: json["normalTiresRatio"] ?? 0,
+      normalGasRatio: json["normalGasRatio"] ?? 0,
       sharedOilRatio: json["sharedOilRatio"] ?? 0,
       sharedGoldRatio: json["sharedGoldRatio"] ?? 0,
       sharedTiresRatio: json["sharedTiresRatio"] ?? 0,
+      sharedGasRatio: json["sharedGasRatio"] ?? 0,
       priceVariant: json["priceVariant"] ?? 0,
       seatNumber: json["seatNumber"] ?? 0,
     );
@@ -311,9 +321,11 @@ class CarCategory {
         "normalOilRatio": normalOilRatio,
         "normalGoldRatio": normalGoldRatio,
         "normalTiresRatio": normalTiresRatio,
+        "normalGasRatio": normalGasRatio,
         "sharedOilRatio": sharedOilRatio,
         "sharedGoldRatio": sharedGoldRatio,
         "sharedTiresRatio": sharedTiresRatio,
+        "sharedGasRatio": sharedGasRatio,
         "priceVariant": priceVariant,
         "seatNumber": seatNumber,
       };
@@ -412,6 +424,8 @@ class Driver {
     required this.avatar,
     required this.rating,
     required this.carType,
+    required this.activeFrom,
+    required this.lastSeen,
   });
 
   final int id;
@@ -423,6 +437,8 @@ class Driver {
   final String avatar;
   final num rating;
   final CarType carType;
+  final DateTime? activeFrom;
+  final DateTime? lastSeen;
 
   factory Driver.fromJson(Map<String, dynamic> json) {
     return Driver(
@@ -435,6 +451,8 @@ class Driver {
       avatar: json["avatar"] ?? "",
       rating: json["rating"] ?? 0,
       carType: CarType.fromJson(json["carType"] ?? {}),
+      activeFrom: DateTime.tryParse(json["activeFrom"] ?? ""),
+      lastSeen: DateTime.tryParse(json["lastSeen"] ?? ""),
     );
   }
 
@@ -448,6 +466,8 @@ class Driver {
         "avatar": avatar,
         "rating": rating,
         "carType": carType.toJson(),
+        "activeFrom": activeFrom?.toIso8601String(),
+        "lastSeen": lastSeen?.toIso8601String(),
       };
 }
 

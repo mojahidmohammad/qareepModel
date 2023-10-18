@@ -68,7 +68,7 @@ class FinancialResult {
     required this.requiredAmountFromCompany,
   });
 
-  final num driverId;
+  final int driverId;
   final String driverName;
   final String driverPhoneNo;
   final num requiredAmountFromDriver;

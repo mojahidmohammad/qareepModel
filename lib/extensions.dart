@@ -132,6 +132,8 @@ extension MaxInt on num {
     if (toInt() < this) return toInt() + 1;
     return toInt();
   }
+
+  num getPercentage(num p) => this * p / 100;
 }
 
 extension SummaryPayToHelper on SummaryPayToEnum {
