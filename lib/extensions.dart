@@ -521,8 +521,8 @@ extension DateUtcHelper on DateTime {
 
   String get formatDateAther => DateFormat('yyyy/MM/dd HH:MM').format(this);
 
-  String formatDuration(DateTime serverDate) {
-    final difference = serverDate.difference(this);
+  String formatDuration({DateTime? serverDate}) {
+    final difference = this.difference(serverDate??DateTime.now());
 
     final months = difference.inDays ~/ 30;
     final days = difference.inDays % 30;
