@@ -522,13 +522,13 @@ extension DateUtcHelper on DateTime {
   String get formatDateAther => DateFormat('yyyy/MM/dd HH:MM').format(this);
 
   String formatDuration({DateTime? serverDate}) {
-    final difference = this.difference(serverDate??DateTime.now());
+    final difference = this.difference(serverDate ?? DateTime.now());
 
-    final months = difference.inDays ~/ 30;
-    final days = difference.inDays % 30;
-    final hours = difference.inHours % 24;
-    final minutes = difference.inMinutes % 60;
-    final seconds = difference.inSeconds % 60;
+    final months = difference.inDays.abs() ~/ 30;
+    final days = difference.inDays.abs() % 30;
+    final hours = difference.inHours.abs() % 24;
+    final minutes = difference.inMinutes.abs() % 60;
+    final seconds = difference.inSeconds.abs() % 60;
 
     final formattedDuration = StringBuffer();
     formattedDuration.write('منذ: ');
