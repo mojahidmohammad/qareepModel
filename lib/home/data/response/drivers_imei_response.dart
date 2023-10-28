@@ -1,3 +1,5 @@
+import 'package:qareeb_models/global.dart';
+
 class DriversImei {
   DriversImei({
     required this.result,
@@ -22,20 +24,24 @@ class DriverImei {
   DriverImei({
     required this.id,
     required this.imei,
+    required this.status,
   });
 
   final int id;
   final String imei;
+  final DriverStatus status;
 
   factory DriverImei.fromJson(Map<String, dynamic> json) {
     return DriverImei(
       id: json["id"] ?? 0,
       imei: json["imei"] ?? "",
+      status: DriverStatus.values[json["status"] ?? 0],
     );
   }
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "imei": imei,
+        "status": status,
       };
 }
