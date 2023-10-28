@@ -423,6 +423,8 @@ class Driver {
     required this.imei,
     required this.avatar,
     required this.rating,
+    required this.isLoyaltySuperscript,
+    required this.isGasIncluded,
     required this.carType,
     required this.activeFrom,
     required this.lastSeen,
@@ -436,6 +438,8 @@ class Driver {
   final String imei;
   final String avatar;
   final num rating;
+  final bool isLoyaltySuperscript;
+  final bool isGasIncluded;
   final CarType carType;
   final DateTime? activeFrom;
   final DateTime? lastSeen;
@@ -450,6 +454,8 @@ class Driver {
       imei: json["imei"] ?? "",
       avatar: json["avatar"] ?? "",
       rating: json["rating"] ?? 0,
+      isLoyaltySuperscript: json["isLoyaltySupscriper"] ?? false,
+      isGasIncluded: json["isGasIncluded"] ?? false,
       carType: CarType.fromJson(json["carType"] ?? {}),
       activeFrom: DateTime.tryParse(json["activeFrom"] ?? ""),
       lastSeen: DateTime.tryParse(json["lastSeen"] ?? ""),
@@ -465,6 +471,8 @@ class Driver {
         "imei": imei,
         "avatar": avatar,
         "rating": rating,
+        "isLoyaltySupscriper": isLoyaltySuperscript,
+        "isGasIncluded": isGasIncluded,
         "carType": carType.toJson(),
         "activeFrom": activeFrom?.toIso8601String(),
         "lastSeen": lastSeen?.toIso8601String(),
