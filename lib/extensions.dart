@@ -237,6 +237,50 @@ extension DriverFinancialHelper on DriverFinancialResult {
   }
 }
 
+extension FinancialReportResultHelper on FinancialReportResult {
+  String get getMessage {
+    switch (summaryType) {
+      //السائق يجب أن يدفع للشركة
+      case SummaryPayToEnum.requiredFromDriver:
+        return 'المبلغ المستحق على جميع السائقين';
+
+      //الشركة يجب انت تدفع للسائق
+      case SummaryPayToEnum.requiredFromCompany:
+        return 'المبلغ المستحق من الشركة لجميع السائقين';
+
+      //الرصيد متكافئ
+      case SummaryPayToEnum.equal:
+        return 'ان مستحقات الشركة من السائق مساوية تماما لمستحقات السائقين';
+    }
+  }
+
+  num get price {
+    switch (summaryType) {
+      //السائق يجب أن يدفع للشركة
+      case SummaryPayToEnum.requiredFromDriver:
+        return totalRequiredAmountFromDriver - totalRequiredAmountFromCompany;
+
+      //الشركة يجب انت تدفع للسائق
+      case SummaryPayToEnum.requiredFromCompany:
+        return totalRequiredAmountFromCompany - totalRequiredAmountFromDriver;
+
+      //الرصيد متكافئ
+      case SummaryPayToEnum.equal:
+        return 0;
+    }
+  }
+
+  SummaryPayToEnum get summaryType {
+    if (totalRequiredAmountFromCompany > totalRequiredAmountFromDriver) {
+      return SummaryPayToEnum.requiredFromCompany;
+    } else if (totalRequiredAmountFromDriver > totalRequiredAmountFromCompany) {
+      return SummaryPayToEnum.requiredFromDriver;
+    } else {
+      return SummaryPayToEnum.equal;
+    }
+  }
+}
+
 extension EnumSpinner on List<Enum> {
   List<SpinnerItem> spinnerItems({Enum? selected}) {
     return map((e) => SpinnerItem(

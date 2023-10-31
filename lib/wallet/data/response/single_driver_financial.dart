@@ -39,23 +39,31 @@ class FinancialReportResult {
   FinancialReportResult({
     required this.items,
     required this.totalCount,
+    required this.totalRequiredAmountFromDriver,
+    required this.totalRequiredAmountFromCompany,
   });
 
   final List<FinancialResult> items;
   final int totalCount;
+  final num totalRequiredAmountFromDriver;
+  final num totalRequiredAmountFromCompany;
 
   factory FinancialReportResult.fromJson(Map<String, dynamic> json) {
     return FinancialReportResult(
-      items: json["items"] == null
+      items: json["reports"] == null
           ? []
-          : List<FinancialResult>.from(json["items"]!.map((x) => FinancialResult.fromJson(x))),
+          : List<FinancialResult>.from(json["reports"]!.map((x) => FinancialResult.fromJson(x))),
       totalCount: json["totalCount"] ?? 0,
+      totalRequiredAmountFromDriver: json["TotalRequiredAmountFromDriver"] ?? 0,
+      totalRequiredAmountFromCompany: json["TotalRequiredAmountFromCompany"] ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "items": items.map((x) => x.toJson()).toList(),
+    "reports": items.map((x) => x.toJson()).toList(),
     "totalCount": totalCount,
+    "TotalRequiredAmountFromDriver": totalRequiredAmountFromDriver,
+    "TotalRequiredAmountFromCompany": totalRequiredAmountFromCompany,
   };
 }
 
@@ -76,20 +84,20 @@ class FinancialResult {
 
   factory FinancialResult.fromJson(Map<String, dynamic> json){
     return FinancialResult(
-      driverId: json["driverId"] ?? 0,
-      driverName: json["driverName"] ?? "",
-      driverPhoneNo: json["driverPhoneNo"] ?? "",
-      requiredAmountFromDriver: json["requiredAmountFromDriver"] ?? 0,
-      requiredAmountFromCompany: json["requiredAmountFromCompany"] ?? 0,
+      driverId: json["DriverId"] ?? 0,
+      driverName: json["DriverName"] ?? "",
+      driverPhoneNo: json["DriverPhoneNo"] ?? "",
+      requiredAmountFromDriver: json["RequiredAmountFromDriver"] ?? 0,
+      requiredAmountFromCompany: json["RequiredAmountFromCompany"] ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "driverId": driverId,
-    "driverName": driverName,
-    "driverPhoneNo": driverPhoneNo,
-    "requiredAmountFromDriver": requiredAmountFromDriver,
-    "requiredAmountFromCompany": requiredAmountFromCompany,
+    "DriverId": driverId,
+    "DriverName": driverName,
+    "DriverPhoneNo": driverPhoneNo,
+    "RequiredAmountFromDriver": requiredAmountFromDriver,
+    "RequiredAmountFromCompany": requiredAmountFromCompany,
   };
 
 }
