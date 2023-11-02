@@ -288,6 +288,16 @@ extension EnumSpinner on List<Enum> {
   }
 }
 
+extension ListHelper on List {
+  List<List<dynamic>> groupingList(int size) {
+    final List<List<dynamic>> result = [];
+    for (int i = 0; i < length; i += size) {
+      result.add(sublist(i, i + size > length ? length : i + size));
+    }
+    return result;
+  }
+}
+
 extension StateName on SharedTripStatus {
   String sharedTripName() {
     switch (this) {
