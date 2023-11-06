@@ -55,8 +55,8 @@ class Debt {
     required this.goldShare,
     required this.tiresShare,
     required this.gasShare,
+    required this.agencyShare,
   });
-
 
   final int id;
   final num driverShare;
@@ -65,12 +65,13 @@ class Debt {
   final num discountAmount;
   final num sharedRequestId;
   final num tripId;
-  final int driverId;
+  final num driverId;
   final DateTime? date;
   final num oilShare;
   final num goldShare;
   final num tiresShare;
   final num gasShare;
+  final num agencyShare;
 
   factory Debt.fromJson(Map<String, dynamic> json){
     return Debt(
@@ -87,6 +88,7 @@ class Debt {
       goldShare: json["goldShare"] ?? 0,
       tiresShare: json["tiresShare"] ?? 0,
       gasShare: json["gasShare"] ?? 0,
+      agencyShare: json["agencyShare"] ?? 0,
     );
   }
 
@@ -104,8 +106,10 @@ class Debt {
     "goldShare": goldShare,
     "tiresShare": tiresShare,
     "gasShare": gasShare,
+    "agencyShare": agencyShare,
   };
 
 }
+
 
 
