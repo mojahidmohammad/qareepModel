@@ -1,6 +1,7 @@
 import '../../../global.dart';
 import '../../../points/data/model/trip_point.dart';
 import '../../../trip_path/data/models/trip_path.dart';
+import '../../../trip_process/data/response/trip_response.dart';
 
 class SharedTripResponse {
   SharedTripResponse({
@@ -255,40 +256,4 @@ class Driver {
       };
 }
 
-class CarType {
-  CarType({
-    required this.userId,
-    required this.carBrand,
-    required this.carModel,
-    required this.carColor,
-    required this.carNumber,
-    required this.seatsNumber,
-  });
 
-  final num userId;
-  final String carBrand;
-  final String carModel;
-  final String carColor;
-  final String carNumber;
-  final num seatsNumber;
-
-  factory CarType.fromJson(Map<String, dynamic> json) {
-    return CarType(
-      userId: json["userId"] ?? 0,
-      carBrand: json["carBrand"] ?? "",
-      carModel: json["carModel"] ?? "",
-      carColor: json["carColor"] ?? "",
-      carNumber: json["carNumber"] ?? "",
-      seatsNumber: json["seatsNumber"] ?? 0,
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        "userId": userId,
-        "carBrand": carBrand,
-        "carModel": carModel,
-        "carColor": carColor,
-        "carNumber": carNumber,
-        "seatsNumber": seatsNumber,
-      };
-}

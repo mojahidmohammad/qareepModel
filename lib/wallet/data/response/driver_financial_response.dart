@@ -1,3 +1,4 @@
+import 'package:qareeb_models/wallet/data/response/single_driver_financial.dart';
 import 'package:qareeb_models/wallet/data/response/wallet_response.dart';
 
 import 'debt_response.dart';
@@ -50,6 +51,17 @@ class DriverFinancialResult {
           Transaction.fromJson(json["lastTransferFromCompanyToDriver"] ?? {}),
       requiredAmountFromDriver: json["requiredAmountFromDriver"] ?? 0,
       requiredAmountFromCompany: json["requiredAmountFromCompany"] ?? 0,
+    );
+  }
+
+  factory DriverFinancialResult.fromFinancialResult(FinancialResult result) {
+    return DriverFinancialResult(
+      debts: [],
+      charging: [],
+      lastTransferFromDriver: Transaction.fromJson({}),
+      lastTransferFromCompanyToDriver: Transaction.fromJson({}),
+      requiredAmountFromDriver: result.requiredAmountFromDriver,
+      requiredAmountFromCompany: result.requiredAmountFromCompany,
     );
   }
 

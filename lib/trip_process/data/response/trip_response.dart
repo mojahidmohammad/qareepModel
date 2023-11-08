@@ -502,6 +502,7 @@ class CarType {
   final String manufacturingYear;
   final String type;
 
+
   factory CarType.fromJson(Map<String, dynamic> json) {
     return CarType(
       userId: json["userId"] ?? 0,
