@@ -119,6 +119,8 @@ class SharedRequest {
     required this.pickupPointId,
     required this.pickupPoint,
     required this.amount,
+    required this.discountValue,
+    required this.couponCode,
   });
 
   final int id;
@@ -132,6 +134,8 @@ class SharedRequest {
   final num pickupPointId;
   final TripPoint pickupPoint;
   final num amount;
+  final num discountValue;
+  final String couponCode;
 
   factory SharedRequest.fromJson(Map<String, dynamic> json) {
     return SharedRequest(
@@ -146,6 +150,8 @@ class SharedRequest {
       pickupPointId: json["pickupPointId"] ?? 0,
       pickupPoint: TripPoint.fromJson(json["pickupPoint"] ?? {}),
       amount: json["amount"] ?? 0,
+      discountValue: json["discountValue"] ?? 0,
+      couponCode: json["couponCode"] ?? '',
     );
   }
 
@@ -161,6 +167,8 @@ class SharedRequest {
         "pickupPointId": pickupPointId,
         "pickupPoint": pickupPoint.toJson(),
         "amount": amount,
+        "discountValue": discountValue,
+        "couponCode": couponCode,
       };
 }
 

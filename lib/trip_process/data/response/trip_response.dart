@@ -101,6 +101,8 @@ class Trip {
     required this.cancelReasone,
     required this.carCategoryId,
     required this.carCategory,
+    required this.discountValue,
+    required this.couponCode,
   });
 
   final int id;
@@ -139,6 +141,8 @@ class Trip {
   final String cancelReasone;
   final num carCategoryId;
   final CarCategory carCategory;
+  final num discountValue;
+  final String couponCode;
 
   factory Trip.fromJson(Map<String, dynamic> json) {
     return Trip(
@@ -178,6 +182,8 @@ class Trip {
       cancelReasone: json["cancelReasone"] ?? "",
       carCategoryId: json["carCategoryId"] ?? 0,
       carCategory: CarCategory.fromJson(json["carCategory"] ?? {}),
+      discountValue: json["discountValue"] ?? 0,
+      couponCode: json["couponCode"] ?? '',
     );
   }
 
@@ -218,6 +224,8 @@ class Trip {
         "cancelReasone": cancelReasone,
         "carCategoryId": carCategoryId,
         "carCategory": carCategory.toJson(),
+        "discountValue": discountValue,
+        "couponCode": couponCode,
       };
 }
 
@@ -501,7 +509,6 @@ class CarType {
   final String carGovernorate;
   final String manufacturingYear;
   final String type;
-
 
   factory CarType.fromJson(Map<String, dynamic> json) {
     return CarType(
