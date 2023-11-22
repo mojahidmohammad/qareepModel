@@ -867,6 +867,24 @@ extension RealName on Enum {
       }
     }
 
+    if (this is CompanyType) {
+      switch (this) {
+        case CompanyType.plans:
+          return 'خطط';
+      }
+    }
+    if (this is PlanType) {
+      switch (this) {
+        case PlanType.bronze:
+          return 'برونزية';
+        case PlanType.silver:
+          return 'فضية';
+        case PlanType.gold:
+          return 'ذهبية';
+        case PlanType.platinum:
+          return 'بلاتينية';
+      }
+    }
     return name;
   }
 

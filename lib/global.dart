@@ -157,4 +157,8 @@ enum Governorate {
   quneitra,
 }
 
+enum CompanyType { plans }
+
+enum PlanType { bronze, silver, gold, platinum }
+
 enum DriverStatus { unAvailable, available, busy }
