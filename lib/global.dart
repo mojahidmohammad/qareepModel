@@ -122,7 +122,11 @@ enum TransferType {
   //خصم
   discount,
   //استعادة
-  refund
+  refund,
+  //خطة اشتراك
+  planEnrollment,
+  //محاسب وكيل
+  agencyPayOff,
 }
 
 enum SummaryPayToEnum {
@@ -134,6 +138,9 @@ enum SummaryPayToEnum {
 
   ///الرصيد متكافئ
   equal,
+
+  ///تحويل للوكيل
+  agency,
 }
 
 enum TripType { scheduled, normal }

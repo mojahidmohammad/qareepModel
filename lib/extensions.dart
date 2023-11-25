@@ -12,6 +12,7 @@ import 'package:qareeb_models/trip_process/data/response/trip_response.dart';
 import 'package:qareeb_models/wallet/data/response/driver_financial_response.dart';
 import 'package:qareeb_models/wallet/data/response/single_driver_financial.dart';
 
+import 'agencies/data/response/agencies_financial_response.dart';
 import 'favorite_place/data/response/add_favorite_place_response.dart';
 import 'global.dart';
 
@@ -141,10 +142,12 @@ extension SummaryPayToHelper on SummaryPayToEnum {
   bool get d2c => this == SummaryPayToEnum.requiredFromDriver;
 
   ///الشركة يجب انت تدفع للسائق
-  bool get c2d => this == SummaryPayToEnum.requiredFromCompany;
+  bool get c2d =>
+      this == SummaryPayToEnum.requiredFromCompany || this == SummaryPayToEnum.agency;
 
   ///الرصيد متكافئ
-  bool get eq => this == SummaryPayToEnum.equal;
+  bool get eq => this == SummaryPayToEnum.equal ;
+  bool get ag => this == SummaryPayToEnum.agency ;
 }
 
 extension FinancialResultHelper on FinancialResult {
@@ -163,6 +166,10 @@ extension FinancialResultHelper on FinancialResult {
       //الرصيد متكافئ
       case SummaryPayToEnum.equal:
         return 'ان مستحقات الشركة من السائق مساوية تماما لمستحقات السائق لدى الشركة';
+
+      //وكيل
+      case SummaryPayToEnum.agency:
+        return 'يستوجب على الشركة تسديد مبلغ للوكيل وقدره  ';
     }
   }
 
@@ -179,6 +186,10 @@ extension FinancialResultHelper on FinancialResult {
       //الرصيد متكافئ
       case SummaryPayToEnum.equal:
         return 0;
+
+      //وكيل
+      case SummaryPayToEnum.agency:
+        return 0;
     }
   }
 
@@ -191,6 +202,14 @@ extension FinancialResultHelper on FinancialResult {
       return SummaryPayToEnum.equal;
     }
   }
+}
+
+extension AgencyReportHelper on AgencyReport {
+  String get getMessage => 'يستوجب على الشركة تسديد مبلغ للوكيل وقدره  ';
+
+  num get price => requiredAmountFromCompany;
+
+  SummaryPayToEnum get summaryType => SummaryPayToEnum.agency;
 }
 
 extension DriverFinancialHelper on DriverFinancialResult {
@@ -207,6 +226,9 @@ extension DriverFinancialHelper on DriverFinancialResult {
       //الرصيد متكافئ
       case SummaryPayToEnum.equal:
         return 'ان مستحقات الشركة من السائق مساوية تماما لمستحقات السائق لدى الشركة';
+      //وكيل
+      case SummaryPayToEnum.agency:
+        return 'يستوجب على الشركة تسديد مبلغ للوكيل وقدره  ';
     }
   }
 
@@ -222,6 +244,9 @@ extension DriverFinancialHelper on DriverFinancialResult {
 
       //الرصيد متكافئ
       case SummaryPayToEnum.equal:
+        return 0;
+      //الرصيد متكافئ
+      case SummaryPayToEnum.agency:
         return 0;
     }
   }
@@ -251,6 +276,9 @@ extension FinancialReportResultHelper on FinancialReportResult {
       //الرصيد متكافئ
       case SummaryPayToEnum.equal:
         return 'ان مستحقات الشركة من السائق مساوية تماما لمستحقات السائقين';
+      //وكيل
+      case SummaryPayToEnum.agency:
+        return 'يستوجب على الشركة تسديد مبلغ للوكيل وقدره  ';
     }
   }
 
@@ -266,6 +294,9 @@ extension FinancialReportResultHelper on FinancialReportResult {
 
       //الرصيد متكافئ
       case SummaryPayToEnum.equal:
+        return 0;
+      //الرصيد متكافئ
+      case SummaryPayToEnum.agency:
         return 0;
     }
   }
@@ -707,6 +738,10 @@ extension RealName on Enum {
           return 'قسيمة حسم';
         case TransferType.refund:
           return 'استرجاع';
+        case TransferType.planEnrollment:
+          return 'اشتراك بخطة';
+        case TransferType.agencyPayOff:
+          return 'دفعة للوكيل';
       }
     }
 

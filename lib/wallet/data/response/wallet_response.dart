@@ -148,6 +148,7 @@ class Transaction {
     required this.type,
     required this.tripId,
     required this.sharedRequestId,
+    required this.note,
   });
 
   final int id;
@@ -161,6 +162,7 @@ class Transaction {
   final TransferType type;
   final num tripId;
   final num sharedRequestId;
+  final String note;
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
     return Transaction(
@@ -175,6 +177,7 @@ class Transaction {
       type: TransferType.values[json["type"] ?? 0],
       tripId: json["tripId"] ?? 0,
       sharedRequestId: json["sharedRequestId"] ?? 0,
+      note: json["note"] ?? "",
     );
   }
 
@@ -190,5 +193,6 @@ class Transaction {
         "type": type.index,
         "tripId": tripId,
         "sharedRequestId": sharedRequestId,
+        "note": note,
       };
 }
