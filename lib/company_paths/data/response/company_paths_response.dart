@@ -46,6 +46,7 @@ class CompanyPath {
   CompanyPath({
     required this.id,
     required this.companyId,
+    required this.companyName,
     required this.pathId,
     required this.path,
     required this.description,
@@ -54,6 +55,7 @@ class CompanyPath {
 
   final int id;
   final num companyId;
+  final String companyName;
   final num pathId;
   final TripPath path;
   final String description;
@@ -63,6 +65,7 @@ class CompanyPath {
     return CompanyPath(
       id: json["id"] ?? 0,
       companyId: json["companyId"] ?? 0,
+      companyName: json["companyName"] ?? '',
       pathId: json["pathId"] ?? 0,
       path: TripPath.fromJson(json["path"] ?? {}),
       description: json["description"] ?? "",
@@ -73,6 +76,7 @@ class CompanyPath {
   Map<String, dynamic> toJson() => {
         "id": id,
         "companyId": companyId,
+        "companyName": companyName,
         "pathId": pathId,
         "path": path.toJson(),
         "description": description,
