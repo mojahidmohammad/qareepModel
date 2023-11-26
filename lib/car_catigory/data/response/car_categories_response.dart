@@ -58,6 +58,7 @@ class CarCategory {
     required this.minimumNightPrice,
     required this.companyLoyaltyRatio,
     required this.sharedMinimumDistanceInMeters,
+    required this.planMinimumDistanceInMeters,
     required this.normalOilRatio,
     required this.normalGoldRatio,
     required this.normalTiresRatio,
@@ -87,6 +88,7 @@ class CarCategory {
   final num minimumNightPrice;
   final num companyLoyaltyRatio;
   final num sharedMinimumDistanceInMeters;
+  final num planMinimumDistanceInMeters;
   final num normalOilRatio;
   final num normalGoldRatio;
   final num normalTiresRatio;
@@ -117,6 +119,7 @@ class CarCategory {
       minimumNightPrice: json["minimumNightPrice"] ?? 0,
       companyLoyaltyRatio: json["companyLoyaltyRatio"] ?? 0,
       sharedMinimumDistanceInMeters: json["sharedMinimumDistanceInMeters"] ?? 0,
+      planMinimumDistanceInMeters: json["planMinimumDistanceInMeters"] ?? 0,
       normalOilRatio: json["normalOilRatio"] ?? 0,
       normalGoldRatio: json["normalGoldRatio"] ?? 0,
       normalTiresRatio: json["normalTiresRatio"] ?? 0,
@@ -148,6 +151,7 @@ class CarCategory {
         "minimumNightPrice": minimumNightPrice,
         "companyLoyaltyRatio": companyLoyaltyRatio,
         "sharedMinimumDistanceInMeters": sharedMinimumDistanceInMeters,
+        "planMinimumDistanceInMeters": planMinimumDistanceInMeters,
         "normalOilRatio": normalOilRatio,
         "normalGoldRatio": normalGoldRatio,
         "normalTiresRatio": normalTiresRatio,

@@ -4,10 +4,12 @@ class FixUrl {
   static String fixAvatarImage(String? image) {
     if (image == null || image.isEmpty) return '';
     if (image.startsWith('http')) return image;
-    final String link = "https://live.qareeb-maas.com/Images/$image";
+    final String link = "https://$qareebModelsBaseUrl/Images/$image";
     return link;
   }
 }
+
+String qareebModelsBaseUrl = 'live.qareeb-maas.com';
 
 class SpinnerItem {
   SpinnerItem({
@@ -93,7 +95,7 @@ enum TransferPayType { driverToCompany, companyToDriver }
 
 enum BusTripType { go, back }
 
-enum UserType { client, driver, admin, institutionAdmin,agencyAdmin }
+enum UserType { client, driver, admin, institutionAdmin, agencyAdmin }
 
 enum WeekDays { sunday, monday, tuesday, wednesday, thursday, friday, saturday }
 
