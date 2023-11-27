@@ -146,8 +146,9 @@ extension SummaryPayToHelper on SummaryPayToEnum {
       this == SummaryPayToEnum.requiredFromCompany || this == SummaryPayToEnum.agency;
 
   ///الرصيد متكافئ
-  bool get eq => this == SummaryPayToEnum.equal ;
-  bool get ag => this == SummaryPayToEnum.agency ;
+  bool get eq => this == SummaryPayToEnum.equal;
+
+  bool get ag => this == SummaryPayToEnum.agency;
 }
 
 extension FinancialResultHelper on FinancialResult {
@@ -395,6 +396,11 @@ extension NavTripHelper on NavTrip {
     }
     return 0.3;
   }
+}
+
+extension TripTypeHelper on TripType {
+  ///الشركة يجب انت تدفع للسائق
+  bool get isDeliver => this == TripType.delivery;
 }
 
 extension PathMap on TripPath {
@@ -790,6 +796,18 @@ extension RealName on Enum {
           return 'إياب';
       }
     }
+    if (this is TripType) {
+      switch (this) {
+        case TripType.scheduled:
+          return 'مجدولة';
+        case TripType.normal:
+          return 'عادية';
+        case TripType.goAndBack:
+          return 'ذهاب وإياب';
+        case TripType.delivery:
+          return 'عامل توصيل';
+      }
+    }
 
     if (this is TransferPayType) {
       switch (this) {
@@ -908,6 +926,16 @@ extension RealName on Enum {
           return 'خطط';
       }
     }
+
+    if (this is CarCategoryType) {
+      switch (this) {
+        case CarCategoryType.trips:
+          return 'رحلات';
+        case CarCategoryType.delivery:
+          return 'توصيل';
+      }
+    }
+
     if (this is PlanType) {
       switch (this) {
         case PlanType.bronze:
@@ -920,6 +948,7 @@ extension RealName on Enum {
           return 'بلاتينية';
       }
     }
+
     return name;
   }
 

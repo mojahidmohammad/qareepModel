@@ -145,7 +145,9 @@ enum SummaryPayToEnum {
   agency,
 }
 
-enum TripType { scheduled, normal }
+enum TripType { scheduled, normal, goAndBack, delivery }
+
+enum CarCategoryType { trips,  delivery }
 
 enum TripStatus { pending, accepted, started, completed, canceled, canceledByAdmin }
 
@@ -171,3 +173,5 @@ enum CompanyType { plans }
 enum PlanType { bronze, silver, gold, platinum }
 
 enum DriverStatus { unAvailable, available, busy }
+
+enum NotificationType { trip, sharedTrip, driverStatus, other }
