@@ -1,4 +1,3 @@
-
 import '../../../global.dart';
 
 class AgenciesResponse {
@@ -49,19 +48,22 @@ class Agency {
     required this.name,
     required this.imageUrl,
     required this.agencyRatio,
+    required this.isActive,
   });
 
   final int id;
   final String name;
   final String imageUrl;
   final num agencyRatio;
+   bool isActive;
 
   factory Agency.fromJson(Map<String, dynamic> json) {
     return Agency(
       id: json["id"] ?? 0,
       name: json["name"] ?? "",
-      imageUrl:FixUrl. fixAvatarImage(json["imageUrl"] ?? ""),
+      imageUrl: FixUrl.fixAvatarImage(json["imageUrl"] ?? ""),
       agencyRatio: json["agencyRatio"] ?? 0,
+      isActive: json["isActive"] ?? false,
     );
   }
 
@@ -70,5 +72,6 @@ class Agency {
         "name": name,
         "imageUrl": imageUrl,
         "agencyRatio": agencyRatio,
+        "isActive": isActive,
       };
 }
