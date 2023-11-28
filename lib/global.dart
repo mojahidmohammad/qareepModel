@@ -145,7 +145,7 @@ enum SummaryPayToEnum {
   agency,
 }
 
-enum TripType { scheduled, normal, goAndBack, delivery }
+enum  TripType { scheduled, normal, goAndBack, delivery }
 
 enum CarCategoryType { trips,  delivery }
 
@@ -169,6 +169,8 @@ enum Governorate {
 }
 
 enum CompanyType { plans }
+
+enum AttendanceType { up, down, unknown }
 
 enum PlanType { bronze, silver, gold, platinum }
 

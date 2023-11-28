@@ -322,11 +322,13 @@ class Driver {
     required this.imei,
     required this.avatar,
     required this.rating,
-    required this.isLoyaltySuperscript,
+    required this.lastSeen,
+    required this.activeFrom,
+    required this.isLoyaltySupscriper,
     required this.isGasIncluded,
     required this.carType,
-    required this.activeFrom,
-    required this.lastSeen,
+    required this.isExaminated,
+    required this.examination,
   });
 
   final int id;
@@ -337,11 +339,13 @@ class Driver {
   final String imei;
   final String avatar;
   final num rating;
-  final bool isLoyaltySuperscript;
+  final DateTime? lastSeen;
+  final DateTime? activeFrom;
+  final bool isLoyaltySupscriper;
   final bool isGasIncluded;
   final CarType carType;
-  final DateTime? activeFrom;
-  final DateTime? lastSeen;
+  final bool isExaminated;
+  final String examination;
 
   factory Driver.fromJson(Map<String, dynamic> json) {
     return Driver(
@@ -353,11 +357,13 @@ class Driver {
       imei: json["imei"] ?? "",
       avatar: json["avatar"] ?? "",
       rating: json["rating"] ?? 0,
-      isLoyaltySuperscript: json["isLoyaltySupscriper"] ?? false,
+      lastSeen: DateTime.tryParse(json["lastSeen"] ?? ""),
+      activeFrom: DateTime.tryParse(json["activeFrom"] ?? ""),
+      isLoyaltySupscriper: json["isLoyaltySupscriper"] ?? false,
       isGasIncluded: json["isGasIncluded"] ?? false,
       carType: CarType.fromJson(json["carType"] ?? {}),
-      activeFrom: DateTime.tryParse(json["activeFrom"] ?? ""),
-      lastSeen: DateTime.tryParse(json["lastSeen"] ?? ""),
+      isExaminated: json["isExaminated"] ?? false,
+      examination: json["examination"] ?? "",
     );
   }
 
@@ -370,11 +376,13 @@ class Driver {
         "imei": imei,
         "avatar": avatar,
         "rating": rating,
-        "isLoyaltySupscriper": isLoyaltySuperscript,
-        "isGasIncluded": isGasIncluded,
-        "carType": carType.toJson(),
-        "activeFrom": activeFrom?.toIso8601String(),
         "lastSeen": lastSeen?.toIso8601String(),
+        "activeFrom": activeFrom?.toIso8601String(),
+        "isLoyaltySupscriper": isLoyaltySupscriper,
+        "isGasIncluded": isGasIncluded,
+        "carType": carType?.toJson(),
+        "isExaminated": isExaminated,
+        "examination": examination,
       };
 }
 

@@ -24,17 +24,20 @@ class DriverImei {
   DriverImei({
     required this.id,
     required this.imei,
+    required this.name,
     required this.status,
   });
 
   final int id;
   final String imei;
+  final String name;
   final DriverStatus status;
 
   factory DriverImei.fromJson(Map<String, dynamic> json) {
     return DriverImei(
       id: json["id"] ?? 0,
       imei: json["imei"] ?? "",
+      name: json["name"] ?? "",
       status: DriverStatus.values[json["status"] ?? 0],
     );
   }
@@ -42,6 +45,7 @@ class DriverImei {
   Map<String, dynamic> toJson() => {
         "id": id,
         "imei": imei,
+        "name": name,
         "status": status,
       };
 }

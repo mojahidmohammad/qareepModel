@@ -210,58 +210,5 @@ class Client {
       };
 }
 
-class Driver {
-  Driver({
-    required this.id,
-    required this.userName,
-    required this.fullName,
-    required this.name,
-    required this.surname,
-    required this.phoneNumber,
-    required this.imei,
-    required this.avatar,
-    required this.rating,
-    required this.carType,
-  });
-
-  final int id;
-  final String userName;
-  final String fullName;
-  final String name;
-  final String surname;
-  final String phoneNumber;
-  final String imei;
-  final String avatar;
-  final num rating;
-  final CarType carType;
-
-  factory Driver.fromJson(Map<String, dynamic> json) {
-    return Driver(
-      id: json["id"] ?? 0,
-      userName: json["userName"] ?? "",
-      fullName: json["fullName"] ?? "",
-      name: json["name"] ?? "",
-      surname: json["surname"] ?? "",
-      phoneNumber: json["phoneNumber"] ?? "",
-      imei: json["imei"] ?? "",
-      avatar: json["avatar"] ?? "",
-      rating: json["rating"] ?? 0,
-      carType: CarType.fromJson(json["carType"] ?? {}),
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "userName": userName,
-        "fullName": fullName,
-        "name": name,
-        "surname": surname,
-        "phoneNumber": phoneNumber,
-        "imei": imei,
-        "avatar": avatar,
-        "rating": rating,
-        "carType": carType.toJson(),
-      };
-}
 
 

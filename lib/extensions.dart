@@ -137,6 +137,10 @@ extension MaxInt on num {
   num getPercentage(num p) => this * p / 100;
 }
 
+extension NumHelper on num? {
+  bool get isEmpty => this == null || this == 0;
+}
+
 extension SummaryPayToHelper on SummaryPayToEnum {
   ///السائق يجب أن يدفع للشركة
   bool get d2c => this == SummaryPayToEnum.requiredFromDriver;
@@ -966,3 +970,5 @@ extension RealName on Enum {
     return false;
   }
 }
+
+
