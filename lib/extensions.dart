@@ -322,6 +322,17 @@ extension EnumSpinner on List<Enum> {
     return map((e) => SpinnerItem(
         name: e.arabicName, id: e.index, item: e, isSelected: e == selected)).toList();
   }
+
+  List<SpinnerItem> spinnerItemsList({List<Enum?>? selected}) {
+    return map(
+          (e) => SpinnerItem(
+        name: (e.arabicName.isEmpty) ? e.name : e.arabicName,
+        id: e.index,
+        item: e,
+        isSelected: selected?.contains(e) ?? false,
+      ),
+    ).toList();
+  }
 }
 
 extension ListHelper on List {
@@ -970,5 +981,4 @@ extension RealName on Enum {
     return false;
   }
 }
-
 

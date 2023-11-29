@@ -136,7 +136,7 @@ class Enrollment {
   });
 
   final int id;
-  final num companyId;
+  final int companyId;
   final CompanyModel company;
   final num planId;
   final String plan;

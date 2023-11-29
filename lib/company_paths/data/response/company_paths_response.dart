@@ -54,7 +54,7 @@ class CompanyPath {
   });
 
   final int id;
-  final num companyId;
+  final int companyId;
   final String companyName;
   final num pathId;
   final TripPath path;
