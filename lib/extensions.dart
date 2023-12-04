@@ -325,7 +325,7 @@ extension EnumSpinner on List<Enum> {
 
   List<SpinnerItem> spinnerItemsList({List<Enum?>? selected}) {
     return map(
-          (e) => SpinnerItem(
+      (e) => SpinnerItem(
         name: (e.arabicName.isEmpty) ? e.name : e.arabicName,
         id: e.index,
         item: e,
@@ -664,6 +664,11 @@ extension DateUtcHelper on DateTime {
   }
 }
 
+extension DateUtcHelperNulable on DateTime? {
+  int getMinDifference(DateTime? date) =>
+      date == null ? 0 : (this?.difference(date).abs())?.inMinutes.round() ?? 0;
+}
+
 extension ScrollMax on ScrollController {
   bool get isMax => position.maxScrollExtent == offset;
 
@@ -981,4 +986,3 @@ extension RealName on Enum {
     return false;
   }
 }
-
