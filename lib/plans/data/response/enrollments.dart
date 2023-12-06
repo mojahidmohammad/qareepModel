@@ -1,3 +1,5 @@
+import 'package:qareeb_models/plans/data/response/plans_response.dart';
+
 import '../../../companies/data/response/companies_response.dart';
 
 class EnrollmentsResponse {
@@ -34,10 +36,10 @@ class Enrollment {
   });
 
   final int id;
-  final int companyId;
+  final num companyId;
   final CompanyModel company;
   final num planId;
-  final String plan;
+  final PlanModel plan;
   final num userId;
   final User user;
   final DateTime? startDate;
@@ -49,7 +51,7 @@ class Enrollment {
       companyId: json["companyId"] ?? 0,
       company: CompanyModel.fromJson(json["company"] ?? {}),
       planId: json["planId"] ?? 0,
-      plan: json["plan"] ?? "",
+      plan: PlanModel.fromJson(json["plan"] ?? {}),
       userId: json["userId"] ?? 0,
       user: User.fromJson(json["user"] ?? {}),
       startDate: DateTime.tryParse(json["startDate"] ?? ""),
@@ -58,16 +60,16 @@ class Enrollment {
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "companyId": companyId,
-    "company": company.toJson(),
-    "planId": planId,
-    "plan": plan,
-    "userId": userId,
-    "user": user.toJson(),
-    "startDate": startDate?.toIso8601String(),
-    "expiryDate": expiryDate?.toIso8601String(),
-  };
+        "id": id,
+        "companyId": companyId,
+        "company": company.toJson(),
+        "planId": planId,
+        "plan": plan.toJson(),
+        "userId": userId,
+        "user": user.toJson(),
+        "startDate": startDate?.toIso8601String(),
+        "expiryDate": expiryDate?.toIso8601String(),
+      };
 }
 
 class User {
@@ -111,15 +113,15 @@ class User {
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "userName": userName,
-    "fullName": fullName,
-    "name": name,
-    "surname": surname,
-    "phoneNumber": phoneNumber,
-    "avatar": avatar,
-    "emergencyPhone": emergencyPhone,
-    "userType": userType,
-    "accountBalance": accountBalance,
-  };
+        "id": id,
+        "userName": userName,
+        "fullName": fullName,
+        "name": name,
+        "surname": surname,
+        "phoneNumber": phoneNumber,
+        "avatar": avatar,
+        "emergencyPhone": emergencyPhone,
+        "userType": userType,
+        "accountBalance": accountBalance,
+      };
 }
