@@ -176,4 +176,4 @@ enum PlanType { bronze, silver, gold, platinum }
 
 enum DriverStatus { unAvailable, available, busy }
 
-enum NotificationType { trip, sharedTrip, driverStatus, other }
+enum NotificationType { trip,haveTrip, sharedTrip, driverStatus, other}
