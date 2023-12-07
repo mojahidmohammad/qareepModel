@@ -24,7 +24,6 @@ class EnrollmentsResponse {
 
 class Enrollment {
   Enrollment({
-    required this.id,
     required this.companyId,
     required this.company,
     required this.planId,
@@ -33,9 +32,14 @@ class Enrollment {
     required this.user,
     required this.startDate,
     required this.expiryDate,
+    required this.countOfRecordToday,
+    required this.countOfRecordThisMounth,
+    required this.isExpired,
+    required this.isTodayConsumed,
+    required this.isPlanConsumed,
+    required this.id,
   });
 
-  final int id;
   final num companyId;
   final CompanyModel company;
   final num planId;
@@ -44,10 +48,15 @@ class Enrollment {
   final User user;
   final DateTime? startDate;
   final DateTime? expiryDate;
+  final num countOfRecordToday;
+  final num countOfRecordThisMounth;
+  final bool isExpired;
+  final bool isTodayConsumed;
+  final bool isPlanConsumed;
+  final int id;
 
   factory Enrollment.fromJson(Map<String, dynamic> json) {
     return Enrollment(
-      id: json["id"] ?? 0,
       companyId: json["companyId"] ?? 0,
       company: CompanyModel.fromJson(json["company"] ?? {}),
       planId: json["planId"] ?? 0,
@@ -56,11 +65,16 @@ class Enrollment {
       user: User.fromJson(json["user"] ?? {}),
       startDate: DateTime.tryParse(json["startDate"] ?? ""),
       expiryDate: DateTime.tryParse(json["expiryDate"] ?? ""),
+      countOfRecordToday: json["countOfRecordToday"] ?? 0,
+      countOfRecordThisMounth: json["countOfRecordThisMounth"] ?? 0,
+      isExpired: json["isExpired"] ?? false,
+      isTodayConsumed: json["isTodayConsumed"] ?? false,
+      isPlanConsumed: json["isPlanConsumed"] ?? false,
+      id: json["id"] ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "companyId": companyId,
         "company": company.toJson(),
         "planId": planId,
@@ -69,6 +83,12 @@ class Enrollment {
         "user": user.toJson(),
         "startDate": startDate?.toIso8601String(),
         "expiryDate": expiryDate?.toIso8601String(),
+        "countOfRecordToday": countOfRecordToday,
+        "countOfRecordThisMounth": countOfRecordThisMounth,
+        "isExpired": isExpired,
+        "isTodayConsumed": isTodayConsumed,
+        "isPlanConsumed": isPlanConsumed,
+        "id": id,
       };
 }
 
