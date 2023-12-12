@@ -40,11 +40,11 @@ class Enrollment {
     required this.id,
   });
 
-  final num companyId;
+  final int companyId;
   final CompanyModel company;
-  final num planId;
+  final int planId;
   final PlanModel plan;
-  final num userId;
+  final int userId;
   final User user;
   final DateTime? startDate;
   final DateTime? expiryDate;
