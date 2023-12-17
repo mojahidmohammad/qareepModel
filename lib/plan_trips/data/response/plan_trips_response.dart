@@ -9,16 +9,16 @@ class PlanTripsResponse {
     required this.result,
   });
 
-  final PlanTripsResult? result;
+  final PlanTripsResult result;
 
   factory PlanTripsResponse.fromJson(Map<String, dynamic> json) {
     return PlanTripsResponse(
-      result: json["result"] == null ? null : PlanTripsResult.fromJson(json["result"]),
+      result: PlanTripsResult.fromJson(json["result"] ?? {}),
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "result": result?.toJson(),
+        "result": result.toJson(),
       };
 }
 

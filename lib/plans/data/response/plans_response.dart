@@ -72,6 +72,7 @@ class PlanModel {
     required this.maxPathMeters,
     required this.maxDailyUsage,
     required this.maxMonthlyUsage,
+    required this.activationDayNumber,
     required this.isActive,
     required this.type,
     required this.enrollments,
@@ -85,6 +86,7 @@ class PlanModel {
   final num maxPathMeters;
   final num maxDailyUsage;
   final num maxMonthlyUsage;
+  final num activationDayNumber;
   final bool isActive;
   final PlanType type;
   final List<Enrollment> enrollments;
@@ -99,6 +101,7 @@ class PlanModel {
       maxPathMeters: json["maxPathMeters"] ?? 0,
       maxDailyUsage: json["maxDailyUsage"] ?? 0,
       maxMonthlyUsage: json["maxMonthlyUsage"] ?? 0,
+      activationDayNumber: json["activationDayNumber"] ?? 0,
       isActive: json["isActive"] ?? false,
       type: PlanType.values[json["type"] ?? 0],
       enrollments: json["enrollments"] == null
@@ -117,6 +120,7 @@ class PlanModel {
         "maxPathMeters": maxPathMeters,
         "maxDailyUsage": maxDailyUsage,
         "maxMonthlyUsage": maxMonthlyUsage,
+        "activationDayNumber": activationDayNumber,
         "isActive": isActive,
         "type": type.index,
         "enrollments": enrollments.map((x) => x.toJson()).toList(),
