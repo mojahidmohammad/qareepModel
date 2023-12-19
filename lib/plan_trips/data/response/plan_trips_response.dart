@@ -17,7 +17,8 @@ class PlanTripsResponse {
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "result": result.toJson(),
       };
 }
@@ -36,12 +37,13 @@ class PlanTripsResult {
       items: json["items"] == null
           ? []
           : List<PlanTripModel>.from(
-              json["items"]!.map((x) => PlanTripModel.fromJson(x))),
+          json["items"]!.map((x) => PlanTripModel.fromJson(x))),
       totalCount: json["totalCount"] ?? 0,
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "items": items.map((x) => x.toJson()).toList(),
         "totalCount": totalCount,
       };
@@ -94,7 +96,8 @@ class PlanTripModel {
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "id": id,
         "name": name,
         "companyPathId": companyPathId,
