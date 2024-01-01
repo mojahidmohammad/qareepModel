@@ -46,6 +46,7 @@ class PlanAttendanceResult {
 
 class PlanAttendance {
   PlanAttendance({
+    required this.user,
     required this.id,
     required this.enrollmentId,
     required this.planTripId,
@@ -56,6 +57,7 @@ class PlanAttendance {
     required this.consumedMeters,
   });
 
+  final User user;
   final int id;
   final int enrollmentId;
   final int planTripId;
@@ -67,19 +69,20 @@ class PlanAttendance {
 
   factory PlanAttendance.fromJson(Map<String, dynamic> json) {
     return PlanAttendance(
+      user: User.fromJson(json["user"] ?? {}),
       id: json["id"] ?? 0,
       enrollmentId: json["enrollmentId"] ?? 0,
       planTripId: json["planTripId"] ?? 0,
       driverId: json["driverId"] ?? 0,
       date: DateTime.tryParse(json["date"] ?? ""),
-      driver:  Driver.fromJson(json["driver"]??{}),
-      enrollment:
-          Enrollment.fromJson(json["enrollment"]??{}),
+      driver: Driver.fromJson(json["driver"] ?? {}),
+      enrollment: Enrollment.fromJson(json["enrollment"] ?? {}),
       consumedMeters: json["consumedMeters"] ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() => {
+        "user": user.toJson(),
         "id": id,
         "enrollmentId": enrollmentId,
         "planTripId": planTripId,
@@ -90,6 +93,3 @@ class PlanAttendance {
         "consumedMeters": consumedMeters,
       };
 }
-
-
-
