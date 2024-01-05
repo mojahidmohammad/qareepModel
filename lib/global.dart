@@ -14,7 +14,7 @@ String qareebModelsBaseUrl = 'live.qareeb-maas.com';
 class SpinnerItem {
   SpinnerItem({
     this.name,
-    this.id = -2,
+    this.id,
     this.isSelected = false,
     this.item,
     this.icon,
@@ -22,7 +22,7 @@ class SpinnerItem {
   });
 
   String? name;
-  int id;
+  int? id;
   bool isSelected;
   bool enable;
   dynamic item;
