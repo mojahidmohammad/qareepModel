@@ -329,6 +329,7 @@ class Driver {
     required this.carType,
     required this.isExaminated,
     required this.examination,
+    required this.lastInternetConnection,
   });
 
   final int id;
@@ -346,6 +347,10 @@ class Driver {
   final CarType carType;
   final bool isExaminated;
   final String examination;
+  final DateTime? lastInternetConnection;
+
+
+
 
   factory Driver.fromJson(Map<String, dynamic> json) {
     return Driver(
@@ -364,6 +369,7 @@ class Driver {
       carType: CarType.fromJson(json["carType"] ?? {}),
       isExaminated: json["isExaminated"] ?? false,
       examination: json["examination"] ?? "",
+      lastInternetConnection: DateTime.tryParse(json["lastInternetConnection"] ?? ""),
     );
   }
 
@@ -383,6 +389,7 @@ class Driver {
         "carType": carType?.toJson(),
         "isExaminated": isExaminated,
         "examination": examination,
+    "lastInternetConnection": lastInternetConnection?.toIso8601String(),
       };
 }
 
