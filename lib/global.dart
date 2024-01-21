@@ -129,6 +129,8 @@ enum TransferType {
   planEnrollment,
   //محاسب وكيل
   agencyPayOff,
+  //محاسبة الهيئة
+  syrianAgency,
 }
 
 enum SummaryPayToEnum {

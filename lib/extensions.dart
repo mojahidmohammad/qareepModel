@@ -768,6 +768,8 @@ extension RealName on Enum {
           return 'اشتراك بخطة';
         case TransferType.agencyPayOff:
           return 'دفعة للوكيل';
+        case TransferType.syrianAgency:
+          return 'دفعة للهيئة';
       }
     }
 
