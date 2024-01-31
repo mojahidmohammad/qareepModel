@@ -46,19 +46,27 @@ class Data {
   Data({
     required this.url,
     required this.processId,
+    required this.operationNumber,
+    required this.guid,
   });
 
   final String url;
   final String processId;
+  final String operationNumber;
+  final String guid;
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       url: json["url"] ?? "",
+      operationNumber: json["operationNumber"] ?? "",
+      guid: json["guid"] ?? "",
       processId: json["processId"] ?? "",
     );
   }
 
   Map<String, dynamic> toJson() => {
         "url": url,
+        "operationNumber": operationNumber,
+        "guid": guid,
       };
 }
