@@ -67,6 +67,7 @@ class CarCategory {
     required this.sharedGoldRatio,
     required this.sharedTiresRatio,
     required this.sharedGasRatio,
+    required this.syrianAuthorityRatio,
     required this.priceVariant,
     required this.seatNumber,
     required this.planDriverRation,
@@ -98,6 +99,7 @@ class CarCategory {
   final num sharedGoldRatio;
   final num sharedTiresRatio;
   final num sharedGasRatio;
+  final num syrianAuthorityRatio;
   final num priceVariant;
   final num seatNumber;
   final num planDriverRation;
@@ -130,6 +132,7 @@ class CarCategory {
       sharedGoldRatio: json["sharedGoldRatio"] ?? 0,
       sharedTiresRatio: json["sharedTiresRatio"] ?? 0,
       sharedGasRatio: json["sharedGasRatio"] ?? 0,
+      syrianAuthorityRatio: json["syrianAuthorityRatio"] ?? 0,
       priceVariant: json["priceVariant"] ?? 0,
       seatNumber: json["seatNumber"] ?? 0,
       planDriverRation: json["planDriverRation"] ?? 0,
@@ -163,6 +166,7 @@ class CarCategory {
         "sharedGoldRatio": sharedGoldRatio,
         "sharedTiresRatio": sharedTiresRatio,
         "sharedGasRatio": sharedGasRatio,
+        "syrianAuthorityRatio": syrianAuthorityRatio,
         "priceVariant": priceVariant,
         "seatNumber": seatNumber,
         "planDriverRation": planDriverRation,
