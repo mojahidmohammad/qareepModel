@@ -723,7 +723,6 @@ extension RealName on Enum {
           return 'رحلة تشاركية';
         case SyrianReportType.planTrips:
           return 'رحلة اشتراكات';
-
       }
     }
 
@@ -782,6 +781,8 @@ extension RealName on Enum {
           return 'دفعة للوكيل';
         case TransferType.syrianAgency:
           return 'دفعة للهيئة';
+        case TransferType.rePay:
+          return 'دفعة تعويضية';
       }
     }
 

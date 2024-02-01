@@ -133,6 +133,8 @@ enum TransferType {
   agencyPayOff,
   //محاسبة الهيئة
   syrianAgency,
+  //شحن تعويضي
+  rePay,
 }
 
 enum SummaryPayToEnum {
