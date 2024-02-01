@@ -110,6 +110,8 @@ enum RedeemType { gold, oil, tire, gas }
 
 enum BusTripCategory { qareebPoints, customPoints }
 
+enum SyrianReportType {normalTrips, sharedtrips, planTrips}
+
 enum TransferType {
   //دفع لرحلة تشاركية
   sharedPay,

@@ -715,6 +715,18 @@ extension RealName on Enum {
       }
     }
 
+    if (this is SyrianReportType) {
+      switch (this) {
+        case SyrianReportType.normalTrips:
+          return 'رحلة عادية';
+        case SyrianReportType.sharedtrips:
+          return 'رحلة تشاركية';
+        case SyrianReportType.planTrips:
+          return 'رحلة اشتراكات';
+
+      }
+    }
+
     if (this is MemberSubscriptionState) {
       switch (this) {
         case MemberSubscriptionState.notSubscribe:
