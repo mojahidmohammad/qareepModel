@@ -38,6 +38,10 @@ class Enrollment {
     required this.isTodayConsumed,
     required this.isPlanConsumed,
     required this.id,
+    required this.consumedMeters,
+    required this.availableMetersMeters,
+    required this.cancellationDate,
+    required this.isCanceled,
   });
 
   final int companyId;
@@ -54,6 +58,10 @@ class Enrollment {
   final bool isTodayConsumed;
   final bool isPlanConsumed;
   final int id;
+  final num consumedMeters;
+  final num availableMetersMeters;
+  final DateTime? cancellationDate;
+  final bool isCanceled;
 
   factory Enrollment.fromJson(Map<String, dynamic> json) {
     return Enrollment(
@@ -71,6 +79,10 @@ class Enrollment {
       isTodayConsumed: json["isTodayConsumed"] ?? false,
       isPlanConsumed: json["isPlanConsumed"] ?? false,
       id: json["id"] ?? 0,
+      consumedMeters: json["consumedMeters"] ?? 0,
+      availableMetersMeters: json["availableMetersMeters"] ?? 0,
+      cancellationDate: DateTime.tryParse(json["cancellationDate"] ?? ""),
+      isCanceled: json["isCanceled"] ?? false,
     );
   }
 
@@ -89,6 +101,10 @@ class Enrollment {
         "isTodayConsumed": isTodayConsumed,
         "isPlanConsumed": isPlanConsumed,
         "id": id,
+        "consumedMeters": consumedMeters,
+        "availableMetersMeters": availableMetersMeters,
+        "cancellationDate": cancellationDate?.toIso8601String(),
+        "isCanceled": isCanceled,
       };
 }
 

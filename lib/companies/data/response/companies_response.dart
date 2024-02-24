@@ -1,4 +1,3 @@
-
 import '../../../global.dart';
 
 class CompanyResponse {
@@ -69,6 +68,7 @@ class CompanyModel {
     required this.type,
     required this.isActive,
     required this.manager,
+    required this.employees,
   });
 
   final int id;
@@ -77,6 +77,7 @@ class CompanyModel {
   final CompanyType type;
   final bool isActive;
   final Manager manager;
+  final List<Employee> employees;
 
   factory CompanyModel.fromJson(Map<String, dynamic> json) {
     return CompanyModel(
@@ -86,6 +87,9 @@ class CompanyModel {
       type: CompanyType.values[json["type"] ?? 0],
       isActive: json["isActive"] ?? false,
       manager: Manager.fromJson(json["manager"] ?? {}),
+      employees: json["employees"] == null
+          ? []
+          : List<Employee>.from(json["employees"]!.map((x) => Employee.fromJson(x))),
     );
   }
 
@@ -96,6 +100,61 @@ class CompanyModel {
         "type": type.index,
         "isActive": isActive,
         "manager": manager.toJson(),
+        "employees": employees.map((x) => x.toJson()).toList(),
+      };
+}
+
+class Employee {
+  Employee({
+    required this.id,
+    required this.userName,
+    required this.fullName,
+    required this.name,
+    required this.surname,
+    required this.phoneNumber,
+    required this.avatar,
+    required this.emergencyPhone,
+    required this.userType,
+    required this.accountBalance,
+  });
+
+  final int id;
+  final String userName;
+  final String fullName;
+  final String name;
+  final String surname;
+  final String phoneNumber;
+  final String avatar;
+  final String emergencyPhone;
+  final String userType;
+  final num accountBalance;
+
+  factory Employee.fromJson(Map<String, dynamic> json) {
+    return Employee(
+      id: json["id"] ?? 0,
+      userName: json["userName"] ?? "",
+      fullName: json["fullName"] ?? "",
+      name: json["name"] ?? "",
+      surname: json["surname"] ?? "",
+      phoneNumber: json["phoneNumber"] ?? "",
+      avatar: json["avatar"] ?? "",
+      emergencyPhone: json["emergencyPhone"] ?? "",
+      userType: json["userType"] ?? "",
+      accountBalance: json["accountBalance"] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "userName": userName,
+        "fullName": fullName,
+        "name": name,
+        "surname": surname,
+        "phoneNumber": phoneNumber,
+        "avatar": avatar,
+        "emergencyPhone": emergencyPhone,
+        "userType": userType,
+        "accountBalance": accountBalance,
       };
 }
 

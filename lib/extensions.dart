@@ -627,6 +627,23 @@ extension DateUtcHelper on DateTime {
 
   String get formatDateAther => DateFormat('yyyy/MM/dd HH:MM').format(this);
 
+  FormatDateTime getFormat({DateTime? serverDate}) {
+    final difference = this.difference(serverDate ?? DateTime.now());
+
+    final months = difference.inDays.abs() ~/ 30;
+    final days = difference.inDays.abs() % 360;
+    final hours = difference.inHours.abs() % 24;
+    final minutes = difference.inMinutes.abs() % 60;
+    final seconds = difference.inSeconds.abs() % 60;
+    return FormatDateTime(
+      months: months,
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+    );
+  }
+
   String formatDuration({DateTime? serverDate}) {
     final difference = this.difference(serverDate ?? DateTime.now());
 
@@ -973,14 +990,21 @@ extension RealName on Enum {
 
     if (this is PlanType) {
       switch (this) {
-        case PlanType.bronze:
-          return 'برونزية';
-        case PlanType.silver:
-          return 'فضية';
-        case PlanType.gold:
-          return 'ذهبية';
-        case PlanType.platinum:
-          return 'بلاتينية';
+        case PlanType.companies:
+          return 'شركات';
+        case PlanType.qareep:
+          return 'قريب';
+        case PlanType.individual:
+          return 'فردية';
+      }
+    }
+
+    if (this is DeptType) {
+      switch (this) {
+        case DeptType.tripPayment:
+          return 'عائدات رحلة';
+        case DeptType.driverCompensation:
+          return 'مسافة تعويضية';
       }
     }
 
@@ -999,5 +1023,31 @@ extension RealName on Enum {
         return false;
     }
     return false;
+  }
+}
+
+
+class FormatDateTime {
+  final int months;
+  final int days;
+  final int hours;
+  final int minutes;
+  final int seconds;
+
+  const FormatDateTime({
+    required this.months,
+    required this.days,
+    required this.hours,
+    required this.minutes,
+    required this.seconds,
+  });
+
+  @override
+  String toString() {
+    return '$months\n'
+        '$days\n'
+        '$hours\n'
+        '$minutes\n'
+        '$seconds\n';
   }
 }

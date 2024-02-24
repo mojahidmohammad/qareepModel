@@ -110,7 +110,7 @@ enum RedeemType { gold, oil, tire, gas }
 
 enum BusTripCategory { qareebPoints, customPoints }
 
-enum SyrianReportType {normalTrips, sharedtrips, planTrips}
+enum SyrianReportType { normalTrips, sharedtrips, planTrips }
 
 enum TransferType {
   //دفع لرحلة تشاركية
@@ -151,9 +151,9 @@ enum SummaryPayToEnum {
   agency,
 }
 
-enum  TripType { scheduled, normal, goAndBack, delivery }
+enum TripType { scheduled, normal, goAndBack, delivery }
 
-enum CarCategoryType { trips,  delivery }
+enum CarCategoryType { trips, delivery }
 
 enum TripStatus { pending, accepted, started, completed, canceled, canceledByAdmin }
 
@@ -178,8 +178,11 @@ enum CompanyType { plans }
 
 enum AttendanceType { up, down, unknown }
 
-enum PlanType { bronze, silver, gold, platinum }
+enum PlanType { companies, qareep, individual }
 
 enum DriverStatus { unAvailable, available, busy }
 
-enum NotificationType { trip,haveTrip, sharedTrip, driverStatus, other}
+enum NotificationType { trip, haveTrip, sharedTrip, driverStatus, other }
+
+enum DeptType { tripPayment, driverCompensation }
+

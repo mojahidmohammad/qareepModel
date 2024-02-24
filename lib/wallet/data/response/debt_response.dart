@@ -1,3 +1,5 @@
+import '../../../global.dart';
+
 class DebtsResponse {
   DebtsResponse({
     required this.result,
@@ -56,6 +58,9 @@ class Debt {
     required this.tiresShare,
     required this.gasShare,
     required this.agencyShare,
+    required this.syrianAuthorityShare,
+    required this.driverCompensation,
+    required this.type,
   });
 
   final int id;
@@ -72,8 +77,11 @@ class Debt {
   final num tiresShare;
   final num gasShare;
   final num agencyShare;
+  final num syrianAuthorityShare;
+  final num driverCompensation;
+  final DeptType type;
 
-  factory Debt.fromJson(Map<String, dynamic> json){
+  factory Debt.fromJson(Map<String, dynamic> json) {
     return Debt(
       id: json["id"] ?? 0,
       driverShare: json["driverShare"] ?? 0,
@@ -89,27 +97,29 @@ class Debt {
       tiresShare: json["tiresShare"] ?? 0,
       gasShare: json["gasShare"] ?? 0,
       agencyShare: json["agencyShare"] ?? 0,
+      syrianAuthorityShare: json["syrianAuthorityShare"] ?? 0,
+      driverCompensation: json["driverCompensation"] ?? 0,
+      type: DeptType.values[json["type"] ?? 0],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "driverShare": driverShare,
-    "totalCost": totalCost,
-    "costAfterDiscount": costAfterDiscount,
-    "discountAmount": discountAmount,
-    "sharedRequestId": sharedRequestId,
-    "tripId": tripId,
-    "driverId": driverId,
-    "date": date?.toIso8601String(),
-    "oilShare": oilShare,
-    "goldShare": goldShare,
-    "tiresShare": tiresShare,
-    "gasShare": gasShare,
-    "agencyShare": agencyShare,
-  };
-
+        "id": id,
+        "driverShare": driverShare,
+        "totalCost": totalCost,
+        "costAfterDiscount": costAfterDiscount,
+        "discountAmount": discountAmount,
+        "sharedRequestId": sharedRequestId,
+        "tripId": tripId,
+        "driverId": driverId,
+        "date": date?.toIso8601String(),
+        "oilShare": oilShare,
+        "goldShare": goldShare,
+        "tiresShare": tiresShare,
+        "gasShare": gasShare,
+        "agencyShare": agencyShare,
+        "syrianAuthorityShare": syrianAuthorityShare,
+        "driverCompensation": driverCompensation,
+        "type": type.index,
+      };
 }
-
-
-

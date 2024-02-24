@@ -15,7 +15,8 @@ class PlanResponse {
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "result": result.toJson(),
       };
 }
@@ -33,7 +34,8 @@ class PlansResponse {
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "result": result.toJson(),
       };
 }
@@ -56,7 +58,8 @@ class PlansResult {
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "totalCount": totalCount,
         "items": items.map((x) => x.toJson()).toList(),
       };
@@ -73,6 +76,7 @@ class PlanModel {
     required this.maxDailyUsage,
     required this.maxMonthlyUsage,
     required this.activationDayNumber,
+    required this.maxMeters,
     required this.isActive,
     required this.type,
     required this.enrollments,
@@ -87,6 +91,7 @@ class PlanModel {
   final num maxDailyUsage;
   final num maxMonthlyUsage;
   final num activationDayNumber;
+  final num maxMeters;
   final bool isActive;
   final PlanType type;
   final List<Enrollment> enrollments;
@@ -102,16 +107,18 @@ class PlanModel {
       maxDailyUsage: json["maxDailyUsage"] ?? 0,
       maxMonthlyUsage: json["maxMonthlyUsage"] ?? 0,
       activationDayNumber: json["activationDayNumber"] ?? 0,
+      maxMeters: json["maxMeters"] ?? 0,
       isActive: json["isActive"] ?? false,
       type: PlanType.values[json["type"] ?? 0],
       enrollments: json["enrollments"] == null
           ? []
           : List<Enrollment>.from(
-              json["enrollments"]!.map((x) => Enrollment.fromJson(x))),
+          json["enrollments"]!.map((x) => Enrollment.fromJson(x))),
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "id": id,
         "price": price,
         "name": name,
@@ -121,6 +128,7 @@ class PlanModel {
         "maxDailyUsage": maxDailyUsage,
         "maxMonthlyUsage": maxMonthlyUsage,
         "activationDayNumber": activationDayNumber,
+        "maxMeters": maxMeters,
         "isActive": isActive,
         "type": type.index,
         "enrollments": enrollments.map((x) => x.toJson()).toList(),

@@ -1,18 +1,18 @@
-
 import 'package:qareeb_models/areas/data/response/area_response.dart';
 
 import '../../../global.dart';
+import '../../../governorates/data/response/governorate_response.dart';
 
-class ProfileInfoResponse {
-  ProfileInfoResponse({
+class ProfileResponse {
+  ProfileResponse({
     required this.result,
   });
 
-  final ProfileInfoResult result;
+  final ProfileResult result;
 
-  factory ProfileInfoResponse.fromJson(Map<String, dynamic> json) {
-    return ProfileInfoResponse(
-      result: ProfileInfoResult.fromJson(json["result"]??{}),
+  factory ProfileResponse.fromJson(Map<String, dynamic> json) {
+    return ProfileResponse(
+      result: ProfileResult.fromJson(json["result"] ?? {}),
     );
   }
 
@@ -21,8 +21,15 @@ class ProfileInfoResponse {
       };
 }
 
-class ProfileInfoResult {
-  ProfileInfoResult({
+class ProfileResult {
+  ProfileResult({
+    required this.password,
+    required this.latitude,
+    required this.longitude,
+    required this.driverStatus,
+    required this.isExamined,
+    required this.companyId,
+    required this.principalCompanyId,
     required this.id,
     required this.ageRange,
     required this.userName,
@@ -82,8 +89,16 @@ class ProfileInfoResult {
   final String emergencyPhone;
   final List<AreaModel> areas;
 
-  factory ProfileInfoResult.fromJson(Map<String, dynamic> json) {
-    return ProfileInfoResult(
+  final String password;
+  final num latitude;
+  final num longitude;
+  final DriverStatus driverStatus;
+  final bool isExamined;
+  final int companyId;
+  final int principalCompanyId;
+
+  factory ProfileResult.fromJson(Map<String, dynamic> json) {
+    return ProfileResult(
       id: json["id"] ?? 0,
       userName: json["userName"] ?? "",
       ageRange: json["ageRange"] ?? "",
@@ -98,8 +113,7 @@ class ProfileInfoResult {
       contract: json["contract"] ?? "",
       drivingLicence: json["drivingLicence"] ?? "",
       carMechanic: json["carMechanic"] ?? "",
-      birthdate:
-          json["birthdate"] == null ? null : DateTime.parse(json["birthdate"]),
+      birthdate: json["birthdate"] == null ? null : DateTime.parse(json["birthdate"]),
       gender: json["gender"] ?? 0,
       fullName: json["fullName"] ?? "",
       tripsCount: json["tripsCount"] ?? 0,
@@ -117,6 +131,13 @@ class ProfileInfoResult {
       areas: json["areas"] == null
           ? []
           : List<AreaModel>.from(json["areas"]!.map((x) => AreaModel.fromJson(x))),
+      password: json["password"] ?? "",
+      latitude: json["latitude"] ?? 0,
+      longitude: json["longitude"] ?? 0,
+      driverStatus: DriverStatus.values[json["driverStatus"] ?? 0],
+      isExamined: json["isExaminated"] ?? false,
+      companyId: json["companyId"] ?? 0,
+      principalCompanyId: json["principalCompanyId"] ?? 0,
     );
   }
 
@@ -148,7 +169,14 @@ class ProfileInfoResult {
         "coupons": coupons,
         "imei": imei,
         "emergencyPhone": emergencyPhone,
+        "password": password,
+        "latitude": latitude,
+        "longitude": longitude,
+        "driverStatus": driverStatus.index,
+        "isExamined": isExamined,
+        "companyId": companyId,
+        "principalCompanyId": principalCompanyId,
+
         "areas": areas.map((x) => x.toJson()).toList(),
       };
-
 }
