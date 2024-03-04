@@ -104,6 +104,8 @@ class Trip {
     required this.carCategory,
     required this.discountValue,
     required this.couponCode,
+    required this.tripStoppingPoints,
+    required this.tripStoppingRecords,
   });
 
   final int id;
@@ -144,6 +146,8 @@ class Trip {
   final CarCategory carCategory;
   final num discountValue;
   final String couponCode;
+  final List<TripStoppingPoint> tripStoppingPoints;
+  final List<TripStoppingRecord> tripStoppingRecords;
 
   factory Trip.fromJson(Map<String, dynamic> json) {
     return Trip(
@@ -185,6 +189,14 @@ class Trip {
       carCategory: CarCategory.fromJson(json["carCategory"] ?? {}),
       discountValue: json["discountValue"] ?? 0,
       couponCode: json["couponCode"] ?? '',
+      tripStoppingPoints: json["tripStoppingPoints"] == null
+          ? []
+          : List<TripStoppingPoint>.from(
+              json["tripStoppingPoints"]!.map((x) => TripStoppingPoint.fromJson(x))),
+      tripStoppingRecords: json["tripStoppingRecords"] == null
+          ? []
+          : List<TripStoppingRecord>.from(
+              json["tripStoppingRecords"]!.map((x) => TripStoppingRecord.fromJson(x))),
     );
   }
 
@@ -227,6 +239,8 @@ class Trip {
         "carCategory": carCategory.toJson(),
         "discountValue": discountValue,
         "couponCode": couponCode,
+        "tripStoppingPoints": tripStoppingPoints.map((x) => x.toJson()).toList(),
+        "tripStoppingRecords": tripStoppingRecords.map((x) => x.toJson()).toList(),
       };
 }
 
@@ -349,9 +363,6 @@ class Driver {
   final String examination;
   final DateTime? lastInternetConnection;
 
-
-
-
   factory Driver.fromJson(Map<String, dynamic> json) {
     return Driver(
       id: json["id"] ?? 0,
@@ -386,10 +397,10 @@ class Driver {
         "activeFrom": activeFrom?.toIso8601String(),
         "isLoyaltySupscriper": isLoyaltySupscriper,
         "isGasIncluded": isGasIncluded,
-        "carType": carType?.toJson(),
+        "carType": carType.toJson(),
         "isExaminated": isExaminated,
         "examination": examination,
-    "lastInternetConnection": lastInternetConnection?.toIso8601String(),
+        "lastInternetConnection": lastInternetConnection?.toIso8601String(),
       };
 }
 
@@ -440,5 +451,79 @@ class CarType {
         "carGovernorate": carGovernorate,
         "manufacturingYear": manufacturingYear,
         "type": type,
+      };
+}
+
+class TripStoppingPoint {
+  TripStoppingPoint({
+    required this.lat,
+    required this.lng,
+  });
+
+  final double lat;
+  final double lng;
+
+  LatLng get point =>LatLng(lat, lng);
+
+  factory TripStoppingPoint.fromJson(Map<String, dynamic> json) {
+    return TripStoppingPoint(
+      lat: json["lat"] ?? 0,
+      lng: json["lng"] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "lat": lat,
+        "lng": lng,
+      };
+}
+
+class TripStoppingRecord {
+  TripStoppingRecord({
+    required this.id,
+    required this.timerStartedAt,
+    required this.timerStartedAtLatitud,
+    required this.timerStartedAtLongitud,
+    required this.timerEndedAt,
+    required this.timerEndedAtLatitud,
+    required this.timerEndedAtLongitud,
+    required this.tripId,
+    required this.duration,
+  });
+
+  final int id;
+  final DateTime? timerStartedAt;
+  final num timerStartedAtLatitud;
+  final num timerStartedAtLongitud;
+  final DateTime? timerEndedAt;
+  final num timerEndedAtLatitud;
+  final num timerEndedAtLongitud;
+  final num tripId;
+  final num duration;
+
+  factory TripStoppingRecord.fromJson(Map<String, dynamic> json) {
+    return TripStoppingRecord(
+      id: json["id"] ?? 0,
+      timerStartedAt: DateTime.tryParse(json["timerStartedAt"] ?? ""),
+      timerStartedAtLatitud: json["timerStartedAtLatitud"] ?? 0,
+      timerStartedAtLongitud: json["timerStartedAtLongitud"] ?? 0,
+      timerEndedAt: DateTime.tryParse(json["timerEndedAt"] ?? ""),
+      timerEndedAtLatitud: json["timerEndedAtLatitud"] ?? 0,
+      timerEndedAtLongitud: json["timerEndedAtLongitud"] ?? 0,
+      tripId: json["tripId"] ?? 0,
+      duration: json["duration"] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "timerStartedAt": timerStartedAt?.toIso8601String(),
+        "timerStartedAtLatitud": timerStartedAtLatitud,
+        "timerStartedAtLongitud": timerStartedAtLongitud,
+        "timerEndedAt": timerEndedAt?.toIso8601String(),
+        "timerEndedAtLatitud": timerEndedAtLatitud,
+        "timerEndedAtLongitud": timerEndedAtLongitud,
+        "tripId": tripId,
+        "duration": duration,
       };
 }

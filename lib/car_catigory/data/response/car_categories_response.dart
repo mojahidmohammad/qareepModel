@@ -73,6 +73,8 @@ class CarCategory {
     required this.planDriverRation,
     required this.planKmCost,
     required this.planMinimumCost,
+    required this.waitingMinuetPrice,
+    required this.minimumWaitingMinuets,
     required this.carCategoryType,
   });
 
@@ -105,6 +107,8 @@ class CarCategory {
   final num planDriverRation;
   final num planKmCost;
   final num planMinimumCost;
+  final num waitingMinuetPrice;
+  final num minimumWaitingMinuets;
   final CarCategoryType carCategoryType;
 
   factory CarCategory.fromJson(Map<String, dynamic> json) {
@@ -138,6 +142,8 @@ class CarCategory {
       planDriverRation: json["planDriverRation"] ?? 0,
       planKmCost: json["planKmCost"] ?? 0,
       planMinimumCost: json["planMinimumCost"] ?? 0,
+      waitingMinuetPrice: json["waitingMinuetPrice"] ?? 0,
+      minimumWaitingMinuets: json["minimumWaitingMinuets"] ?? 0,
       carCategoryType: CarCategoryType.values[json["carCategoryType"] ?? 0],
     );
   }
@@ -172,6 +178,8 @@ class CarCategory {
         "planDriverRation": planDriverRation,
         "planKmCost": planKmCost,
         "planMinimumCost": planMinimumCost,
+        "waitingMinuetPrice": waitingMinuetPrice,
+        "minimumWaitingMinuets": minimumWaitingMinuets,
         "carCategoryType": carCategoryType.index,
       };
 }

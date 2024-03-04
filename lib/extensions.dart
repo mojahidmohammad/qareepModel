@@ -135,6 +135,8 @@ extension MaxInt on num {
   }
 
   num getPercentage(num p) => this * p / 100;
+
+  String get fixDistance => (this / 1000).toStringAsFixed(2);
 }
 
 extension NumHelper on num? {
@@ -1025,7 +1027,6 @@ extension RealName on Enum {
     return false;
   }
 }
-
 
 class FormatDateTime {
   final int months;
