@@ -1,3 +1,5 @@
+import '../../../global.dart';
+
 class LoginResponse {
   LoginResponse({
     required this.result,
@@ -22,7 +24,7 @@ class LoginResult {
     required this.encryptedAccessToken,
     required this.expireInSeconds,
     required this.userId,
-    required this.userTrip,
+
     required this.accepctPolicy,
     required this.institutionId,
     required this.agencyId,
@@ -35,11 +37,11 @@ class LoginResult {
   final String encryptedAccessToken;
   final int expireInSeconds;
   final int userId;
-  final String userTrip;
+
   final bool accepctPolicy;
   final int institutionId;
   final int agencyId;
-  final String userType;
+  final UserType userType;
   final String roleName;
   final String identifier;
 
@@ -49,7 +51,7 @@ class LoginResult {
       encryptedAccessToken: json["encryptedAccessToken"] ?? "",
       expireInSeconds: json["expireInSeconds"] ?? 0,
       userId: json["userId"] ?? 0,
-      userTrip: json["userTrip"] ?? "",
+
       accepctPolicy: json["accepctPolicy"] ?? false,
       institutionId: json["institutionId"] ?? 0,
       agencyId: json["agencyId"] ?? 0,
@@ -64,11 +66,11 @@ class LoginResult {
     "encryptedAccessToken": encryptedAccessToken,
     "expireInSeconds": expireInSeconds,
     "userId": userId,
-    "userTrip": userTrip,
+
     "accepctPolicy": accepctPolicy,
     "institutionId": institutionId,
     "agencyId": agencyId,
-    "userType": userType,
+    "userType": userType.index,
     "roleName": roleName,
     "identifier": identifier,
   };
