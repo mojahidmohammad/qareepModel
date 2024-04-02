@@ -17,8 +17,7 @@ class PlanTripsResponse {
     );
   }
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         "result": result.toJson(),
       };
 }
@@ -37,13 +36,12 @@ class PlanTripsResult {
       items: json["items"] == null
           ? []
           : List<PlanTripModel>.from(
-          json["items"]!.map((x) => PlanTripModel.fromJson(x))),
+              json["items"]!.map((x) => PlanTripModel.fromJson(x))),
       totalCount: json["totalCount"] ?? 0,
     );
   }
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         "items": items.map((x) => x.toJson()).toList(),
         "totalCount": totalCount,
       };
@@ -62,6 +60,8 @@ class PlanTripModel {
     required this.startDate,
     required this.endDate,
     required this.days,
+    required this.planTrips,
+    required this.isActive,
   });
 
   final int id;
@@ -75,6 +75,8 @@ class PlanTripModel {
   final DateTime? startDate;
   final DateTime? endDate;
   final List<WeekDays> days;
+  final List<PlanTrip> planTrips;
+  final bool isActive;
 
   factory PlanTripModel.fromJson(Map<String, dynamic> json) {
     return PlanTripModel(
@@ -85,6 +87,10 @@ class PlanTripModel {
       companyId: json["companyId"] ?? 0,
       description: json["description"] ?? "",
       company: CompanyModel.fromJson(json["company"] ?? {}),
+      planTrips: json["planTrips"] == null
+          ? []
+          : List<PlanTrip>.from(json["planTrips"]!.map((x) => PlanTrip.fromJson(x))),
+      isActive: json["isActive"] ?? false,
       drivers: json["drivers"] == null
           ? []
           : List<Driver>.from(json["drivers"]!.map((x) => Driver.fromJson(x))),
@@ -96,8 +102,7 @@ class PlanTripModel {
     );
   }
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "companyPathId": companyPathId,
@@ -109,5 +114,33 @@ class PlanTripModel {
         "startDate": startDate?.toIso8601String(),
         "endDate": endDate?.toIso8601String(),
         "days": days.map((x) => x).toList(),
+        "planTrips": planTrips.map((x) => x.toJson()).toList(),
+        "isActive": isActive,
+      };
+}
+
+class PlanTrip {
+  PlanTrip({
+    required this.driver,
+    required this.planTripTemplate,
+    required this.id,
+  });
+
+  final Driver driver;
+  final dynamic planTripTemplate;
+  final int id;
+
+  factory PlanTrip.fromJson(Map<String, dynamic> json) {
+    return PlanTrip(
+      driver: Driver.fromJson(json["driver"] ?? {}),
+      planTripTemplate: json["planTripTemplate"],
+      id: json["id"] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "driver": driver.toJson(),
+        "planTripTemplate": planTripTemplate,
+        "id": id,
       };
 }

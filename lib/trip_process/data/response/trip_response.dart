@@ -188,7 +188,7 @@ class Trip {
       tripStatus: TripStatus.values[json["tripStatus"] ?? 0],
       estimatedCost: json["estimatedCost"] ?? 0,
       actualCost: json["actualCost"] ?? 0,
-      isPaid: json["isPaid"] ?? false,
+      isPaid: (json["enrollmentId"] ?? 0) != 0 ? true : json["isPaid"] ?? false,
       cancelReasone: json["cancelReasone"] ?? "",
       carCategoryId: json["carCategoryId"] ?? 0,
       carCategory: CarCategory.fromJson(json["carCategory"] ?? {}),

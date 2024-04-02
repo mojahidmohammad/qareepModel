@@ -24,6 +24,11 @@ class LoginResult {
     required this.userId,
     required this.userTrip,
     required this.accepctPolicy,
+    required this.institutionId,
+    required this.agencyId,
+    required this.userType,
+    required this.roleName,
+    required this.identifier,
   });
 
   final String accessToken;
@@ -32,12 +37,13 @@ class LoginResult {
   final int userId;
   final String userTrip;
   final bool accepctPolicy;
+  final int institutionId;
+  final int agencyId;
+  final String userType;
+  final String roleName;
+  final String identifier;
 
-  factory LoginResult.initial() {
-    return LoginResult.fromJson({});
-  }
-
-  factory LoginResult.fromJson(Map<String, dynamic> json) {
+  factory LoginResult.fromJson(Map<String, dynamic> json){
     return LoginResult(
       accessToken: json["accessToken"] ?? "",
       encryptedAccessToken: json["encryptedAccessToken"] ?? "",
@@ -45,15 +51,26 @@ class LoginResult {
       userId: json["userId"] ?? 0,
       userTrip: json["userTrip"] ?? "",
       accepctPolicy: json["accepctPolicy"] ?? false,
+      institutionId: json["institutionId"] ?? 0,
+      agencyId: json["agencyId"] ?? 0,
+      userType: json["userType"] ?? "",
+      roleName: json["roleName"] ?? "",
+      identifier: json["identifier"] ?? "",
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "accessToken": accessToken,
-        "encryptedAccessToken": encryptedAccessToken,
-        "expireInSeconds": expireInSeconds,
-        "userId": userId,
-        "userTrip": userTrip,
-        "accepctPolicy": accepctPolicy,
-      };
+    "accessToken": accessToken,
+    "encryptedAccessToken": encryptedAccessToken,
+    "expireInSeconds": expireInSeconds,
+    "userId": userId,
+    "userTrip": userTrip,
+    "accepctPolicy": accepctPolicy,
+    "institutionId": institutionId,
+    "agencyId": agencyId,
+    "userType": userType,
+    "roleName": roleName,
+    "identifier": identifier,
+  };
+
 }

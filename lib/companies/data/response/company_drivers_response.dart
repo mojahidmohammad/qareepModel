@@ -28,13 +28,13 @@ class CompanyDriver {
 
   final num tripId;
   final String imei;
-  final String type;
+  final int type;
 
   factory CompanyDriver.fromJson(Map<String, dynamic> json) {
     return CompanyDriver(
       tripId: json["tripId"] ?? 0,
       imei: json["imei"] ?? "",
-      type: json["type"] ?? "",
+      type: json["type"] ?? 0,
     );
   }
 
