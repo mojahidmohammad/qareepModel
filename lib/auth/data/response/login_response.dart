@@ -24,7 +24,6 @@ class LoginResult {
     required this.encryptedAccessToken,
     required this.expireInSeconds,
     required this.userId,
-
     required this.accepctPolicy,
     required this.institutionId,
     required this.agencyId,
@@ -45,34 +44,31 @@ class LoginResult {
   final String roleName;
   final String identifier;
 
-  factory LoginResult.fromJson(Map<String, dynamic> json){
+  factory LoginResult.fromJson(Map<String, dynamic> json) {
     return LoginResult(
       accessToken: json["accessToken"] ?? "",
       encryptedAccessToken: json["encryptedAccessToken"] ?? "",
       expireInSeconds: json["expireInSeconds"] ?? 0,
       userId: json["userId"] ?? 0,
-
       accepctPolicy: json["accepctPolicy"] ?? false,
       institutionId: json["institutionId"] ?? 0,
       agencyId: json["agencyId"] ?? 0,
-      userType: json["userType"] ?? "",
+      userType: UserType.values[json["userType"] ?? 0],
       roleName: json["roleName"] ?? "",
       identifier: json["identifier"] ?? "",
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "accessToken": accessToken,
-    "encryptedAccessToken": encryptedAccessToken,
-    "expireInSeconds": expireInSeconds,
-    "userId": userId,
-
-    "accepctPolicy": accepctPolicy,
-    "institutionId": institutionId,
-    "agencyId": agencyId,
-    "userType": userType.index,
-    "roleName": roleName,
-    "identifier": identifier,
-  };
-
+        "accessToken": accessToken,
+        "encryptedAccessToken": encryptedAccessToken,
+        "expireInSeconds": expireInSeconds,
+        "userId": userId,
+        "accepctPolicy": accepctPolicy,
+        "institutionId": institutionId,
+        "agencyId": agencyId,
+        "userType": userType.index,
+        "roleName": roleName,
+        "identifier": identifier,
+      };
 }
