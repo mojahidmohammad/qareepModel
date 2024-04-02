@@ -39,7 +39,9 @@ class Enrollment {
     required this.isPlanConsumed,
     required this.id,
     required this.consumedMeters,
-    required this.availableMetersMeters,
+    required this.availableMeters,
+    required this.availableMinutes,
+    required this.consumedMinutes,
     required this.cancellationDate,
     required this.isCanceled,
   });
@@ -59,7 +61,9 @@ class Enrollment {
   final bool isPlanConsumed;
   final int id;
   final num consumedMeters;
-  final num availableMetersMeters;
+  final num availableMinutes;
+  final num consumedMinutes;
+  final num availableMeters;
   final DateTime? cancellationDate;
   final bool isCanceled;
 
@@ -80,7 +84,9 @@ class Enrollment {
       isPlanConsumed: json["isPlanConsumed"] ?? false,
       id: json["id"] ?? 0,
       consumedMeters: json["consumedMeters"] ?? 0,
-      availableMetersMeters: json["availableMetersMeters"] ?? 0,
+      availableMeters: json["availableMeters"] ?? 0,
+      availableMinutes: json["availableMinutes"] ?? 0,
+      consumedMinutes: json["consumedMinutes"] ?? 0,
       cancellationDate: DateTime.tryParse(json["cancellationDate"] ?? ""),
       isCanceled: json["isCanceled"] ?? false,
     );
@@ -102,7 +108,9 @@ class Enrollment {
         "isPlanConsumed": isPlanConsumed,
         "id": id,
         "consumedMeters": consumedMeters,
-        "availableMetersMeters": availableMetersMeters,
+        "availableMeters": availableMeters,
+        "availableMinutes": availableMinutes,
+        "consumedMinutes": consumedMinutes,
         "cancellationDate": cancellationDate?.toIso8601String(),
         "isCanceled": isCanceled,
       };

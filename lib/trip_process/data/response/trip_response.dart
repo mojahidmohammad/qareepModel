@@ -76,6 +76,7 @@ class Trip {
     required this.acceptDate,
     required this.startDate,
     required this.endDate,
+    required this.cancelDate,
     required this.sourceName,
     required this.source,
     required this.destinationName,
@@ -106,6 +107,7 @@ class Trip {
     required this.couponCode,
     required this.tripStoppingPoints,
     required this.tripStoppingRecords,
+    required this.enrollmentId,
   });
 
   final int id;
@@ -118,6 +120,7 @@ class Trip {
   final DateTime? acceptDate;
   final DateTime? startDate;
   final DateTime? endDate;
+  final DateTime? cancelDate;
   final String sourceName;
   final Destination source;
   final String destinationName;
@@ -148,6 +151,7 @@ class Trip {
   final String couponCode;
   final List<TripStoppingPoint> tripStoppingPoints;
   final List<TripStoppingRecord> tripStoppingRecords;
+  final int enrollmentId;
 
   factory Trip.fromJson(Map<String, dynamic> json) {
     return Trip(
@@ -161,6 +165,7 @@ class Trip {
       acceptDate: DateTime.tryParse(json["acceptDate"] ?? ""),
       startDate: DateTime.tryParse(json["startDate"] ?? ""),
       endDate: DateTime.tryParse(json["endDate"] ?? ""),
+      cancelDate: DateTime.tryParse(json["cancelDate"] ?? ""),
       sourceName: json["sourceName"] ?? "",
       source: Destination.fromJson(json["source"] ?? {}),
       destinationName: json["destinationName"] ?? "",
@@ -197,6 +202,7 @@ class Trip {
           ? []
           : List<TripStoppingRecord>.from(
               json["tripStoppingRecords"]!.map((x) => TripStoppingRecord.fromJson(x))),
+      enrollmentId: json["enrollmentId"] ?? 0,
     );
   }
 
@@ -211,6 +217,7 @@ class Trip {
         "acceptDate": acceptDate?.toIso8601String(),
         "startDate": startDate?.toIso8601String(),
         "endDate": endDate?.toIso8601String(),
+        "cancelDate": cancelDate?.toIso8601String(),
         "sourceName": sourceName,
         "source": source.toJson(),
         "destinationName": destinationName,
@@ -241,6 +248,7 @@ class Trip {
         "couponCode": couponCode,
         "tripStoppingPoints": tripStoppingPoints.map((x) => x.toJson()).toList(),
         "tripStoppingRecords": tripStoppingRecords.map((x) => x.toJson()).toList(),
+        "enrollmentId": enrollmentId,
       };
 }
 
@@ -463,7 +471,7 @@ class TripStoppingPoint {
   final double lat;
   final double lng;
 
-  LatLng get point =>LatLng(lat, lng);
+  LatLng get point => LatLng(lat, lng);
 
   factory TripStoppingPoint.fromJson(Map<String, dynamic> json) {
     return TripStoppingPoint(

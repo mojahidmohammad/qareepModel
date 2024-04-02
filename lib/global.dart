@@ -135,6 +135,10 @@ enum TransferType {
   syrianAgency,
   //شحن تعويضي
   rePay,
+  //
+  enrollmentExtraMeters,
+  //
+  upgradeEnrollment,
 }
 
 enum SummaryPayToEnum {
@@ -155,7 +159,16 @@ enum TripType { scheduled, normal, goAndBack, delivery }
 
 enum CarCategoryType { trips, delivery }
 
-enum TripStatus { pending, accepted, started, completed, canceled, canceledByAdmin }
+enum TripStatus {
+  pending,
+  accepted,
+  started,
+  completed,
+  canceled,
+  canceledByAdmin,
+  pendingManager,
+  canceledByManager,
+}
 
 enum Governorate {
   damascus,
@@ -185,4 +198,3 @@ enum DriverStatus { unAvailable, available, busy }
 enum NotificationType { trip, haveTrip, sharedTrip, driverStatus, other }
 
 enum DeptType { tripPayment, driverCompensation }
-

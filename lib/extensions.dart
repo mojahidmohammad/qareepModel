@@ -506,6 +506,10 @@ extension NormalTripMap on Trip {
         return null;
       case TripStatus.canceledByAdmin:
         return null;
+      case TripStatus.pendingManager:
+        return null;
+      case TripStatus.canceledByManager:
+        return null;
     }
   }
 
@@ -513,7 +517,11 @@ extension NormalTripMap on Trip {
       tripStatus == TripStatus.started || tripStatus == TripStatus.accepted;
 
   bool get isCanceled =>
-      tripStatus == TripStatus.canceled || tripStatus == TripStatus.canceledByAdmin;
+      tripStatus == TripStatus.canceled ||
+      tripStatus == TripStatus.canceledByAdmin ||
+      tripStatus == TripStatus.canceledByManager;
+
+  bool get isCompanyTrip => enrollmentId != 0;
 
   bool get isDelved => tripStatus == TripStatus.completed;
 }
@@ -761,7 +769,7 @@ extension RealName on Enum {
         case Gender.mail:
           return 'ذكر';
         case Gender.female:
-          return 'انثي';
+          return 'أنثى';
       }
     }
 
@@ -802,6 +810,10 @@ extension RealName on Enum {
           return 'دفعة للهيئة';
         case TransferType.rePay:
           return 'دفعة تعويضية';
+        case TransferType.enrollmentExtraMeters:
+          return 'بطاقة شحن كيلومترات';
+        case TransferType.upgradeEnrollment:
+          return 'تجديد خطة';
       }
     }
 
@@ -916,6 +928,10 @@ extension RealName on Enum {
           return 'ملغية';
         case TripStatus.canceledByAdmin:
           return 'ملغية بواسطة المدير';
+        case TripStatus.pendingManager:
+          return 'في انتظار موافقة المدير';
+        case TripStatus.canceledByManager:
+          return 'ملغية بواسطة مدير الشركة';
       }
     }
 
