@@ -30,6 +30,7 @@ class LoginResult {
     required this.userType,
     required this.roleName,
     required this.identifier,
+    required this.isActive,
   });
 
   final String accessToken;
@@ -43,6 +44,7 @@ class LoginResult {
   final UserType userType;
   final String roleName;
   final String identifier;
+  final bool isActive;
 
   factory LoginResult.fromJson(Map<String, dynamic> json) {
     return LoginResult(
@@ -56,6 +58,7 @@ class LoginResult {
       userType: UserType.values[json["userType"] ?? 0],
       roleName: json["roleName"] ?? "",
       identifier: json["identifier"] ?? "",
+      isActive: json["isActive"] ?? false,
     );
   }
 
@@ -70,5 +73,6 @@ class LoginResult {
         "userType": userType.index,
         "roleName": roleName,
         "identifier": identifier,
+    "isActive": isActive,
       };
 }
