@@ -113,7 +113,7 @@ class PlanTripModel {
         "drivers": drivers.map((x) => x.toJson()).toList(),
         "startDate": startDate?.toIso8601String(),
         "endDate": endDate?.toIso8601String(),
-        "days": days.map((x) => x).toList(),
+        "days": days.map((x) => x.index).toList(),
         "planTrips": planTrips.map((x) => x.toJson()).toList(),
         "isActive": isActive,
       };
@@ -121,26 +121,92 @@ class PlanTripModel {
 
 class PlanTrip {
   PlanTrip({
+    required this.id,
     required this.driver,
     required this.planTripTemplate,
-    required this.id,
   });
 
-  final Driver driver;
-  final dynamic planTripTemplate;
   final int id;
+  final Driver driver;
+  final PlanTripTemplate planTripTemplate;
 
   factory PlanTrip.fromJson(Map<String, dynamic> json) {
     return PlanTrip(
-      driver: Driver.fromJson(json["driver"] ?? {}),
-      planTripTemplate: json["planTripTemplate"],
       id: json["id"] ?? 0,
+      driver: Driver.fromJson(json["driver"] ?? {}),
+      planTripTemplate: PlanTripTemplate.fromJson(json["planTripTemplate"] ?? {}),
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "driver": driver.toJson(),
-        "planTripTemplate": planTripTemplate,
         "id": id,
+        "driver": driver.toJson(),
+        "planTripTemplate": planTripTemplate.toJson(),
+      };
+}
+
+class PlanTripTemplate {
+  PlanTripTemplate({
+    required this.id,
+    required this.name,
+    required this.companyPathId,
+    required this.companyPath,
+    required this.companyId,
+    required this.company,
+    required this.description,
+    required this.planTrips,
+    required this.startDate,
+    required this.endDate,
+    required this.days,
+    required this.isActive,
+  });
+
+  final int id;
+  final String name;
+  final num companyPathId;
+  final CompanyPath companyPath;
+  final num companyId;
+  final CompanyModel company;
+  final String description;
+  final List<String> planTrips;
+  final DateTime? startDate;
+  final DateTime? endDate;
+  final List<WeekDays> days;
+  final bool isActive;
+
+  factory PlanTripTemplate.fromJson(Map<String, dynamic> json) {
+    return PlanTripTemplate(
+      id: json["id"] ?? 0,
+      name: json["name"] ?? "",
+      companyPathId: json["companyPathId"] ?? 0,
+      companyPath: CompanyPath.fromJson(json["companyPath"] ?? {}),
+      companyId: json["companyId"] ?? 0,
+      company: CompanyModel.fromJson(json["company"] ?? {}),
+      description: json["description"] ?? "",
+      planTrips: json["planTrips"] == null
+          ? []
+          : List<String>.from(json["planTrips"]!.map((x) => x)),
+      startDate: DateTime.tryParse(json["startDate"] ?? ""),
+      endDate: DateTime.tryParse(json["endDate"] ?? ""),
+      days: json["days"] == null
+          ? <WeekDays>[]
+          : List<WeekDays>.from(json["days"]!.map((x) => WeekDays.values[x])),
+      isActive: json["isActive"] ?? false,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "companyPathId": companyPathId,
+        "companyPath": companyPath.toJson(),
+        "companyId": companyId,
+        "company": company.toJson(),
+        "description": description,
+        "planTrips": planTrips.map((x) => x).toList(),
+        "startDate": startDate?.toIso8601String(),
+        "endDate": endDate?.toIso8601String(),
+        "days": days.map((x) => x.index).toList(),
+        "isActive": isActive,
       };
 }
