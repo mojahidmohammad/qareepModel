@@ -1,6 +1,8 @@
 import '../../../companies/data/response/companies_response.dart';
 import '../../../company_paths/data/response/company_paths_response.dart';
 import '../../../global.dart';
+import '../../../global.dart';
+import '../../../global.dart';
 import '../../../trip_path/data/models/trip_path.dart';
 import '../../../trip_process/data/response/trip_response.dart';
 
@@ -124,17 +126,20 @@ class PlanTrip {
     required this.id,
     required this.driver,
     required this.planTripTemplate,
+    required this.planTripStatus,
   });
 
   final int id;
   final Driver driver;
   final PlanTripTemplate planTripTemplate;
+  final PlanTripStatus planTripStatus;
 
   factory PlanTrip.fromJson(Map<String, dynamic> json) {
     return PlanTrip(
       id: json["id"] ?? 0,
       driver: Driver.fromJson(json["driver"] ?? {}),
       planTripTemplate: PlanTripTemplate.fromJson(json["planTripTemplate"] ?? {}),
+      planTripStatus: PlanTripStatus.values[json["planTripStatus"] ?? 0],
     );
   }
 
@@ -142,6 +147,7 @@ class PlanTrip {
         "id": id,
         "driver": driver.toJson(),
         "planTripTemplate": planTripTemplate.toJson(),
+        "PlanTripStatus": planTripStatus.index,
       };
 }
 

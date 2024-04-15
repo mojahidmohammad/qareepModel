@@ -189,6 +189,8 @@ enum Governorate {
 
 enum CompanyType { plans }
 
+enum PlanTripStatus { pending, running }
+
 enum AttendanceType { up, down, unknown }
 
 enum PlanType { companies, qareep, individual }
@@ -197,4 +199,4 @@ enum DriverStatus { unAvailable, available, busy }
 
 enum NotificationType { trip, haveTrip, sharedTrip, driverStatus, other }
 
-enum DeptType { tripPayment, driverCompensation }
+enum DeptType { tripPayment, driverCompensation,planTripPayment }

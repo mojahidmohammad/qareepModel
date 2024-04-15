@@ -9,6 +9,7 @@ import 'package:qareeb_models/redeems/data/response/redeems_response.dart';
 import 'package:qareeb_models/shared_trip/data/response/shared_trip.dart';
 import 'package:qareeb_models/trip_path/data/models/trip_path.dart';
 import 'package:qareeb_models/trip_process/data/response/trip_response.dart';
+import 'package:qareeb_models/wallet/data/response/debt_response.dart';
 import 'package:qareeb_models/wallet/data/response/driver_financial_response.dart';
 import 'package:qareeb_models/wallet/data/response/single_driver_financial.dart';
 
@@ -609,7 +610,7 @@ extension DateUtcHelper on DateTime {
 
   DateTime get getUtc => DateTime.utc(year, month, day);
 
-  String get formatDate => DateFormat.yMd().format(this);
+  String get formatDate => DateFormat('yyyy/MM/dd').format(this);
 
   String get formatTime {
     var t = DateFormat('h:mm a').format(this);
@@ -694,6 +695,19 @@ extension DateUtcHelper on DateTime {
 extension DateUtcHelperNulable on DateTime? {
   int getMinDifference(DateTime? date) =>
       date == null ? 0 : (this?.difference(date).abs())?.inMinutes.round() ?? 0;
+}
+
+extension DebtH on Debt {
+  String get typeName {
+    switch (type) {
+      case DeptType.tripPayment:
+        return sharedRequestId != 0 ? ' مقعد برحلة تشاركية' : ' عادية ';
+      case DeptType.driverCompensation:
+        return 'مسافة تعويضية';
+      case DeptType.planTripPayment:
+        return 'رحلة اشتراكات';
+    }
+  }
 }
 
 extension ScrollMax on ScrollController {
@@ -1023,6 +1037,17 @@ extension RealName on Enum {
           return 'عائدات رحلة';
         case DeptType.driverCompensation:
           return 'مسافة تعويضية';
+        case DeptType.planTripPayment:
+          return 'رحلة اشتراكات';
+      }
+    }
+
+    if (this is PlanTripStatus) {
+      switch (this) {
+        case PlanTripStatus.pending:
+          return 'جاهزة للبدء';
+        case PlanTripStatus.running:
+          return 'جارية';
       }
     }
 
@@ -1040,6 +1065,11 @@ extension RealName on Enum {
       case NavTrip.end:
         return false;
     }
+    return false;
+  }
+
+  bool get isPlanTripActive {
+    if (this == PlanTripStatus.running) return true;
     return false;
   }
 }
