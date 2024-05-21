@@ -167,7 +167,18 @@ enum TripStatus {
   canceled,
   canceledByAdmin,
   pendingManager,
-  canceledByManager,
+  canceledByManager;
+
+  bool get isTripActive =>
+      this == TripStatus.started || this == TripStatus.accepted;
+
+  bool get isCanceled =>
+      this == TripStatus.canceled ||
+          this == TripStatus.canceledByAdmin ||
+          this == TripStatus.canceledByManager;
+  
+  bool get isDelved => this == TripStatus.completed;
+
 }
 
 enum Governorate {

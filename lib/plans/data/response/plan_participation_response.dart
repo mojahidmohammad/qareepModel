@@ -39,7 +39,7 @@ class PlanParticipationResult {
   final int planTripId;
   final int userId;
   final List<TripPoint> notificationPoints;
-  final PlanTripModel planTrip;
+  final PlanTrip planTrip;
 
   factory PlanParticipationResult.fromJson(Map<String, dynamic> json) {
     return PlanParticipationResult(
@@ -50,7 +50,7 @@ class PlanParticipationResult {
           ? []
           : List<TripPoint>.from(
               json["notificationPoints"]!.map((x) => TripPoint.fromJson(x))),
-      planTrip: PlanTripModel.fromJson(json["planTrip"] ?? {}),
+      planTrip: PlanTrip.fromJson(json["planTrip"] ?? {}),
     );
   }
 
@@ -58,8 +58,8 @@ class PlanParticipationResult {
         "id": id,
         "planTripId": planTripId,
         "userId": userId,
-        "notificationPoints": notificationPoints.map((x) => x.toJson()).toList(),
+        "notificationPoints":
+            notificationPoints.map((x) => x.toJson()).toList(),
         "planTrip": planTrip.toJson(),
       };
 }
-

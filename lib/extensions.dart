@@ -486,6 +486,7 @@ extension PathMap on TripPath {
 }
 
 extension NormalTripMap on Trip {
+
   LatLng get startPoint => LatLng(source.latitude, source.longitude);
 
   LatLng get endPoint => LatLng(destination.latitude, destination.longitude);
@@ -514,17 +515,7 @@ extension NormalTripMap on Trip {
     }
   }
 
-  bool get isTripActive =>
-      tripStatus == TripStatus.started || tripStatus == TripStatus.accepted;
-
-  bool get isCanceled =>
-      tripStatus == TripStatus.canceled ||
-      tripStatus == TripStatus.canceledByAdmin ||
-      tripStatus == TripStatus.canceledByManager;
-
   bool get isCompanyTrip => enrollmentId != 0;
-
-  bool get isDelved => tripStatus == TripStatus.completed;
 }
 
 extension SharedRequestMap on SharedTrip {
