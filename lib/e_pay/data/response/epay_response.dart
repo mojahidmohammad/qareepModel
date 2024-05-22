@@ -1,58 +1,37 @@
-import 'package:qareeb_models/global.dart';
+import '../../../global.dart';
 
-class EpayResponse {
-  EpayResponse({
-    required this.result,
-  });
-
-  final EpayResult result;
-
-  factory EpayResponse.fromJson(Map<String, dynamic> json) {
-    return EpayResponse(
-      result: EpayResult.fromJson(json["result"] ?? {}),
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        "result": result.toJson(),
-      };
-}
-
-class EpayResult {
-  EpayResult({
+class ProvidersResponse {
+  ProvidersResponse({
     required this.items,
     required this.totalCount,
   });
 
-  final List<EpayItem> items;
-  final int totalCount;
+  final List<Provider> items;
+  final num totalCount;
 
-  factory EpayResult.fromJson(Map<String, dynamic> json) {
-    return EpayResult(
+  factory ProvidersResponse.fromJson(Map<String, dynamic> json) {
+    return ProvidersResponse(
       items: json["items"] == null
           ? []
-          : List<EpayItem>.from(json["items"]!.map((x) => EpayItem.fromJson(x))),
+          : List<Provider>.from(
+          json["items"]!.map((x) => Provider.fromJson(x))),
       totalCount: json["totalCount"] ?? 0,
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "items": items.map((x) => x.toJson()).toList(),
         "totalCount": totalCount,
       };
 }
 
-class EpayItem {
-  EpayItem({
+class Provider {
+  Provider({
     required this.id,
     required this.name,
     required this.imageUrl,
-    required this.email,
-    required this.phone,
-    required this.link,
-    required this.file,
-    required this.creationTime,
-    required this.creatorUserId,
+    required this.order,
     required this.isActive,
     required this.isWebView,
   });
@@ -60,42 +39,28 @@ class EpayItem {
   final int id;
   final String name;
   final String imageUrl;
-  final String email;
-  final String phone;
-  final String link;
-  final String file;
+  final num order;
+  final bool isActive;
   final bool isWebView;
-  final String creationTime;
-  final String creatorUserId;
-  bool isActive;
 
-  factory EpayItem.fromJson(Map<String, dynamic> json) {
-    return EpayItem(
+  factory Provider.fromJson(Map<String, dynamic> json) {
+    return Provider(
       id: json["id"] ?? 0,
       name: json["name"] ?? "",
-      isWebView: json["isWebView"] ?? false,
       imageUrl: FixUrl.fixAvatarImage(json["imageUrl"]),
-      email: json["email"] ?? "",
-      phone: json["phone"] ?? "",
-      link: json["link"] ?? "",
-      file: json["file"] ?? "",
-      creationTime: json["creationTime"] ?? "",
-      creatorUserId: json["creatorUserId"] ?? "",
+      order: json["order"] ?? 0,
       isActive: json["isActive"] ?? false,
+      isWebView: json["isWebView"] ?? false,
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "id": id,
         "name": name,
         "imageUrl": imageUrl,
-        "email": email,
-        "phone": phone,
-        "link": link,
-        "file": file,
-        "isWebView": isWebView,
-        "creationTime": creationTime,
-        "creatorUserId": creatorUserId,
+        "order": order,
         "isActive": isActive,
+        "isWebView": isWebView,
       };
 }

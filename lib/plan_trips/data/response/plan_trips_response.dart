@@ -6,39 +6,15 @@ import '../../../trip_process/data/response/trip_response.dart';
 class PlanTripsResponse {
   PlanTripsResponse({
     required this.result,
-    required this.targetUrl,
-    required this.success,
-    required this.error,
-    required this.unAuthorizedRequest,
-    required this.abp,
   });
 
   final PlanTrip result;
-  final dynamic targetUrl;
-  final bool success;
-  final dynamic error;
-  final bool unAuthorizedRequest;
-  final bool abp;
 
   factory PlanTripsResponse.fromJson(Map<String, dynamic> json) {
-    return PlanTripsResponse(
-      result: PlanTrip.fromJson(json["result"] ?? {}),
-      targetUrl: json["targetUrl"],
-      success: json["success"] ?? false,
-      error: json["error"],
-      unAuthorizedRequest: json["unAuthorizedRequest"] ?? false,
-      abp: json["__abp"] ?? false,
-    );
+    return PlanTripsResponse(result: PlanTrip.fromJson(json["result"] ?? {}));
   }
 
-  Map<String, dynamic> toJson() => {
-        "result": result.toJson(),
-        "targetUrl": targetUrl,
-        "success": success,
-        "error": error,
-        "unAuthorizedRequest": unAuthorizedRequest,
-        "__abp": abp,
-      };
+  Map<String, dynamic> toJson() => {"result": result.toJson()};
 }
 
 class PlanTrip {
@@ -67,7 +43,7 @@ class PlanTrip {
   final List<PlanDriverTrip> driverTrips;
   final DateTime? startDate;
   final DateTime? endDate;
-  final List<String> days;
+  final List<WeekDays> days;
   final bool isActive;
 
   factory PlanTrip.fromJson(Map<String, dynamic> json) {
@@ -87,7 +63,8 @@ class PlanTrip {
       endDate: DateTime.tryParse(json["endDate"] ?? ""),
       days: json["days"] == null
           ? []
-          : List<String>.from(json["days"]!.map((x) => x)),
+          : List<WeekDays>.from(
+              json["days"]!.map((x) => WeekDays.values[x ?? 0])),
       isActive: json["isActive"] ?? false,
     );
   }
@@ -103,7 +80,7 @@ class PlanTrip {
         "driverTrips": driverTrips.map((x) => x.toJson()).toList(),
         "startDate": startDate?.toIso8601String(),
         "endDate": endDate?.toIso8601String(),
-        "days": days.map((x) => x).toList(),
+        "days": days.map((x) => x.index).toList(),
         "isActive": isActive,
       };
 }
