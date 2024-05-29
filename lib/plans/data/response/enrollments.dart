@@ -2,6 +2,31 @@ import 'package:qareeb_models/plans/data/response/plans_response.dart';
 
 import '../../../companies/data/response/companies_response.dart';
 
+class EnrollmentsResponse1 {
+  EnrollmentsResponse1({
+    required this.items,
+    required this.totalCount,
+  });
+
+  final List<Enrollment> items;
+  final int totalCount;
+
+  factory EnrollmentsResponse1.fromJson(Map<String, dynamic> json) {
+    return EnrollmentsResponse1(
+      items: json["items"] == null
+          ? []
+          : List<Enrollment>.from(
+              json["items"]!.map((x) => Enrollment.fromJson(x))),
+      totalCount: json["totalCount"] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "items": items.map((x) => x.toJson()).toList(),
+        "totalCount": totalCount,
+      };
+}
+
 class EnrollmentsResponse {
   EnrollmentsResponse({
     required this.result,
@@ -13,7 +38,8 @@ class EnrollmentsResponse {
     return EnrollmentsResponse(
       result: json["result"] == null
           ? []
-          : List<Enrollment>.from(json["result"]!.map((x) => Enrollment.fromJson(x))),
+          : List<Enrollment>.from(
+              json["result"]!.map((x) => Enrollment.fromJson(x))),
     );
   }
 
