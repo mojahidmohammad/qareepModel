@@ -8,10 +8,54 @@ class PlanTripsResponse {
     required this.result,
   });
 
-  final PlanTrip result;
+  final PlanTripsResult? result;
 
   factory PlanTripsResponse.fromJson(Map<String, dynamic> json) {
-    return PlanTripsResponse(result: PlanTrip.fromJson(json["result"] ?? {}));
+    return PlanTripsResponse(
+      result:
+          json["result"] == null ? null : PlanTripsResult.fromJson(json["result"]),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "result": result?.toJson(),
+      };
+}
+
+class PlanTripsResult {
+  PlanTripsResult({
+    required this.items,
+    required this.totalCount,
+  });
+
+  final List<PlanTrip> items;
+  final num totalCount;
+
+  factory PlanTripsResult.fromJson(Map<String, dynamic> json) {
+    return PlanTripsResult(
+      items: json["items"] == null
+          ? []
+          : List<PlanTrip>.from(
+              json["items"]!.map((x) => PlanTrip.fromJson(x))),
+      totalCount: json["totalCount"] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "items": items.map((x) => x.toJson()).toList(),
+        "totalCount": totalCount,
+      };
+}
+
+class PlanTripResponse {
+  PlanTripResponse({
+    required this.result,
+  });
+
+  final PlanTrip result;
+
+  factory PlanTripResponse.fromJson(Map<String, dynamic> json) {
+    return PlanTripResponse(result: PlanTrip.fromJson(json["result"] ?? {}));
   }
 
   Map<String, dynamic> toJson() => {"result": result.toJson()};
@@ -35,9 +79,9 @@ class PlanTrip {
 
   final int id;
   final String name;
-  final num companyPathId;
+  final int companyPathId;
   final CompanyPath companyPath;
-  final num companyId;
+  final int companyId;
   final CompanyModel company;
   final String description;
   final List<PlanDriverTrip> driverTrips;
