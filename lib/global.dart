@@ -139,6 +139,8 @@ enum TransferType {
   enrollmentExtraMeters,
   //
   upgradeEnrollment,
+  //دفع مباشر
+  directPay,
 }
 
 enum SummaryPayToEnum {

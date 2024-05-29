@@ -819,6 +819,8 @@ extension RealName on Enum {
           return 'بطاقة شحن كيلومترات';
         case TransferType.upgradeEnrollment:
           return 'تجديد خطة';
+        case TransferType.directPay:
+          return 'دفع مباشر';
       }
     }
 
