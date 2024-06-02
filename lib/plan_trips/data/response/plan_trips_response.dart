@@ -139,14 +139,14 @@ class PlanDriverTrip {
 
   final int id;
   final Driver driver;
-  final String planTripTemplate;
+  final PlanTrip planTripTemplate;
   final PlanTripStatus planTripStatus;
 
   factory PlanDriverTrip.fromJson(Map<String, dynamic> json) {
     return PlanDriverTrip(
       id: json["id"] ?? 0,
       driver: Driver.fromJson(json["driver"] ?? {}),
-      planTripTemplate: json["planTripTemplate"] ?? "",
+      planTripTemplate: PlanTrip.fromJson(json["planTripTemplate"] ?? {}),
       planTripStatus: PlanTripStatus.values[json["planTripStatus"] ?? 0],
     );
   }
@@ -154,7 +154,7 @@ class PlanDriverTrip {
   Map<String, dynamic> toJson() => {
         "id": id,
         "driver": driver.toJson(),
-        "planTripTemplate": planTripTemplate,
+        "planTripTemplate": planTripTemplate.toJson(),
         "PlanTripStatus": planTripStatus.index,
       };
 }
