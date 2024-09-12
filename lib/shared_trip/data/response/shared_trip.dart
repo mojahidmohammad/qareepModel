@@ -96,7 +96,7 @@ class SharedTrip {
         "schedulingDate": schedulingDate?.toIso8601String(),
         "startDate": startDate?.toIso8601String(),
         "endDate": endDate?.toIso8601String(),
-        "tripStatus": tripStatus,
+        "tripStatus": tripStatus.index,
         "seatNumber": seatNumber,
         "seatCost": seatCost,
         "totalCost": totalCost,
@@ -143,7 +143,7 @@ class SharedRequest {
       sharedTripId: json["sharedTripId"] ?? 0,
       clientId: json["clientId"] ?? 0,
       client: Client.fromJson(json["client"] ?? {}),
-      status:SharedRequestStatus.values[ json["status"] ?? 0],
+      status: SharedRequestStatus.values[json["status"] ?? 0],
       seatNumber: json["seatNumber"] ?? 0,
       dropPointId: json["dropPointId"] ?? 0,
       dropPoint: TripPoint.fromJson(json["dropPoint"] ?? {}),
@@ -209,6 +209,3 @@ class Client {
         "avatar": avatar,
       };
 }
-
-
-
