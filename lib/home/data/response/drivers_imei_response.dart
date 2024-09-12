@@ -46,6 +46,6 @@ class DriverImei {
         "id": id,
         "imei": imei,
         "name": name,
-        "status": status,
+        "status": status.index,
       };
 }

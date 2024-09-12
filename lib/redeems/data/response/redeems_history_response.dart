@@ -74,7 +74,7 @@ class RedeemHistory {
   Map<String, dynamic> toJson() => {
         "id": id,
         "driverId": driverId,
-        "type": type,
+        "type": type.index,
         "meters": meters,
         "redeemDate": redeemDate?.toIso8601String(),
         "aggregatedMoney": aggregatedMoney,

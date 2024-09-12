@@ -120,11 +120,11 @@ class Charging {
   Map<String, dynamic> toJson() => {
         "id": id,
         "date": date?.toIso8601String(),
-        "status": status,
+        "status": status.index,
         "amount": amount,
         "accountId": accountId,
         "paymentSourceId": paymentSourceId,
-        "type": type,
+        "type": type.index,
         "userName": userName,
         "clientPhone": clientPhone,
         "providerName": providerName,
