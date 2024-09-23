@@ -69,8 +69,6 @@ class SpinnerItem {
 //</editor-fold>
 }
 
-enum CubitStatuses { init, done, loading, error }
-
 enum BookingPages { selectLocation, trip, booking }
 
 enum StateScreen { non, confirmCode, policy, main, passwordCode }

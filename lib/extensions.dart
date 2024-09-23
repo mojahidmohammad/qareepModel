@@ -550,11 +550,6 @@ extension SharedRequestMap on SharedTrip {
   }
 }
 
-extension CubitStateHelper on CubitStatuses {
-  bool get isLoading => this == CubitStatuses.loading;
-
-  bool get isDone => this == CubitStatuses.done;
-}
 
 extension TripPointHelper on TripPoint {
   LatLng get getLatLng => LatLng(lat, lng);
