@@ -551,9 +551,9 @@ extension SharedRequestMap on SharedTrip {
 
   String get dateTrip {
     if (isStart) {
-      return startDate!.formatFullDate;
+      return startDate?.formatFullDate??'';
     } else if (isEnd) {
-      return 'منتهية:  ${endDate!.formatFullDate}';
+      return 'منتهية:  ${endDate?.formatFullDate??''}';
     }
     return schedulingDate?.formatFullDate ?? '';
   }
