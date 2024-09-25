@@ -117,12 +117,6 @@ extension SplitByLength on String {
   }
 }
 
-extension StringHelper on String? {
-  bool get isBlank {
-    return this?.trim().isEmpty ?? true;
-  }
-}
-
 final oCcy = NumberFormat("#,###", "en_US");
 
 extension MaxInt on num {
@@ -486,7 +480,6 @@ extension PathMap on TripPath {
 }
 
 extension NormalTripMap on Trip {
-
   LatLng get startPoint => LatLng(source.latitude, source.longitude);
 
   LatLng get endPoint => LatLng(destination.latitude, destination.longitude);
@@ -529,7 +522,32 @@ extension SharedRequestMap on SharedTrip {
 
   bool get isStart => startDate != null;
 
-  bool get isEnd => endDate != null;
+  bool get isEnd => endDate != null||tripStatus == SharedTripStatus.closed;
+
+  String get getStringStatus {
+    if (isEnd) {
+      return 'منتهية';
+    }
+    if (isStart) {
+      return 'بدأت';
+    }
+    if (tripStatus == SharedTripStatus.canceled) return 'ملغية';
+
+    return '';
+  }
+
+  Color get getColorStatus {
+    if (isStart) {
+      return Colors.green;
+    }
+    if (isEnd) {
+      return Colors.grey;
+    }
+
+    if (tripStatus == SharedTripStatus.canceled) return Colors.red;
+
+    return Colors.transparent;
+  }
 
   String get dateTrip {
     if (isStart) {
@@ -549,7 +567,6 @@ extension SharedRequestMap on SharedTrip {
     return s;
   }
 }
-
 
 extension TripPointHelper on TripPoint {
   LatLng get getLatLng => LatLng(lat, lng);
